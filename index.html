@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>我的个人网站</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- 导航栏 -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo">YourName<span class="dot">.</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">关于我</a></li>
+        <li><a href="#skills">技能</a></li>
+        <li><a href="#projects">项目</a></li>
+        <li><a href="#contact">联系</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="菜单">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero 区域 -->
+  <section class="hero" id="home">
+    <div class="hero-bg">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+    <div class="hero-content">
+      <p class="hero-greeting">👋 你好，我是</p>
+      <h1 class="hero-name">Your Name</h1>
+      <div class="hero-role">
+        <span class="role-prefix">一名</span>
+        <span class="role-text" id="roleText"></span>
+        <span class="role-cursor">|</span>
+      </div>
+      <p class="hero-desc">热爱编程，专注于构建优雅且实用的数字产品。</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">查看项目</a>
+        <a href="#contact" class="btn btn-outline">联系我</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <span>向下滚动</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- 关于我 -->
+  <section class="about section" id="about">
+    <div class="container">
+      <h2 class="section-title">关于我 <span class="title-line"></span></h2>
+      <div class="about-grid">
+        <div class="about-image-wrap">
+          <div class="about-avatar">
+            <div class="avatar-placeholder">
+              <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="38" r="22" fill="currentColor" opacity="0.8"/>
+                <ellipse cx="50" cy="85" rx="35" ry="22" fill="currentColor" opacity="0.6"/>
+              </svg>
+            </div>
+          </div>
+          <div class="about-badge about-badge-1">🎓 本科在读</div>
+          <div class="about-badge about-badge-2">💻 全栈开发</div>
+        </div>
+        <div class="about-text">
+          <h3>嗨，很高兴认识你！</h3>
+          <p>我是一名充满热情的开发者，对前端开发、用户体验设计以及新兴技术保持浓厚兴趣。</p>
+          <p>在空闲时间，我喜欢探索开源项目、写技术博客，并且不断挑战自己学习新的框架与工具。</p>
+          <div class="about-stats">
+            <div class="stat-item">
+              <span class="stat-num" data-target="20">0</span><span>+</span>
+              <p>完成项目</p>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num" data-target="3">0</span><span>+</span>
+              <p>年经验</p>
+            </div>
+            <div class="stat-item">
+              <span class="stat-num" data-target="5">0</span><span>+</span>
+              <p>开源贡献</p>
+            </div>
+          </div>
+          <a href="#" class="btn btn-primary" download>下载简历 ↓</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 技能 -->
+  <section class="skills section" id="skills">
+    <div class="container">
+      <h2 class="section-title">技能栈 <span class="title-line"></span></h2>
+      <div class="skills-grid">
+        <div class="skill-card" data-delay="0">
+          <div class="skill-icon">🌐</div>
+          <h3>前端开发</h3>
+          <div class="skill-tags">
+            <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
+            <span>React</span><span>Vue</span><span>TypeScript</span>
+          </div>
+        </div>
+        <div class="skill-card" data-delay="100">
+          <div class="skill-icon">⚙️</div>
+          <h3>后端开发</h3>
+          <div class="skill-tags">
+            <span>Node.js</span><span>Python</span><span>Express</span>
+            <span>FastAPI</span><span>REST API</span>
+          </div>
+        </div>
+        <div class="skill-card" data-delay="200">
+          <div class="skill-icon">🗄️</div>
+          <h3>数据库</h3>
+          <div class="skill-tags">
+            <span>MySQL</span><span>MongoDB</span><span>Redis</span>
+            <span>PostgreSQL</span>
+          </div>
+        </div>
+        <div class="skill-card" data-delay="300">
+          <div class="skill-icon">🛠️</div>
+          <h3>工具与其他</h3>
+          <div class="skill-tags">
+            <span>Git</span><span>Docker</span><span>Linux</span>
+            <span>Figma</span><span>VS Code</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 项目 -->
+  <section class="projects section" id="projects">
+    <div class="container">
+      <h2 class="section-title">我的项目 <span class="title-line"></span></h2>
+      <div class="projects-grid">
+
+        <div class="project-card">
+          <div class="project-header" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+            <div class="project-links">
+              <a href="#" target="_blank" title="查看 Demo">🔗</a>
+              <a href="#" target="_blank" title="GitHub">📂</a>
+            </div>
+            <div class="project-icon">🚀</div>
+          </div>
+          <div class="project-body">
+            <h3>项目一</h3>
+            <p>一个使用 React 和 Node.js 构建的全栈 Web 应用，支持用户认证与实时数据同步。</p>
+            <div class="project-tech">
+              <span>React</span><span>Node.js</span><span>MongoDB</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+            <div class="project-links">
+              <a href="#" target="_blank" title="查看 Demo">🔗</a>
+              <a href="#" target="_blank" title="GitHub">📂</a>
+            </div>
+            <div class="project-icon">📊</div>
+          </div>
+          <div class="project-body">
+            <h3>项目二</h3>
+            <p>数据可视化仪表板，整合多个 API 数据源，提供直观的图表分析界面。</p>
+            <div class="project-tech">
+              <span>Vue</span><span>Python</span><span>Chart.js</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-header" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+            <div class="project-links">
+              <a href="#" target="_blank" title="查看 Demo">🔗</a>
+              <a href="#" target="_blank" title="GitHub">📂</a>
+            </div>
+            <div class="project-icon">🤖</div>
+          </div>
+          <div class="project-body">
+            <h3>项目三</h3>
+            <p>基于大语言模型的智能助手工具，支持多轮对话与知识库检索。</p>
+            <div class="project-tech">
+              <span>TypeScript</span><span>FastAPI</span><span>OpenAI</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 联系 -->
+  <section class="contact section" id="contact">
+    <div class="container">
+      <h2 class="section-title">联系我 <span class="title-line"></span></h2>
+      <div class="contact-wrap">
+        <div class="contact-info">
+          <p class="contact-lead">有项目合作或任何问题？欢迎随时联系我！</p>
+          <div class="contact-items">
+            <a href="mailto:your@email.com" class="contact-item">
+              <span class="contact-icon">📧</span>
+              <div>
+                <strong>邮箱</strong>
+                <p>your@email.com</p>
+              </div>
+            </a>
+            <a href="https://github.com/yourusername" target="_blank" class="contact-item">
+              <span class="contact-icon">🐙</span>
+              <div>
+                <strong>GitHub</strong>
+                <p>github.com/yourusername</p>
+              </div>
+            </a>
+            <a href="https://linkedin.com/in/yourusername" target="_blank" class="contact-item">
+              <span class="contact-icon">💼</span>
+              <div>
+                <strong>LinkedIn</strong>
+                <p>linkedin.com/in/yourusername</p>
+              </div>
+            </a>
+          </div>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <input type="text" id="name" placeholder="你的姓名" required />
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" placeholder="你的邮箱" required />
+          </div>
+          <div class="form-group">
+            <textarea id="message" placeholder="你想说..." rows="5" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">发送消息 →</button>
+          <p class="form-note" id="formNote"></p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 Your Name · 用 ❤️ 构建</p>
+      <div class="footer-links">
+        <a href="https://github.com/yourusername" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
