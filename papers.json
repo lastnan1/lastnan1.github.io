@@ -1,0 +1,272 @@
+{
+  "generated": "2026-06-05",
+  "total": 19,
+  "papers": [
+    {
+      "id": "2026-06-05/01-AMAW-PINN-配点与损失联合自适应",
+      "date": "2026-06-05",
+      "title": "Enhancing PINNs for solving PDEs via adaptive collocation point movement and adaptive loss weighting",
+      "zhTitle": "AMAW-PINN：配点移动 + 损失联合自适应（Nonlinear Dynamics）",
+      "venue": "Nonlinear Dynamics",
+      "venue_grade": "SCI",
+      "doi": "10.1007/s11071-023-08654-w",
+      "arxiv": "",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-05/01-AMAW-PINN-配点与损失联合自适应.html"
+    },
+    {
+      "id": "2026-06-05/02-SA-PINN-极小极大点级权重",
+      "date": "2026-06-05",
+      "title": "Self-adaptive physics-informed neural networks",
+      "zhTitle": "SA-PINN：极小极大点级软注意力权重（JCP）",
+      "venue": "Journal of Computational Physics",
+      "venue_grade": "SCI 一区",
+      "doi": "10.1016/j.jcp.2022.111722",
+      "arxiv": "2009.04544",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-05/02-SA-PINN-极小极大点级权重.html"
+    },
+    {
+      "id": "2026-06-05/03-gPINN-梯度增强损失",
+      "date": "2026-06-05",
+      "title": "Gradient-enhanced physics-informed neural networks for forward and inverse PDE problems",
+      "zhTitle": "gPINN：PDE 残差梯度增强损失（CMAME）",
+      "venue": "Computer Methods in Applied Mechanics and Engineering",
+      "venue_grade": "SCI 一区",
+      "doi": "10.1016/j.cma.2022.114823",
+      "arxiv": "",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-05/03-gPINN-梯度增强损失.html"
+    },
+    {
+      "id": "2026-06-05/04-ConFIG-无冲突梯度训练",
+      "date": "2026-06-05",
+      "title": "ConFIG: Towards Conflict-free Training of Physics Informed Neural Networks",
+      "zhTitle": "ConFIG：无冲突梯度方向训练 PINN（ICLR 2025）",
+      "venue": "ICLR 2025",
+      "venue_grade": "顶会（A类对待）",
+      "doi": "",
+      "arxiv": "2408.11104",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-05/04-ConFIG-无冲突梯度训练.html"
+    },
+    {
+      "id": "2026-06-05/05-WHC-PINN-双曲守恒律加权",
+      "date": "2026-06-05",
+      "title": "Physics-informed neural network with weighted loss and hard constraints for hyperbolic conservation laws",
+      "zhTitle": "WHC-PINN：加权软损失 + 硬约束处理双曲守恒律（Scientific Reports 2025）",
+      "venue": "Scientific Reports",
+      "venue_grade": "SCI",
+      "doi": "10.1038/s41598-025-34263-1",
+      "arxiv": "",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-05/05-WHC-PINN-双曲守恒律加权.html"
+    },
+    {
+      "id": "2026-06-05/06-PD-PINN-原始对偶鲁棒训练",
+      "date": "2026-06-05",
+      "title": "Accuracy and Robustness of Weight-Balancing Methods for Training PINNs",
+      "zhTitle": "PD-PINN：原始对偶框架提升权重平衡鲁棒性（arXiv 2025）",
+      "venue": "arXiv preprint",
+      "venue_grade": "预印本（WASP 资助，2025-01）",
+      "doi": "",
+      "arxiv": "2501.18582",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-05/06-PD-PINN-原始对偶鲁棒训练.html"
+    },
+    {
+      "id": "2026-06-04/01-BRDR-平衡残差衰减率",
+      "date": "2026-06-04",
+      "title": "Self-adaptive weights based on balanced residual decay rate for physics-informed neural networks and deep operator networks",
+      "zhTitle": "Self-adaptive weights based on balanced residual decay rate (BRDR)",
+      "venue": "Journal of Computational Physics",
+      "venue_grade": "SCI 一区",
+      "doi": "10.1016/j.jcp.2025.114226",
+      "arxiv": "2407.01613",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-04/01-BRDR-平衡残差衰减率.html"
+    },
+    {
+      "id": "2026-06-04/02-LA-PINN-损失注意力",
+      "date": "2026-06-04",
+      "title": "Loss-attentional physics-informed neural networks",
+      "zhTitle": "Loss-attentional physics-informed neural networks (LA-PINN)",
+      "venue": "Journal of Computational Physics",
+      "venue_grade": "SCI 一区",
+      "doi": "10.1016/j.jcp.2024.112781",
+      "arxiv": "",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-04/02-LA-PINN-损失注意力.html"
+    },
+    {
+      "id": "2026-06-04/03-DB-PINN-双层次平衡",
+      "date": "2026-06-04",
+      "title": "Dual-Balancing for Physics-Informed Neural Networks",
+      "zhTitle": "Dual-Balancing for Physics-Informed Neural Networks (DB-PINN)",
+      "venue": "IJCAI 2025",
+      "venue_grade": "CCF-A",
+      "doi": "10.24963/ijcai.2025/797",
+      "arxiv": "",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-04/03-DB-PINN-双层次平衡.html"
+    },
+    {
+      "id": "2026-06-04/04-ReLoBRaLo-相对损失平衡",
+      "date": "2026-06-04",
+      "title": "Multi-Objective Loss Balancing for Physics-Informed Deep Learning (ReLoBRaLo)",
+      "zhTitle": "ReLoBRaLo：相对损失平衡（CMAME）",
+      "venue": "Computer Methods in Applied Mechanics and Engineering",
+      "venue_grade": "SCI 一区",
+      "doi": "10.1016/j.jcmp.2023.105968",
+      "arxiv": "2110.09813",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-04/04-ReLoBRaLo-相对损失平衡.html"
+    },
+    {
+      "id": "2026-06-04/05-NTK-特征值加权",
+      "date": "2026-06-04",
+      "title": "When and why PINNs fail to train: A neural tangent kernel perspective",
+      "zhTitle": "NTK 视角与特征值自适应加权（JCP）",
+      "venue": "Journal of Computational Physics",
+      "venue_grade": "SCI 一区",
+      "doi": "10.1016/j.jcp.2021.110768",
+      "arxiv": "2007.14527",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-04/05-NTK-特征值加权.html"
+    },
+    {
+      "id": "2026-06-04/06-RBA-残差注意力",
+      "date": "2026-06-04",
+      "title": "Residual-based attention in physics-informed neural networks",
+      "zhTitle": "RBA：残差注意力配点加权（CMAME）",
+      "venue": "Computer Methods in Applied Mechanics and Engineering",
+      "venue_grade": "SCI 一区",
+      "doi": "10.1016/j.cma.2024.116805",
+      "arxiv": "2307.00379",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-04/06-RBA-残差注意力.html"
+    },
+    {
+      "id": "2026-06-04/07-AL-PINN-增广拉格朗日",
+      "date": "2026-06-04",
+      "title": "Enhanced physics-informed neural networks with Augmented Lagrangian relaxation method (AL-PINNs)",
+      "zhTitle": "AL-PINN：增广拉格朗日松弛自适应 λ（Neurocomputing）",
+      "venue": "Neurocomputing",
+      "venue_grade": "CCF-B / SCI",
+      "doi": "10.1016/j.neucom.2023.126424",
+      "arxiv": "2205.01059",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-04/07-AL-PINN-增广拉格朗日.html"
+    },
+    {
+      "id": "2026-06-04/08-MOO-VARI-多目标优化加权",
+      "date": "2026-06-04",
+      "title": "A Multi-Objective Optimization Framework for Adaptive Weighting in Physics-Informed Machine Learning",
+      "zhTitle": "MOO-VARI：NSGA-II + 方差感知加权（AAAI 2026）",
+      "venue": "AAAI 2026",
+      "venue_grade": "CCF-A",
+      "doi": "10.1609/aaai.v40i32.39900",
+      "arxiv": "",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-04/08-MOO-VARI-多目标优化加权.html"
+    },
+    {
+      "id": "2026-06-04/09-因果训练加权",
+      "date": "2026-06-04",
+      "title": "Respecting causality for training physics-informed neural networks",
+      "zhTitle": "因果训练：时间加权残差损失（JCP）",
+      "venue": "Journal of Computational Physics",
+      "venue_grade": "SCI 一区",
+      "doi": "10.1016/j.jcp.2022.10.028",
+      "arxiv": "2203.07404",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-04/09-因果训练加权.html"
+    },
+    {
+      "id": "2026-06-04/10-因果注意力-CA",
+      "date": "2026-06-04",
+      "title": "Casual attention: Adaptive enforcement of causality in physics-informed neural networks",
+      "zhTitle": "Causal Attention (CA)：自适应因果权重（JCP 2026）",
+      "venue": "Journal of Computational Physics",
+      "venue_grade": "SCI 一区",
+      "doi": "10.1016/j.jcp.2026.112424",
+      "arxiv": "",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-04/10-因果注意力-CA.html"
+    },
+    {
+      "id": "2026-06-04/11-BPINN-贝叶斯自适应加权",
+      "date": "2026-06-04",
+      "title": "Adaptive weighting of Bayesian physics informed neural networks for multitask and multiscale forward and inverse problems",
+      "zhTitle": "B-PINN 多任务自适应加权（JCP 2023）",
+      "venue": "Journal of Computational Physics",
+      "venue_grade": "SCI 一区",
+      "doi": "10.1016/j.jcp.2023.112342",
+      "arxiv": "",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-04/11-BPINN-贝叶斯自适应加权.html"
+    },
+    {
+      "id": "2026-06-04/12-NeurIPS-失败模式与课程学习",
+      "date": "2026-06-04",
+      "title": "Characterizing possible failure modes in physics-informed neural networks",
+      "zhTitle": "PINN 失败模式与课程正则（NeurIPS 2021）",
+      "venue": "NeurIPS 2021",
+      "venue_grade": "CCF-A",
+      "doi": "",
+      "arxiv": "2109.01050",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-04/12-NeurIPS-失败模式与课程学习.html"
+    },
+    {
+      "id": "2026-06-04/13-vRBA-变分残差注意力",
+      "date": "2026-06-04",
+      "title": "A variational framework for residual-based adaptivity in neural PDE solvers and operator learning",
+      "zhTitle": "vRBA：变分残差注意力框架（npj AI 2026）",
+      "venue": "npj Artificial Intelligence",
+      "venue_grade": "SCI 一区",
+      "doi": "10.1038/s44387-026-00084-4",
+      "arxiv": "",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-04/13-vRBA-变分残差注意力.html"
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Characterizing possible failure modes in physics-informed neural networks · 论文笔记</title>
+  <link rel="stylesheet" href="../../style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.cn" crossorigin />
+  <link href="https://fonts.googleapis.cn/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  
+  <style>
+    .paper-back { display:inline-flex; align-items:center; gap:6px; color:var(--text-muted); font-size:.85rem; margin-bottom:32px; transition:color var(--transition); }
+    .paper-back:hover { color:var(--accent); }
+    .paper-meta-bar { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:20px 0 28px; }
+    .paper-ext-link { font-size:.8rem; padding:4px 12px; border:1px solid var(--border); border-radius:4px; color:var(--accent); transition:var(--transition); }
+    .paper-ext-link:hover { background:var(--accent); color:var(--bg); }
+    .paper-tags { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 32px; }
+    .paper-tag { font-size:.72rem; padding:3px 10px; border-radius:4px; background:var(--bg-3); color:var(--text-muted); border:1px solid rgba(255,255,255,.06); }
+    .paper-body h2 { font-family:var(--font-display); font-size:1.15rem; font-weight:600; margin:40px 0 14px; padding-bottom:8px; border-bottom:1px solid var(--border); color:var(--text); }
+    .paper-body h3 { font-size:1rem; font-weight:600; margin:24px 0 10px; color:var(--accent); }
+    .paper-body h4 { font-size:.92rem; font-weight:600; margin:18px 0 8px; color:var(--text-muted); }
+    .paper-body p { color:var(--text-muted); line-height:1.8; margin-bottom:12px; font-size:.93rem; }
+    .paper-body ul, .paper-body ol { color:var(--text-muted); font-size:.93rem; line-height:1.8; padding-left:22px; margin-bottom:14px; }
+    .paper-body li { margin-bottom:6px; }
+    .paper-body blockquote { border-left:3px solid var(--accent); padding:8px 16px; margin:16px 0; color:var(--text-muted); font-size:.9rem; background:var(--bg-3); border-radius:0 6px 6px 0; }
+    .paper-body hr { border:none; border-top:1px solid var(--border); margin:32px 0; }
+    .paper-body code { font-size:.85em; background:var(--bg-3); padding:2px 6px; border-radius:3px; color:var(--accent); }
+    .paper-body pre.code-block { background:var(--bg-3); border:1px solid var(--border); border-radius:8px; padding:16px; font-size:.82rem; overflow-x:auto; margin-bottom:16px; }
+    .paper-body .wikilink { color:var(--accent); text-decoration:underline; text-underline-offset:3px; }
+    .paper-body .wikilink:hover { color:#e8c47a; }
+    .table-wrap { overflow-x:auto; margin-bottom:20px; }
+    .table-wrap table { width:100%; border-collapse:collapse; font-size:.88rem; }
+    .table-wrap th { background:var(--bg-3); color:var(--accent); padding:10px 14px; text-align:left; border-bottom:1px solid var(--border); }
+    .table-wrap td { color:var(--text-muted); padding:9px 14px; border-bottom:1px solid rgba(255,255,255,.04); }
+    .table-wrap tr:hover td { background:rgba(212,168,83,.04); }
+    .mermaid-wrap { margin:20px 0; background:var(--bg-3); border-radius:10px; padding:16px; border:1px solid var(--border); overflow-x:auto; }
+    .mermaid-wrap pre { background:none; border:none; padding:0; }
+    .siblings-nav { margin-top:40px; padding-top:24px; border-top:1px solid var(--border); display:flex; flex-wrap:wrap; gap:10px; align-items:center; }
+    .siblings-label { font-size:.78rem; color:var(--text-faint); margin-right:4px; }
+    .sibling-link { font-size:.8rem; padding:4px 12px; border:1px solid var(--border); border-radius:4px; color:var(--text-muted); transition:var(--transition); }
+    .sibling-link:hover { border-color:var(--accent); color:var(--accent); }
+    .grade-ccfa { background:var(--accent-dim); color:var(--accent); border-color:rgba(212,168,83,.3); }
+    .grade-sci1 { background:var(--success-dim); color:var(--success); border-color:rgba(61,158,143,.3); }
+    .grade-sci, .grade-preprint, .grade-default { background:rgba(139,149,168,.1); color:var(--text-muted); border-color:var(--border-planned); }
+    .paper-page { max-width:820px; margin:0 auto; padding:100px 24px 80px; position:relative; z-index:1; }
+    .paper-en-title { font-size:.88rem; color:var(--text-faint); margin-bottom:6px; line-height:1.5; }
+    .paper-zh-title { font-family:var(--font-display); font-size:clamp(1.4rem,3vw,2rem); font-weight:700; letter-spacing:-.02em; line-height:1.25; margin-bottom:0; }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <nav class="navbar scrolled">
+    <div class="nav-container">
+      <a href="../../index.html" class="nav-logo">Research<span class="dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="../../index.html">主页</a></li>
+        <li><a href="../../knowledge.html">知识库</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="paper-page">
+    <a href="../../knowledge.html" class="paper-back">← 返回知识库</a>
+
+    <p class="paper-en-title">Characterizing possible failure modes in physics-informed neural networks</p>
+    <h1 class="paper-zh-title">PINN 失败模式与课程正则（NeurIPS 2021）</h1>
+
+    <div class="paper-meta-bar">
+      <span class="status-badge grade-ccfa">CCF-A</span>
+      <span style="font-size:.88rem;color:var(--text-muted)">NeurIPS 2021</span>
+      <span style="font-size:.78rem;color:var(--text-faint)">2026-06-04</span>
+      
+      <a href="https://arxiv.org/abs/2109.01050" target="_blank" rel="noopener" class="paper-ext-link">arXiv ↗</a>
+    </div>
+
+    <div class="paper-tags"><span class="paper-tag">自适应权重</span></div>
+
+    <div class="paper-body">
+      <h1 id="PINN-失败模式与课程正则-NeurIPS-2021-">PINN 失败模式与课程正则（NeurIPS 2021）</h1><h2 id="元信息">元信息</h2><ul><li><strong>作者 / 年份</strong>：Aditi Krishnapriyan 等, 2021</li><li><strong>发表于</strong>：NeurIPS 2021（CCF-A）</li><li><strong>链接</strong>：<a href="https://arxiv.org/abs/2109.01050" target="_blank" rel="noopener">https://arxiv.org/abs/2109.01050</a></li><li><strong>引用数</strong>：极高</li></ul><h2 id="核心内容">核心内容</h2><p>证明 PINN 在对流/反应/扩散问题失败主因是<strong>损失景观病态</strong>而非网络容量不足；提出<strong>课程正则</strong>（逐步加强 PDE 约束）与序列到序列学习，误差可比 vanilla PINN 降 1–2 个量级。</p><h2 id="创新点">创新点</h2><ol><li>系统刻画软约束导致的 ill-conditioning。</li><li>课程学习可视为<strong>时间/复杂度维度的损失权重调度</strong>。</li><li>为后续所有自适应权重工作提供「为何需要加权」的动机。</li><li>与梯度病理、NTK 分析文献常一起引用。</li></ol><h2 id="相关汇报">相关汇报</h2><div class="table-wrap"><table><thead><tr><th>汇报</th><th>关联理由</th></tr></thead><tbody><tr><td><a href="05-NTK-特征值加权.html" class="wikilink">05-NTK-特征值加权</a></td><td>从 NTK 解释优化难，本文从损失景观与课程角度解决。</td></tr><tr><td><a href="09-因果训练加权.html" class="wikilink">09-因果训练加权</a></td><td>课程/因果都是<strong>非均匀时间训练策略</strong>，可组合。</td></tr><tr><td><a href="01-BRDR-平衡残差衰减率.html" class="wikilink">01-BRDR-平衡残差衰减率</a></td><td>BRDR 针对配点收敛不同步，本文针对 PDE 算子病态。</td></tr></tbody></table></div><h2 id="与我研究的关联">与我研究的关联</h2><p>层状/复杂介质可先弱 PDE 权、强快照权（课程），再过渡到 BRDR/ReLoBRaLo 全自动权。</p><h2 id="备注">备注</h2><ul><li>非直接「λ 自适应」但属损失调度基石；汇报批次：第 2 次检索 #12</li></ul>
+    </div>
+
+    <div class="siblings-nav"><span class="siblings-label">同日其他论文：</span><a href="01-BRDR-平衡残差衰减率.html" class="sibling-link">BRDR-平衡残差衰减率</a><a href="02-LA-PINN-损失注意力.html" class="sibling-link">LA-PINN</a><a href="03-DB-PINN-双层次平衡.html" class="sibling-link">DB-PINN</a><a href="04-ReLoBRaLo-相对损失平衡.html" class="sibling-link">ReLoBRaLo-相对损失平衡</a><a href="05-NTK-特征值加权.html" class="sibling-link">NTK-特征值加权</a><a href="06-RBA-残差注意力.html" class="sibling-link">RBA-残差注意力</a><a href="07-AL-PINN-增广拉格朗日.html" class="sibling-link">AL-PINN</a><a href="08-MOO-VARI-多目标优化加权.html" class="sibling-link">MOO-VARI</a><a href="09-因果训练加权.html" class="sibling-link">因果训练加权</a><a href="10-因果注意力-CA.html" class="sibling-link">因果注意力-CA</a><a href="11-BPINN-贝叶斯自适应加权.html" class="sibling-link">BPINN-贝叶斯自适应加权</a><a href="13-vRBA-变分残差注意力.html" class="sibling-link">vRBA-变分残差注意力</a></div>
+  </main>
+
+  
+  <script>
+    const navbar = document.querySelector('.navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+  </script>
+</body>
+</html>

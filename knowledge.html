@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>论文知识库 · Research</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.cn" crossorigin />
+  <link href="https://fonts.googleapis.cn/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── 筛选栏 ── */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 40px;
+      align-items: center;
+    }
+    .filter-search {
+      flex: 1;
+      min-width: 220px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 16px;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: .9rem;
+      transition: var(--transition);
+    }
+    .filter-search:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-dim);
+    }
+    .filter-search::placeholder { color: var(--text-faint); }
+
+    .filter-group { display: flex; gap: 6px; flex-wrap: wrap; }
+    .filter-btn {
+      font-family: var(--font-body);
+      font-size: .78rem;
+      font-weight: 500;
+      letter-spacing: .04em;
+      padding: 6px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-btn.active {
+      background: var(--accent);
+      color: var(--bg);
+      border-color: var(--accent);
+    }
+
+    /* ── 日期分组 ── */
+    .date-group { margin-bottom: 48px; }
+    .date-group-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .date-group-label {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      letter-spacing: -.01em;
+    }
+    .date-group-count {
+      font-size: .75rem;
+      color: var(--text-faint);
+      background: var(--bg-3);
+      padding: 2px 10px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+    }
+    .date-group-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── 论文卡片 ── */
+    .papers-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .paper-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    .paper-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity .5s ease, transform .5s ease, border-color var(--transition), box-shadow var(--transition);
+    }
+    .paper-card.hidden { display: none; }
+    .paper-card:hover {
+      border-color: rgba(212,168,83,.28);
+      box-shadow: var(--shadow);
+    }
+    .paper-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .paper-venue {
+      font-size: .78rem;
+      color: var(--text-faint);
+    }
+    .paper-zh-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.35;
+      letter-spacing: -.01em;
+    }
+    .paper-en-title {
+      font-size: .78rem;
+      color: var(--text-faint);
+      line-height: 1.5;
+    }
+    .paper-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .paper-tag {
+      font-size: .68rem;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: var(--bg-3);
+      color: var(--text-muted);
+      border: 1px solid rgba(255,255,255,.05);
+    }
+    .paper-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: auto;
+    }
+    .paper-read-btn {
+      font-size: .8rem;
+      color: var(--accent);
+      font-weight: 500;
+      transition: var(--transition);
+      padding: 6px 14px;
+      border: 1px solid rgba(212,168,83,.25);
+      border-radius: 5px;
+    }
+    .paper-read-btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* ── 级别徽章 ── */
+    .grade-ccfa { background: var(--accent-dim); color: var(--accent); border: 1px solid rgba(212,168,83,.3); }
+    .grade-sci1 { background: var(--success-dim); color: var(--success); border: 1px solid rgba(61,158,143,.3); }
+    .grade-sci, .grade-preprint, .grade-default { background: rgba(139,149,168,.1); color: var(--text-muted); border: 1px solid var(--border-planned); }
+
+    /* ── 空状态 ── */
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 48px 0;
+      color: var(--text-faint);
+      font-size: .95rem;
+      display: none;
+    }
+
+    /* ── 响应式 ── */
+    @media (max-width: 768px) {
+      .papers-grid { grid-template-columns: 1fr; }
+      .filter-bar { flex-direction: column; align-items: stretch; }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">Research<span class="dot">.</span></a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">主页</a></li>
+        <li><a href="index.html#experiments">实验看板</a></li>
+        <li><a href="knowledge.html" style="color:var(--accent)">知识库</a></li>
+        <li><a href="index.html#about">关于</a></li>
+      </ul>
+      <button class="nav-toggle" id="navToggle" aria-label="菜单">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="hero" id="home" style="min-height:50vh;">
+    <div class="hero-content">
+      <p class="hero-label">PINN 论文跟踪</p>
+      <h1 class="hero-name">论文知识库</h1>
+      <p class="hero-subtitle">每日精读笔记 · 按日期整理</p>
+      <div class="summary-strip" id="summaryStrip" style="max-width:520px;margin:0 auto 32px;"></div>
+      <a href="#papers" class="btn btn-primary">浏览论文 ↓</a>
+    </div>
+  </section>
+
+  <section class="section" id="papers" style="background:var(--bg-2);">
+    <div class="container">
+      <h2 class="section-title">全部论文 <span class="title-line"></span></h2>
+
+      <div class="filter-bar">
+        <input type="text" class="filter-search" id="searchInput" placeholder="搜索标题、关键词…" />
+        <div class="filter-group" id="gradeFilter">
+          <button class="filter-btn active" data-grade="all">全部</button>
+          <button class="filter-btn" data-grade="ccfa">CCF-A</button>
+          <button class="filter-btn" data-grade="sci1">SCI 一区</button>
+          <button class="filter-btn" data-grade="sci">SCI</button>
+          <button class="filter-btn" data-grade="preprint">预印本</button>
+        </div>
+      </div>
+
+      <div id="papersContainer"></div>
+      <p class="no-results" id="noResults">没有匹配的论文，换个关键词试试？</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2026 Research · <a href="index.html" style="color:var(--text-muted)">返回主页</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // ── 工具函数 ──
+    function venueGradeKey(grade) {
+      if (!grade) return 'default';
+      const g = grade.toLowerCase();
+      if (g.includes('ccf-a') || g.includes('顶会')) return 'ccfa';
+      if (g.includes('sci一区') || g.includes('sci 一区')) return 'sci1';
+      if (g.includes('sci')) return 'sci';
+      if (g.includes('预印本') || g.includes('arxiv')) return 'preprint';
+      return 'default';
+    }
+
+    function gradeLabel(grade) {
+      if (!grade) return '';
+      const g = grade.toLowerCase();
+      if (g.includes('ccf-a') || g.includes('顶会')) return 'CCF-A';
+      if (g.includes('sci一区') || g.includes('sci 一区')) return 'SCI 一区';
+      if (g.includes('sci')) return 'SCI';
+      if (g.includes('预印本')) return '预印本';
+      return grade;
+    }
+
+    // ── 状态 ──
+    let allPapers = [];
+    let activeGrade = 'all';
+    let searchQuery = '';
+
+    // ── 渲染摘要条 ──
+    function renderSummary(data) {
+      const total = data.total;
+      const dates = [...new Set(data.papers.map(p => p.date))].length;
+      const ccfa = data.papers.filter(p => venueGradeKey(p.venue_grade) === 'ccfa').length;
+      document.getElementById('summaryStrip').innerHTML = `
+        <div class="summary-item"><span class="summary-value">${total}</span><span class="summary-label">论文总数</span></div>
+        <div class="summary-divider"></div>
+        <div class="summary-item"><span class="summary-value">${dates}</span><span class="summary-label">阅读天数</span></div>
+        <div class="summary-divider"></div>
+        <div class="summary-item"><span class="summary-value">${ccfa}</span><span class="summary-label">顶会论文</span></div>
+        <div class="summary-divider"></div>
+        <div class="summary-item summary-item--date"><span class="summary-value summary-value--sm">${data.generated}</span><span class="summary-label">最近更新</span></div>
+      `;
+    }
+
+    // ── 渲染论文列表 ──
+    function renderPapers(papers) {
+      // 按日期分组
+      const groups = {};
+      for (const p of papers) {
+        (groups[p.date] = groups[p.date] || []).push(p);
+      }
+      const dates = Object.keys(groups).sort((a, b) => b.localeCompare(a));
+
+      const container = document.getElementById('papersContainer');
+      container.innerHTML = '';
+
+      for (const date of dates) {
+        const dayPapers = groups[date];
+        const groupEl = document.createElement('div');
+        groupEl.className = 'date-group';
+        groupEl.dataset.date = date;
+
+        groupEl.innerHTML = `
+          <div class="date-group-header">
+            <span class="date-group-label">${date}</span>
+            <span class="date-group-count">${dayPapers.length} 篇</span>
+            <span class="date-group-line"></span>
+          </div>
+          <div class="papers-grid">
+            ${dayPapers.map((p, i) => `
+              <a href="${p.htmlPath}" class="paper-card" data-grade="${venueGradeKey(p.venue_grade)}"
+                 data-search="${(p.title + ' ' + p.zhTitle + ' ' + (p.tags || []).join(' ')).toLowerCase()}"
+                 style="--card-delay:${i * 60}ms">
+                <div class="paper-card-top">
+                  ${p.venue_grade ? `<span class="status-badge grade-${venueGradeKey(p.venue_grade)}">${gradeLabel(p.venue_grade)}</span>` : ''}
+                  <span class="paper-venue">${p.venue}</span>
+                </div>
+                <p class="paper-zh-title">${p.zhTitle}</p>
+                ${p.title !== p.zhTitle ? `<p class="paper-en-title">${p.title}</p>` : ''}
+                ${p.tags && p.tags.length ? `
+                  <div class="paper-tags">
+                    ${p.tags.map(t => `<span class="paper-tag">${t}</span>`).join('')}
+                  </div>` : ''}
+                <div class="paper-card-footer">
+                  <span class="paper-read-btn">阅读笔记 →</span>
+                </div>
+              </a>
+            `).join('')}
+            <p class="no-results" id="noResults-${date}" style="display:none;grid-column:1/-1;text-align:center;padding:24px;color:var(--text-faint);font-size:.9rem;">本日无匹配论文</p>
+          </div>
+        `;
+        container.appendChild(groupEl);
+      }
+
+      // IntersectionObserver 入场动画
+      document.querySelectorAll('.paper-card').forEach(el => {
+        setTimeout(() => el.classList.add('visible'), 100 + (parseInt(el.style.getPropertyValue('--card-delay')) || 0));
+      });
+    }
+
+    // ── 过滤逻辑 ──
+    function applyFilters() {
+      const query = searchQuery.toLowerCase();
+      let visible = 0;
+
+      document.querySelectorAll('.paper-card').forEach(card => {
+        const gradeMatch = activeGrade === 'all' || card.dataset.grade === activeGrade;
+        const searchMatch = !query || card.dataset.search.includes(query);
+        const show = gradeMatch && searchMatch;
+        card.classList.toggle('hidden', !show);
+        if (show) visible++;
+      });
+
+      // 隐藏全空的日期分组
+      document.querySelectorAll('.date-group').forEach(group => {
+        const hasVisible = [...group.querySelectorAll('.paper-card')].some(c => !c.classList.contains('hidden'));
+        group.style.display = hasVisible ? '' : 'none';
+      });
+
+      document.getElementById('noResults').style.display = visible === 0 ? 'block' : 'none';
+    }
+
+    // ── 初始化 ──
+    async function init() {
+      try {
+        const res = await fetch('papers.json');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        allPapers = data.papers;
+        renderSummary(data);
+        renderPapers(allPapers);
+        setupFilters();
+      } catch (err) {
+        document.getElementById('papersContainer').innerHTML =
+          `<p style="color:var(--text-muted);padding:32px;border:1px dashed var(--border);border-radius:12px;">
+            无法加载 papers.json。请先运行 <code style="color:var(--accent)">node build-papers.js</code>，然后通过 HTTP 服务器访问（<code style="color:var(--accent)">npx serve .</code>）。
+          </p>`;
+        console.error(err);
+      }
+    }
+
+    function setupFilters() {
+      // 搜索
+      document.getElementById('searchInput').addEventListener('input', e => {
+        searchQuery = e.target.value;
+        applyFilters();
+      });
+
+      // 级别按钮
+      document.getElementById('gradeFilter').addEventListener('click', e => {
+        const btn = e.target.closest('.filter-btn');
+        if (!btn) return;
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeGrade = btn.dataset.grade;
+        applyFilters();
+      });
+    }
+
+    // ── 导航 ──
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    const navToggle = document.getElementById('navToggle');
+    const navLinks = document.getElementById('navLinks');
+    navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+    init();
+  </script>
+</body>
+</html>
