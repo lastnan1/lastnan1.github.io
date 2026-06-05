@@ -128,16 +128,10 @@ function createExperimentCard(exp, index) {
 }
 
 function setupObservers() {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const delay = entry.target.dataset.delay || 0;
-        setTimeout(() => entry.target.classList.add('visible'), parseInt(delay));
-      }
-    });
-  }, { threshold: 0.08 });
-
-  document.querySelectorAll('.experiment-card').forEach(el => observer.observe(el));
+  document.querySelectorAll('.experiment-card').forEach(el => {
+    const delay = parseInt(el.dataset.delay || 0, 10);
+    setTimeout(() => el.classList.add('visible'), 120 + delay);
+  });
 }
 
 const navbar = document.getElementById('navbar');

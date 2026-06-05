@@ -13,8 +13,8 @@
   --text-faint: #5a6478;
   --border: rgba(212, 168, 83, 0.12);
   --border-planned: rgba(139, 149, 168, 0.25);
-  --font-display: 'Fraunces', Georgia, serif;
-  --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+  --font-display: 'Fraunces', 'Noto Serif SC', Georgia, 'Songti SC', serif;
+  --font-body: 'IBM Plex Sans', 'Segoe UI', 'Microsoft YaHei', system-ui, sans-serif;
   --radius: 12px;
   --radius-lg: 20px;
   --shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
