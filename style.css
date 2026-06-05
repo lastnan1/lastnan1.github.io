@@ -517,6 +517,45 @@ img { max-width: 100%; }
   font-size: 0.78rem;
 }
 
+/* 主推项目卡片 */
+.project-featured {
+  grid-column: 1 / -1;
+}
+.project-featured .project-header {
+  height: 120px;
+}
+.project-featured .project-body {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.project-badge {
+  display: inline-block;
+  background: linear-gradient(90deg, rgba(99,102,241,0.2), rgba(34,211,238,0.15));
+  border: 1px solid rgba(99,102,241,0.4);
+  color: var(--primary-light);
+  border-radius: 50px;
+  padding: 3px 14px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+}
+
+.project-highlights {
+  list-style: none;
+  margin: 12px 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.project-highlights li {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  padding-left: 4px;
+}
+
 /* ===== Contact ===== */
 .contact-wrap {
   display: grid;

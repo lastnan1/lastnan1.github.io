@@ -68,13 +68,13 @@
               </svg>
             </div>
           </div>
-          <div class="about-badge about-badge-1">🎓 本科在读</div>
-          <div class="about-badge about-badge-2">💻 全栈开发</div>
+          <div class="about-badge about-badge-1">🎓 硕士研究生</div>
+          <div class="about-badge about-badge-2">🔬 PINN 研究者</div>
         </div>
         <div class="about-text">
           <h3>嗨，很高兴认识你！</h3>
-          <p>我是一名充满热情的开发者，对前端开发、用户体验设计以及新兴技术保持浓厚兴趣。</p>
-          <p>在空闲时间，我喜欢探索开源项目、写技术博客，并且不断挑战自己学习新的框架与工具。</p>
+          <p>我是一名 <strong>PINN（物理信息神经网络）</strong> 领域的硕士研究生，专注于将深度学习与偏微分方程求解相结合，研究地震波正演与自适应损失权重策略。</p>
+          <p>目前主要围绕二维声波传播问题，设计并对比多种 PINN 优化方案，涵盖自适应 λ 权重、残差驱动配点重采样和不确定性感知损失等前沿方向。</p>
           <div class="about-stats">
             <div class="stat-item">
               <span class="stat-num" data-target="20">0</span><span>+</span>
@@ -101,35 +101,35 @@
       <h2 class="section-title">技能栈 <span class="title-line"></span></h2>
       <div class="skills-grid">
         <div class="skill-card" data-delay="0">
-          <div class="skill-icon">🌐</div>
-          <h3>前端开发</h3>
+          <div class="skill-icon">🧠</div>
+          <h3>深度学习 / PINN</h3>
           <div class="skill-tags">
-            <span>HTML5</span><span>CSS3</span><span>JavaScript</span>
-            <span>React</span><span>Vue</span><span>TypeScript</span>
+            <span>PyTorch</span><span>PINN</span><span>自适应损失权重</span>
+            <span>偏微分方程</span><span>声波方程</span><span>有限差分</span>
           </div>
         </div>
         <div class="skill-card" data-delay="100">
-          <div class="skill-icon">⚙️</div>
-          <h3>后端开发</h3>
+          <div class="skill-icon">🔬</div>
+          <h3>科学计算</h3>
           <div class="skill-tags">
-            <span>Node.js</span><span>Python</span><span>Express</span>
-            <span>FastAPI</span><span>REST API</span>
+            <span>NumPy</span><span>SciPy</span><span>Matplotlib</span>
+            <span>波场正演</span><span>残差采样</span><span>Ricker 子波</span>
           </div>
         </div>
         <div class="skill-card" data-delay="200">
-          <div class="skill-icon">🗄️</div>
-          <h3>数据库</h3>
+          <div class="skill-icon">💻</div>
+          <h3>编程语言 / 工具</h3>
           <div class="skill-tags">
-            <span>MySQL</span><span>MongoDB</span><span>Redis</span>
-            <span>PostgreSQL</span>
+            <span>Python</span><span>JavaScript</span><span>Git</span>
+            <span>Linux</span><span>AutoDL</span><span>JupyterLab</span>
           </div>
         </div>
         <div class="skill-card" data-delay="300">
-          <div class="skill-icon">🛠️</div>
-          <h3>工具与其他</h3>
+          <div class="skill-icon">📊</div>
+          <h3>实验评价 / 可视化</h3>
           <div class="skill-tags">
-            <span>Git</span><span>Docker</span><span>Linux</span>
-            <span>Figma</span><span>VS Code</span>
+            <span>RMSE</span><span>Rel-L2</span><span>相关系数</span>
+            <span>误差图</span><span>波场对比</span><span>中心剖面</span>
           </div>
         </div>
       </div>
@@ -142,19 +142,26 @@
       <h2 class="section-title">我的项目 <span class="title-line"></span></h2>
       <div class="projects-grid">
 
-        <div class="project-card">
-          <div class="project-header" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+        <!-- PINN 研究项目（主要项目） -->
+        <div class="project-card project-featured">
+          <div class="project-header" style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);">
             <div class="project-links">
-              <a href="#" target="_blank" title="查看 Demo">🔗</a>
-              <a href="#" target="_blank" title="GitHub">📂</a>
+              <a href="https://github.com/lastnan1" target="_blank" title="GitHub">📂</a>
             </div>
-            <div class="project-icon">🚀</div>
+            <div class="project-icon">🌊</div>
           </div>
           <div class="project-body">
-            <h3>项目一</h3>
-            <p>一个使用 React 和 Node.js 构建的全栈 Web 应用，支持用户认证与实时数据同步。</p>
+            <div class="project-badge">硕士研究 · 在研</div>
+            <h3>PINN 声波正演对比研究</h3>
+            <p>基于物理信息神经网络（PINN）求解二维均匀介质声波传播问题，系统设计并对比六种自适应损失权重策略（A–F），复现 Hou et al. 2023、Shi &amp; Beer 2024、Jing et al. 2025 等三篇前沿论文方案。</p>
+            <ul class="project-highlights">
+              <li>🔬 提出 Softmax 归一化 + 梯度模长初始化自适应 λ 方案，解决权重塌缩问题</li>
+              <li>📐 引入雷克子波 × 高斯空间震源，使 PDE 残差与 FD 正演物理一致</li>
+              <li>📊 设计 RMSE / Rel-L2 / Corr / MaxAE 多维评价体系，外推至 t=0.12s 验证泛化能力</li>
+            </ul>
             <div class="project-tech">
-              <span>React</span><span>Node.js</span><span>MongoDB</span>
+              <span>Python</span><span>PyTorch</span><span>PINN</span>
+              <span>声波方程</span><span>自适应权重</span><span>有限差分</span>
             </div>
           </div>
         </div>

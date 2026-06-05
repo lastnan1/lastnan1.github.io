@@ -17,7 +17,7 @@ navLinks.querySelectorAll('a').forEach(link => {
 });
 
 /* ===== 打字机效果 ===== */
-const roles = ['前端开发者', '全栈工程师', 'UI 爱好者', '开源贡献者'];
+const roles = ['PINN 研究者', '深度学习工程师', '科学计算爱好者', '开源贡献者'];
 let roleIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
