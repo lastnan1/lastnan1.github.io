@@ -15,10 +15,11 @@ personal web/
 ├── experiments.json    实验进度数据（唯一需要手动更新的文件）
 ├── papers.json         论文索引（由 build-papers.js 自动生成，勿手动修改）
 ├── build-papers.js     论文构建脚本
-├── papers/             论文 MD 笔记 + 生成的 HTML
+├── papers/             论文 MD 笔记 + PDF + 生成的 HTML
 │   ├── 2026-06-04/
 │   │   ├── 01-BRDR-平衡残差衰减率.md
 │   │   ├── 01-BRDR-平衡残差衰减率.html   ← 脚本生成
+│   │   ├── 2407.01613.pdf                ← 有 arXiv 时由脚本自动复制
 │   │   └── ...
 │   └── 2026-06-05/
 │       └── ...
@@ -119,16 +120,36 @@ arxiv: "2408.xxxxx"           ← 可选
 
 ...
 
-## 备注
+## 本地 PDF
 
-...
+![[2407.01613.pdf]]
+
+- arXiv：https://arxiv.org/abs/2407.01613
 ```
 
-### 步骤 2：复制 MD 到网站目录
+无 arXiv 的期刊论文写：
+
+```markdown
+## 本地 PDF
+
+> 暂无本地 PDF（本篇无 arXiv 预印本，仅期刊/会议发表）。
+
+- DOI：https://doi.org/10.xxxx/xxxxx
+```
+
+### 步骤 2：同步笔记到网站目录
 
 ```powershell
-# 复制单个日期文件夹（示例）
-Copy-Item -Recurse "D:\study\root\note\每日论文\2026-06-06" "D:\personal web\papers\"
+# 复制单个日期文件夹（先删旧目录，避免嵌套重复）
+$date = "2026-06-06"
+Remove-Item -Recurse -Force "D:\personal web\papers\$date" -ErrorAction SilentlyContinue
+Copy-Item -Recurse "D:\study\root\note\每日论文\$date" "D:\personal web\papers\"
+```
+
+可选：在笔记目录先下载 PDF，构建脚本会自动同步：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File "D:\study\root\note\每日论文\_arxiv-papers\download_all.ps1"
 ```
 
 ### 步骤 3：运行构建脚本
@@ -139,8 +160,21 @@ node build-papers.js
 ```
 
 脚本会自动：
-- 为每篇 MD 生成同名 `.html`（包含样式、导航、wikilink 跳转）
-- 刷新 `papers.json` 索引
+- 从笔记目录复制 PDF 到 `papers/YYYY-MM-DD/`（若本地已有则跳过）
+- 为每篇 MD 生成同名 `.html`（含 PDF/DOI 主按钮、wikilink 跳转）
+- 刷新 `papers.json` 索引（含 `readLink` 字段）
+
+### PDF / DOI 链接规则
+
+每篇论文有一个主阅读按钮，优先级如下：
+
+| 优先级 | 条件 | 按钮 |
+|--------|------|------|
+| 1 | 同目录有 `{arxiv_id}.pdf` | **PDF ↗**（本地文件） |
+| 2 | frontmatter 有 `arxiv:` 但无本地 PDF | **PDF ↗**（arXiv 在线 PDF） |
+| 3 | 仅有 `doi:` | **DOI ↗**（期刊页面） |
+
+知识库卡片和单篇论文页顶部均显示该按钮；正文 `![[xxx.pdf]]` 也会转为可点击链接。
 
 ### 步骤 4：推送到 GitHub
 
@@ -187,6 +221,8 @@ npx serve .
 ## 六、注意事项
 
 - `papers.json` 和 `papers/**/*.html` 均由脚本自动生成，**不要手动修改**
+- `papers/**/*.pdf` 由构建脚本从笔记目录复制，会进入 Git 仓库（单篇约 1–5 MB）
+- 复制日期文件夹时务必先 `Remove-Item` 旧目录，避免出现 `papers/2026-06-04/2026-06-04/` 嵌套重复
 - `siteLastUpdated` 字段每次发版时手动改为当天日期，老师在页面顶部能直接看到
 - 中国大陆访问 Google Fonts 可能较慢，字体已配置降级到微软雅黑等本地字体
 - `.agents/` 和 `skills-lock.json` 已在 `.gitignore` 中忽略，无需关注

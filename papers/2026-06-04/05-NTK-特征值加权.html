@@ -12,8 +12,20 @@
     .paper-back { display:inline-flex; align-items:center; gap:6px; color:var(--text-muted); font-size:.85rem; margin-bottom:32px; transition:color var(--transition); }
     .paper-back:hover { color:var(--accent); }
     .paper-meta-bar { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:20px 0 28px; }
+    .paper-read-link { font-size:.85rem; font-weight:600; padding:8px 18px; border-radius:6px; transition:var(--transition); }
+    .paper-read-link--pdf, .paper-read-link--arxiv-pdf { background:var(--accent); color:var(--bg); border:1px solid var(--accent); }
+    .paper-read-link--pdf:hover, .paper-read-link--arxiv-pdf:hover { filter:brightness(1.08); box-shadow:0 4px 16px rgba(212,168,83,.3); }
+    .paper-read-link--doi { background:transparent; color:var(--accent); border:1px solid rgba(212,168,83,.4); }
+    .paper-read-link--doi:hover { background:var(--accent); color:var(--bg); }
     .paper-ext-link { font-size:.8rem; padding:4px 12px; border:1px solid var(--border); border-radius:4px; color:var(--accent); transition:var(--transition); }
     .paper-ext-link:hover { background:var(--accent); color:var(--bg); }
+    .pdf-embed-wrap { margin:12px 0 20px; }
+    .paper-pdf-embed { display:inline-flex; align-items:center; gap:6px; font-size:.88rem; font-weight:500; padding:10px 20px; background:var(--accent-dim); border:1px solid rgba(212,168,83,.35); border-radius:8px; color:var(--accent); transition:var(--transition); }
+    .paper-pdf-embed:hover { background:var(--accent); color:var(--bg); }
+    .paper-pdf-embed--doi { background:rgba(139,149,168,.1); border-color:var(--border-planned); color:var(--text-muted); }
+    .paper-pdf-embed--doi:hover { background:var(--accent-dim); color:var(--accent); }
+    .pdf-fallback { background:var(--bg-3); border-left:3px solid var(--border-planned); padding:12px 16px; margin:16px 0; border-radius:0 8px 8px 0; }
+    .pdf-fallback p { color:var(--text-faint); font-size:.88rem; margin-bottom:10px; }
     .paper-tags { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 32px; }
     .paper-tag { font-size:.72rem; padding:3px 10px; border-radius:4px; background:var(--bg-3); color:var(--text-muted); border:1px solid rgba(255,255,255,.06); }
     .paper-body h2 { font-family:var(--font-display); font-size:1.15rem; font-weight:600; margin:40px 0 14px; padding-bottom:8px; border-bottom:1px solid var(--border); color:var(--text); }
@@ -68,6 +80,7 @@
     <h1 class="paper-zh-title">NTK 视角与特征值自适应加权（JCP）</h1>
 
     <div class="paper-meta-bar">
+      <a href="2007.14527.pdf" target="_blank" rel="noopener" class="paper-read-link paper-read-link--pdf">PDF ↗</a>
       <span class="status-badge grade-sci1">SCI 一区</span>
       <span style="font-size:.88rem;color:var(--text-muted)">Journal of Computational Physics</span>
       <span style="font-size:.78rem;color:var(--text-faint)">2026-06-04</span>
@@ -78,7 +91,7 @@
     <div class="paper-tags"><span class="paper-tag">自适应权重</span></div>
 
     <div class="paper-body">
-      <h1 id="NTK-视角与特征值自适应加权-JCP-">NTK 视角与特征值自适应加权（JCP）</h1><h2 id="元信息">元信息</h2><ul><li><strong>作者 / 年份</strong>：Sifan Wang, Xinling Yu, Paris Perdikaris, 2022</li><li><strong>发表于</strong>：Journal of Computational Physics, Vol. 449（SCI 一区）</li><li><strong>链接</strong>：<a href="https://doi.org/10.1016/j.jcp.2021.110768" target="_blank" rel="noopener">https://doi.org/10.1016/j.jcp.2021.110768</a></li><li><strong>引用数</strong>：极高（PINN 训练理论奠基之一）</li></ul><h2 id="核心内容">核心内容</h2><p>推导 PINN 的 NTK，证明各损失分量收敛速率由 NTK 特征值决定；提出按特征值<strong>反比加权</strong>各损失项，缓解边界/残差项梯度失衡（即 learning rate annealing 的理论版）。</p><h2 id="创新点">创新点</h2><ol><li>首次用 NTK 解释 PINN 训练失败与损失项收敛不同步。</li><li>自适应权重由初始化时 NTK 特征值给出，有明确理论动机。</li><li>与经验性 LR annealing 统一在同一框架下。</li><li>开源实现 PINNsNTK，影响后续 BRDR、DB-PINN 等权重工作。</li></ol><h2 id="相关汇报">相关汇报</h2><div class="table-wrap"><table><thead><tr><th>汇报</th><th>关联理由</th></tr></thead><tbody><tr><td><a href="04-ReLoBRaLo-相对损失平衡.html" class="wikilink">04-ReLoBRaLo-相对损失平衡</a></td><td>ReLoBRaLo 可视为避开 NTK 计算开销的实用替代。</td></tr><tr><td><a href="01-BRDR-平衡残差衰减率.html" class="wikilink">01-BRDR-平衡残差衰减率</a></td><td>BRDR 引用并对比 NTK 加权路线。</td></tr><tr><td><a href="08-MOO-VARI-多目标优化加权.html" class="wikilink">08-MOO-VARI-多目标优化加权</a></td><td>MOO-VARI 用 Pareto 而非 NTK，属另一条「理论驱动加权」线。</td></tr></tbody></table></div><h2 id="与我研究的关联">与我研究的关联</h2><p>若 PDE 项梯度长期压制快照项，可在训练前做一次 NTK 估计定 λ 初值，再接入你的可学习 λ 微调。</p><h2 id="备注">备注</h2><ul><li>汇报批次：第 2 次检索 #05</li></ul>
+      <h1 id="NTK-视角与特征值自适应加权-JCP-">NTK 视角与特征值自适应加权（JCP）</h1><h2 id="元信息">元信息</h2><ul><li><strong>作者 / 年份</strong>：Sifan Wang, Xinling Yu, Paris Perdikaris, 2022</li><li><strong>发表于</strong>：Journal of Computational Physics, Vol. 449（SCI 一区）</li><li><strong>链接</strong>：<a href="https://doi.org/10.1016/j.jcp.2021.110768" target="_blank" rel="noopener">https://doi.org/10.1016/j.jcp.2021.110768</a></li><li><strong>引用数</strong>：极高（PINN 训练理论奠基之一）</li></ul><h2 id="核心内容">核心内容</h2><p>推导 PINN 的 NTK，证明各损失分量收敛速率由 NTK 特征值决定；提出按特征值<strong>反比加权</strong>各损失项，缓解边界/残差项梯度失衡（即 learning rate annealing 的理论版）。</p><h2 id="创新点">创新点</h2><ol><li>首次用 NTK 解释 PINN 训练失败与损失项收敛不同步。</li><li>自适应权重由初始化时 NTK 特征值给出，有明确理论动机。</li><li>与经验性 LR annealing 统一在同一框架下。</li><li>开源实现 PINNsNTK，影响后续 BRDR、DB-PINN 等权重工作。</li></ol><h2 id="相关汇报">相关汇报</h2><div class="table-wrap"><table><thead><tr><th>汇报</th><th>关联理由</th></tr></thead><tbody><tr><td><a href="04-ReLoBRaLo-相对损失平衡.html" class="wikilink">04-ReLoBRaLo-相对损失平衡</a></td><td>ReLoBRaLo 可视为避开 NTK 计算开销的实用替代。</td></tr><tr><td><a href="01-BRDR-平衡残差衰减率.html" class="wikilink">01-BRDR-平衡残差衰减率</a></td><td>BRDR 引用并对比 NTK 加权路线。</td></tr><tr><td><a href="08-MOO-VARI-多目标优化加权.html" class="wikilink">08-MOO-VARI-多目标优化加权</a></td><td>MOO-VARI 用 Pareto 而非 NTK，属另一条「理论驱动加权」线。</td></tr></tbody></table></div><h2 id="与我研究的关联">与我研究的关联</h2><p>若 PDE 项梯度长期压制快照项，可在训练前做一次 NTK 估计定 λ 初值，再接入你的可学习 λ 微调。</p><h2 id="备注">备注</h2><ul><li>汇报批次：第 2 次检索 #05</li></ul><h2 id="本地-PDF">本地 PDF</h2><div class="pdf-embed-wrap"><a href="2007.14527.pdf" class="paper-pdf-embed" target="_blank" rel="noopener">📄 打开 PDF</a></div><ul><li>arXiv：<a href="https://arxiv.org/abs/2007.14527" target="_blank" rel="noopener">https://arxiv.org/abs/2007.14527</a></li><li>文件：<code>每日论文/2026-06-04/2007.14527.pdf</code></li></ul>
     </div>
 
     <div class="siblings-nav"><span class="siblings-label">同日其他论文：</span><a href="01-BRDR-平衡残差衰减率.html" class="sibling-link">BRDR-平衡残差衰减率</a><a href="02-LA-PINN-损失注意力.html" class="sibling-link">LA-PINN</a><a href="03-DB-PINN-双层次平衡.html" class="sibling-link">DB-PINN</a><a href="04-ReLoBRaLo-相对损失平衡.html" class="sibling-link">ReLoBRaLo-相对损失平衡</a><a href="06-RBA-残差注意力.html" class="sibling-link">RBA-残差注意力</a><a href="07-AL-PINN-增广拉格朗日.html" class="sibling-link">AL-PINN</a><a href="08-MOO-VARI-多目标优化加权.html" class="sibling-link">MOO-VARI</a><a href="09-因果训练加权.html" class="sibling-link">因果训练加权</a><a href="10-因果注意力-CA.html" class="sibling-link">因果注意力-CA</a><a href="11-BPINN-贝叶斯自适应加权.html" class="sibling-link">BPINN-贝叶斯自适应加权</a><a href="12-NeurIPS-失败模式与课程学习.html" class="sibling-link">NeurIPS-失败模式与课程学习</a><a href="13-vRBA-变分残差注意力.html" class="sibling-link">vRBA-变分残差注意力</a></div>

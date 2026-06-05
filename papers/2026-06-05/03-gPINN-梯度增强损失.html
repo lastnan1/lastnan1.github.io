@@ -12,8 +12,20 @@
     .paper-back { display:inline-flex; align-items:center; gap:6px; color:var(--text-muted); font-size:.85rem; margin-bottom:32px; transition:color var(--transition); }
     .paper-back:hover { color:var(--accent); }
     .paper-meta-bar { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:20px 0 28px; }
+    .paper-read-link { font-size:.85rem; font-weight:600; padding:8px 18px; border-radius:6px; transition:var(--transition); }
+    .paper-read-link--pdf, .paper-read-link--arxiv-pdf { background:var(--accent); color:var(--bg); border:1px solid var(--accent); }
+    .paper-read-link--pdf:hover, .paper-read-link--arxiv-pdf:hover { filter:brightness(1.08); box-shadow:0 4px 16px rgba(212,168,83,.3); }
+    .paper-read-link--doi { background:transparent; color:var(--accent); border:1px solid rgba(212,168,83,.4); }
+    .paper-read-link--doi:hover { background:var(--accent); color:var(--bg); }
     .paper-ext-link { font-size:.8rem; padding:4px 12px; border:1px solid var(--border); border-radius:4px; color:var(--accent); transition:var(--transition); }
     .paper-ext-link:hover { background:var(--accent); color:var(--bg); }
+    .pdf-embed-wrap { margin:12px 0 20px; }
+    .paper-pdf-embed { display:inline-flex; align-items:center; gap:6px; font-size:.88rem; font-weight:500; padding:10px 20px; background:var(--accent-dim); border:1px solid rgba(212,168,83,.35); border-radius:8px; color:var(--accent); transition:var(--transition); }
+    .paper-pdf-embed:hover { background:var(--accent); color:var(--bg); }
+    .paper-pdf-embed--doi { background:rgba(139,149,168,.1); border-color:var(--border-planned); color:var(--text-muted); }
+    .paper-pdf-embed--doi:hover { background:var(--accent-dim); color:var(--accent); }
+    .pdf-fallback { background:var(--bg-3); border-left:3px solid var(--border-planned); padding:12px 16px; margin:16px 0; border-radius:0 8px 8px 0; }
+    .pdf-fallback p { color:var(--text-faint); font-size:.88rem; margin-bottom:10px; }
     .paper-tags { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 32px; }
     .paper-tag { font-size:.72rem; padding:3px 10px; border-radius:4px; background:var(--bg-3); color:var(--text-muted); border:1px solid rgba(255,255,255,.06); }
     .paper-body h2 { font-family:var(--font-display); font-size:1.15rem; font-weight:600; margin:40px 0 14px; padding-bottom:8px; border-bottom:1px solid var(--border); color:var(--text); }
@@ -68,6 +80,7 @@
     <h1 class="paper-zh-title">gPINN：PDE 残差梯度增强损失（CMAME）</h1>
 
     <div class="paper-meta-bar">
+      <a href="https://doi.org/10.1016/j.cma.2022.114823" target="_blank" rel="noopener" class="paper-read-link paper-read-link--doi">DOI ↗</a>
       <span class="status-badge grade-sci1">SCI 一区</span>
       <span style="font-size:.88rem;color:var(--text-muted)">Computer Methods in Applied Mechanics and Engineering</span>
       <span style="font-size:.78rem;color:var(--text-faint)">2026-06-05</span>
@@ -78,7 +91,7 @@
     <div class="paper-tags"><span class="paper-tag">自适应权重</span></div>
 
     <div class="paper-body">
-      <h1 id="gPINN-PDE-残差梯度增强损失-CMAME-">gPINN：PDE 残差梯度增强损失（CMAME）</h1><h2 id="元信息">元信息</h2><ul><li><strong>作者 / 年份</strong>：Chengyu Yu, Maziar Raissi 等, 2022</li><li><strong>发表于</strong>：Computer Methods in Applied Mechanics and Engineering（SCI 一区）</li><li><strong>链接</strong>：<a href="https://doi.org/10.1016/j.cma.2022.114823" target="_blank" rel="noopener">https://doi.org/10.1016/j.cma.2022.114823</a></li><li><strong>引用数</strong>：高</li></ul><h2 id="核心内容">核心内容</h2><p>在 PINN 损失中除 PDE 残差外，加入<strong>残差对输入的梯度</strong>项（gPINN），提高精度；并与 <strong>RAR</strong>（残差自适应细化配点）结合，在陡梯度解上进一步改进。</p><h2 id="创新点">创新点</h2><ol><li>多一项梯度损失，等价于对损失结构做「物理一致性」加强，而非简单标量 λ。</li><li>更少配点即可达到与 PINN 相当或更好精度。</li><li>gPINN + RAR：梯度增强 + 自适应采样双轨。</li><li>正/逆问题均有系统实验。</li></ol><h2 id="相关汇报">相关汇报</h2><div class="table-wrap"><table><thead><tr><th>汇报</th><th>关联理由</th></tr></thead><tbody><tr><td><a href="01-AMAW-PINN-配点与损失联合自适应.html" class="wikilink">01-AMAW-PINN-配点与损失联合自适应</a></td><td>AMAW 动配点+调权；gPINN 加梯度项+RAR，可组成「g+AMAW」消融。</td></tr><tr><td><a href="../2026-06-04/06-RBA-残差注意力.html" class="wikilink">06-RBA-残差注意力</a></td><td>RBA 与 RAR 同属残差驱动自适应，gPINN 论文明确结合 RAR。</td></tr><tr><td><a href="../2026-06-04/04-ReLoBRaLo-相对损失平衡.html" class="wikilink">04-ReLoBRaLo-相对损失平衡</a></td><td>ReLoBRaLo 平衡已有项权重；gPINN 是<strong>新增</strong>梯度损失项。</td></tr></tbody></table></div><h2 id="与我研究的关联">与我研究的关联</h2><p>可在 <code>losses.py</code> 增加 <code>loss_pde_grad</code> 项，与现有三分项 λ 平衡一起评估是否缓解 PDE 残差收敛慢。</p><h2 id="备注">备注</h2><ul><li>检索批次：2026-06-05 第 1 次</li></ul>
+      <h1 id="gPINN-PDE-残差梯度增强损失-CMAME-">gPINN：PDE 残差梯度增强损失（CMAME）</h1><h2 id="元信息">元信息</h2><ul><li><strong>作者 / 年份</strong>：Chengyu Yu, Maziar Raissi 等, 2022</li><li><strong>发表于</strong>：Computer Methods in Applied Mechanics and Engineering（SCI 一区）</li><li><strong>链接</strong>：<a href="https://doi.org/10.1016/j.cma.2022.114823" target="_blank" rel="noopener">https://doi.org/10.1016/j.cma.2022.114823</a></li><li><strong>引用数</strong>：高</li></ul><h2 id="核心内容">核心内容</h2><p>在 PINN 损失中除 PDE 残差外，加入<strong>残差对输入的梯度</strong>项（gPINN），提高精度；并与 <strong>RAR</strong>（残差自适应细化配点）结合，在陡梯度解上进一步改进。</p><h2 id="创新点">创新点</h2><ol><li>多一项梯度损失，等价于对损失结构做「物理一致性」加强，而非简单标量 λ。</li><li>更少配点即可达到与 PINN 相当或更好精度。</li><li>gPINN + RAR：梯度增强 + 自适应采样双轨。</li><li>正/逆问题均有系统实验。</li></ol><h2 id="相关汇报">相关汇报</h2><div class="table-wrap"><table><thead><tr><th>汇报</th><th>关联理由</th></tr></thead><tbody><tr><td><a href="01-AMAW-PINN-配点与损失联合自适应.html" class="wikilink">01-AMAW-PINN-配点与损失联合自适应</a></td><td>AMAW 动配点+调权；gPINN 加梯度项+RAR，可组成「g+AMAW」消融。</td></tr><tr><td><a href="../2026-06-04/06-RBA-残差注意力.html" class="wikilink">06-RBA-残差注意力</a></td><td>RBA 与 RAR 同属残差驱动自适应，gPINN 论文明确结合 RAR。</td></tr><tr><td><a href="../2026-06-04/04-ReLoBRaLo-相对损失平衡.html" class="wikilink">04-ReLoBRaLo-相对损失平衡</a></td><td>ReLoBRaLo 平衡已有项权重；gPINN 是<strong>新增</strong>梯度损失项。</td></tr></tbody></table></div><h2 id="与我研究的关联">与我研究的关联</h2><p>可在 <code>losses.py</code> 增加 <code>loss_pde_grad</code> 项，与现有三分项 λ 平衡一起评估是否缓解 PDE 残差收敛慢。</p><h2 id="备注">备注</h2><ul><li>检索批次：2026-06-05 第 1 次</li></ul><h2 id="本地-PDF">本地 PDF</h2><div class="pdf-fallback"><p>暂无本地 PDF（本篇无 arXiv 预印本，仅期刊/会议发表）。</p><a href="https://doi.org/10.1016/j.cma.2022.114823" class="paper-pdf-embed paper-pdf-embed--doi" target="_blank" rel="noopener">🔗 打开 DOI 链接</a></div><ul><li>DOI：<a href="https://doi.org/10.1016/j.cma.2022.114823" target="_blank" rel="noopener">https://doi.org/10.1016/j.cma.2022.114823</a></li></ul>
     </div>
 
     <div class="siblings-nav"><span class="siblings-label">同日其他论文：</span><a href="01-AMAW-PINN-配点与损失联合自适应.html" class="sibling-link">AMAW-PINN</a><a href="02-SA-PINN-极小极大点级权重.html" class="sibling-link">SA-PINN</a><a href="04-ConFIG-无冲突梯度训练.html" class="sibling-link">ConFIG-无冲突梯度训练</a><a href="05-WHC-PINN-双曲守恒律加权.html" class="sibling-link">WHC-PINN</a><a href="06-PD-PINN-原始对偶鲁棒训练.html" class="sibling-link">PD-PINN</a></div>

@@ -154,20 +154,40 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
+      gap: 8px;
       margin-top: auto;
     }
-    .paper-read-btn {
+    .paper-read-btn, .paper-pdf-btn {
       font-size: .8rem;
-      color: var(--accent);
       font-weight: 500;
       transition: var(--transition);
       padding: 6px 14px;
-      border: 1px solid rgba(212,168,83,.25);
       border-radius: 5px;
+      text-decoration: none;
+    }
+    .paper-read-btn {
+      color: var(--accent);
+      border: 1px solid rgba(212,168,83,.25);
     }
     .paper-read-btn:hover {
       background: var(--accent);
       color: var(--bg);
+    }
+    .paper-pdf-btn {
+      background: var(--accent);
+      color: var(--bg);
+      border: 1px solid var(--accent);
+    }
+    .paper-pdf-btn:hover {
+      filter: brightness(1.08);
+    }
+    .paper-pdf-btn--doi {
+      background: transparent;
+      color: var(--accent);
+      border-color: rgba(212,168,83,.35);
+    }
+    .paper-pdf-btn--doi:hover {
+      background: var(--accent-dim);
     }
 
     /* ── 级别徽章 ── */
@@ -315,8 +335,13 @@
             <span class="date-group-line"></span>
           </div>
           <div class="papers-grid">
-            ${dayPapers.map((p, i) => `
-              <a href="${p.htmlPath}" class="paper-card" data-grade="${venueGradeKey(p.venue_grade)}"
+            ${dayPapers.map((p, i) => {
+              const rl = p.readLink;
+              const pdfBtn = rl
+                ? `<a href="${rl.url}" class="paper-pdf-btn${rl.type === 'doi' ? ' paper-pdf-btn--doi' : ''}" target="_blank" rel="noopener" onclick="event.stopPropagation()">${rl.label}</a>`
+                : '';
+              return `
+              <article class="paper-card" data-grade="${venueGradeKey(p.venue_grade)}"
                  data-search="${(p.title + ' ' + p.zhTitle + ' ' + (p.tags || []).join(' ')).toLowerCase()}"
                  style="--card-delay:${i * 60}ms">
                 <div class="paper-card-top">
@@ -330,10 +355,11 @@
                     ${p.tags.map(t => `<span class="paper-tag">${t}</span>`).join('')}
                   </div>` : ''}
                 <div class="paper-card-footer">
-                  <span class="paper-read-btn">阅读笔记 →</span>
+                  <a href="${p.htmlPath}" class="paper-read-btn">阅读笔记 →</a>
+                  ${pdfBtn}
                 </div>
-              </a>
-            `).join('')}
+              </article>`;
+            }).join('')}
             <p class="no-results" id="noResults-${date}" style="display:none;grid-column:1/-1;text-align:center;padding:24px;color:var(--text-faint);font-size:.9rem;">本日无匹配论文</p>
           </div>
         `;

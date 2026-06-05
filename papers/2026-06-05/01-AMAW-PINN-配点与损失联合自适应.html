@@ -12,8 +12,20 @@
     .paper-back { display:inline-flex; align-items:center; gap:6px; color:var(--text-muted); font-size:.85rem; margin-bottom:32px; transition:color var(--transition); }
     .paper-back:hover { color:var(--accent); }
     .paper-meta-bar { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:20px 0 28px; }
+    .paper-read-link { font-size:.85rem; font-weight:600; padding:8px 18px; border-radius:6px; transition:var(--transition); }
+    .paper-read-link--pdf, .paper-read-link--arxiv-pdf { background:var(--accent); color:var(--bg); border:1px solid var(--accent); }
+    .paper-read-link--pdf:hover, .paper-read-link--arxiv-pdf:hover { filter:brightness(1.08); box-shadow:0 4px 16px rgba(212,168,83,.3); }
+    .paper-read-link--doi { background:transparent; color:var(--accent); border:1px solid rgba(212,168,83,.4); }
+    .paper-read-link--doi:hover { background:var(--accent); color:var(--bg); }
     .paper-ext-link { font-size:.8rem; padding:4px 12px; border:1px solid var(--border); border-radius:4px; color:var(--accent); transition:var(--transition); }
     .paper-ext-link:hover { background:var(--accent); color:var(--bg); }
+    .pdf-embed-wrap { margin:12px 0 20px; }
+    .paper-pdf-embed { display:inline-flex; align-items:center; gap:6px; font-size:.88rem; font-weight:500; padding:10px 20px; background:var(--accent-dim); border:1px solid rgba(212,168,83,.35); border-radius:8px; color:var(--accent); transition:var(--transition); }
+    .paper-pdf-embed:hover { background:var(--accent); color:var(--bg); }
+    .paper-pdf-embed--doi { background:rgba(139,149,168,.1); border-color:var(--border-planned); color:var(--text-muted); }
+    .paper-pdf-embed--doi:hover { background:var(--accent-dim); color:var(--accent); }
+    .pdf-fallback { background:var(--bg-3); border-left:3px solid var(--border-planned); padding:12px 16px; margin:16px 0; border-radius:0 8px 8px 0; }
+    .pdf-fallback p { color:var(--text-faint); font-size:.88rem; margin-bottom:10px; }
     .paper-tags { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 32px; }
     .paper-tag { font-size:.72rem; padding:3px 10px; border-radius:4px; background:var(--bg-3); color:var(--text-muted); border:1px solid rgba(255,255,255,.06); }
     .paper-body h2 { font-family:var(--font-display); font-size:1.15rem; font-weight:600; margin:40px 0 14px; padding-bottom:8px; border-bottom:1px solid var(--border); color:var(--text); }
@@ -68,6 +80,7 @@
     <h1 class="paper-zh-title">AMAW-PINN：配点移动 + 损失联合自适应（Nonlinear Dynamics）</h1>
 
     <div class="paper-meta-bar">
+      <a href="https://doi.org/10.1007/s11071-023-08654-w" target="_blank" rel="noopener" class="paper-read-link paper-read-link--doi">DOI ↗</a>
       <span class="status-badge grade-sci">SCI</span>
       <span style="font-size:.88rem;color:var(--text-muted)">Nonlinear Dynamics</span>
       <span style="font-size:.78rem;color:var(--text-faint)">2026-06-05</span>
@@ -78,7 +91,7 @@
     <div class="paper-tags"><span class="paper-tag">自适应权重</span></div>
 
     <div class="paper-body">
-      <h1 id="AMAW-PINN-配点移动---损失联合自适应-Nonlinear-Dynamics-">AMAW-PINN：配点移动 + 损失联合自适应（Nonlinear Dynamics）</h1><h2 id="元信息">元信息</h2><ul><li><strong>作者 / 年份</strong>：Jie Hou, Ying Li, Shihui Ying, 2023</li><li><strong>发表于</strong>：Nonlinear Dynamics, Vol. 111（SCI）</li><li><strong>链接</strong>：<a href="https://doi.org/10.1007/s11071-023-08654-w" target="_blank" rel="noopener">https://doi.org/10.1007/s11071-023-08654-w</a> | <a href="https://github.com/hsbhc/AMAW-PINN" target="_blank" rel="noopener">https://github.com/hsbhc/AMAW-PINN</a></li><li><strong>引用数</strong>：中等</li></ul><h2 id="核心内容">核心内容</h2><p>同时做两件事：<strong>残差引导的配点移动</strong>（自适应采样）与 <strong>负对数似然（NLL）估计驱动的损失项自适应加权</strong>，在 Poisson、Burgers、Helmholtz、腔驱流等多算例上提升精度与泛化。</p><h2 id="创新点">创新点</h2><ol><li>采样与加权一体化，而非只调 λ 或只动配点。</li><li>损失权重通过最小化 NLL 连续更新，减少手工超参。</li><li>配点可向高残差区聚集，缓解均匀配点浪费。</li><li>开源代码 AMAW-PINN，便于复现。</li></ol><h2 id="相关汇报">相关汇报</h2><div class="table-wrap"><table><thead><tr><th>汇报</th><th>关联理由</th></tr></thead><tbody><tr><td><a href="../2026-06-04/06-RBA-残差注意力.html" class="wikilink">06-RBA-残差注意力</a></td><td>都用残差信息做自适应；RBA 做点权，AMAW 还移动配点。</td></tr><tr><td><a href="../2026-06-04/04-ReLoBRaLo-相对损失平衡.html" class="wikilink">04-ReLoBRaLo-相对损失平衡</a></td><td>同为项级自动加权；ReLoBRaLo 用相对进展，AMAW 用 NLL。</td></tr><tr><td><a href="../2026-06-04/13-vRBA-变分残差注意力.html" class="wikilink">13-vRBA-变分残差注意力</a></td><td>vRBA 从变分角度解释残差加权；AMAW 是工程化「采样+加权」组合。</td></tr></tbody></table></div><h2 id="与我研究的关联">与我研究的关联</h2><p>声波正演可在 PDE 配点做残差引导重采样，同时用 NLL 更新 λ_PDE/λ_S/λ_BC，与 BRDR 做点权形成对照实验。</p><h2 id="备注">备注</h2><ul><li>检索批次：2026-06-05 第 1 次</li></ul>
+      <h1 id="AMAW-PINN-配点移动---损失联合自适应-Nonlinear-Dynamics-">AMAW-PINN：配点移动 + 损失联合自适应（Nonlinear Dynamics）</h1><h2 id="元信息">元信息</h2><ul><li><strong>作者 / 年份</strong>：Jie Hou, Ying Li, Shihui Ying, 2023</li><li><strong>发表于</strong>：Nonlinear Dynamics, Vol. 111（SCI）</li><li><strong>链接</strong>：<a href="https://doi.org/10.1007/s11071-023-08654-w" target="_blank" rel="noopener">https://doi.org/10.1007/s11071-023-08654-w</a> | <a href="https://github.com/hsbhc/AMAW-PINN" target="_blank" rel="noopener">https://github.com/hsbhc/AMAW-PINN</a></li><li><strong>引用数</strong>：中等</li></ul><h2 id="核心内容">核心内容</h2><p>同时做两件事：<strong>残差引导的配点移动</strong>（自适应采样）与 <strong>负对数似然（NLL）估计驱动的损失项自适应加权</strong>，在 Poisson、Burgers、Helmholtz、腔驱流等多算例上提升精度与泛化。</p><h2 id="创新点">创新点</h2><ol><li>采样与加权一体化，而非只调 λ 或只动配点。</li><li>损失权重通过最小化 NLL 连续更新，减少手工超参。</li><li>配点可向高残差区聚集，缓解均匀配点浪费。</li><li>开源代码 AMAW-PINN，便于复现。</li></ol><h2 id="相关汇报">相关汇报</h2><div class="table-wrap"><table><thead><tr><th>汇报</th><th>关联理由</th></tr></thead><tbody><tr><td><a href="../2026-06-04/06-RBA-残差注意力.html" class="wikilink">06-RBA-残差注意力</a></td><td>都用残差信息做自适应；RBA 做点权，AMAW 还移动配点。</td></tr><tr><td><a href="../2026-06-04/04-ReLoBRaLo-相对损失平衡.html" class="wikilink">04-ReLoBRaLo-相对损失平衡</a></td><td>同为项级自动加权；ReLoBRaLo 用相对进展，AMAW 用 NLL。</td></tr><tr><td><a href="../2026-06-04/13-vRBA-变分残差注意力.html" class="wikilink">13-vRBA-变分残差注意力</a></td><td>vRBA 从变分角度解释残差加权；AMAW 是工程化「采样+加权」组合。</td></tr></tbody></table></div><h2 id="与我研究的关联">与我研究的关联</h2><p>声波正演可在 PDE 配点做残差引导重采样，同时用 NLL 更新 λ_PDE/λ_S/λ_BC，与 BRDR 做点权形成对照实验。</p><h2 id="备注">备注</h2><ul><li>检索批次：2026-06-05 第 1 次</li></ul><h2 id="本地-PDF">本地 PDF</h2><div class="pdf-fallback"><p>暂无本地 PDF（本篇无 arXiv 预印本，仅期刊/会议发表）。</p><a href="https://doi.org/10.1007/s11071-023-08654-w" class="paper-pdf-embed paper-pdf-embed--doi" target="_blank" rel="noopener">🔗 打开 DOI 链接</a></div><ul><li>DOI：<a href="https://doi.org/10.1007/s11071-023-08654-w" target="_blank" rel="noopener">https://doi.org/10.1007/s11071-023-08654-w</a></li></ul>
     </div>
 
     <div class="siblings-nav"><span class="siblings-label">同日其他论文：</span><a href="02-SA-PINN-极小极大点级权重.html" class="sibling-link">SA-PINN</a><a href="03-gPINN-梯度增强损失.html" class="sibling-link">gPINN-梯度增强损失</a><a href="04-ConFIG-无冲突梯度训练.html" class="sibling-link">ConFIG-无冲突梯度训练</a><a href="05-WHC-PINN-双曲守恒律加权.html" class="sibling-link">WHC-PINN</a><a href="06-PD-PINN-原始对偶鲁棒训练.html" class="sibling-link">PD-PINN</a></div>

@@ -1,7 +1,64 @@
 {
   "generated": "2026-06-05",
-  "total": 19,
+  "total": 22,
   "papers": [
+    {
+      "id": "2026-06-06/01-APINN-多任务自适应加权",
+      "date": "2026-06-06",
+      "title": "Physics-informed neural networks with adaptive loss weighting algorithm for solving partial differential equations",
+      "zhTitle": "APINN：多任务视角的自适应损失加权（Gao et al. 2025）",
+      "venue": "Computers & Mathematics with Applications",
+      "venue_grade": "SCI",
+      "doi": "10.1016/j.camwa.2025.01.007",
+      "arxiv": "",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-06/01-APINN-多任务自适应加权.html",
+      "readLink": {
+        "type": "doi",
+        "url": "https://doi.org/10.1016/j.camwa.2025.01.007",
+        "label": "DOI ↗"
+      }
+    },
+    {
+      "id": "2026-06-06/02-IDW-逆Dirichlet梯度方差加权",
+      "date": "2026-06-06",
+      "title": "Inverse Dirichlet weighting enables reliable training of physics informed neural networks",
+      "zhTitle": "IDW：逆 Dirichlet 梯度方差加权（Maddu et al. 2022）",
+      "venue": "Machine Learning: Science and Technology",
+      "venue_grade": "SCI",
+      "doi": "10.1088/2632-2153/ac3712",
+      "arxiv": "2107.00940",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-06/02-IDW-逆Dirichlet梯度方差加权.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-06/2107.00940.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-06/03-BRDR-SAS-加权与采样联合",
+      "date": "2026-06-06",
+      "title": "Self-adaptive weighting and sampling for physics-informed neural networks",
+      "zhTitle": "BRDR-SAS：自适应加权与残差采样联合框架（Chen et al. 2025）",
+      "venue": "Machine Learning: Science and Technology",
+      "venue_grade": "SCI",
+      "doi": "10.1088/2632-2153/ae556e",
+      "arxiv": "2511.05452",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-06/03-BRDR-SAS-加权与采样联合.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-06/2511.05452.pdf",
+        "label": "PDF ↗"
+      }
+    },
     {
       "id": "2026-06-05/01-AMAW-PINN-配点与损失联合自适应",
       "date": "2026-06-05",
@@ -14,7 +71,12 @@
       "tags": [
         "自适应权重"
       ],
-      "htmlPath": "papers/2026-06-05/01-AMAW-PINN-配点与损失联合自适应.html"
+      "htmlPath": "papers/2026-06-05/01-AMAW-PINN-配点与损失联合自适应.html",
+      "readLink": {
+        "type": "doi",
+        "url": "https://doi.org/10.1007/s11071-023-08654-w",
+        "label": "DOI ↗"
+      }
     },
     {
       "id": "2026-06-05/02-SA-PINN-极小极大点级权重",
@@ -28,7 +90,12 @@
       "tags": [
         "自适应权重"
       ],
-      "htmlPath": "papers/2026-06-05/02-SA-PINN-极小极大点级权重.html"
+      "htmlPath": "papers/2026-06-05/02-SA-PINN-极小极大点级权重.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-05/2009.04544.pdf",
+        "label": "PDF ↗"
+      }
     },
     {
       "id": "2026-06-05/03-gPINN-梯度增强损失",
@@ -42,7 +109,12 @@
       "tags": [
         "自适应权重"
       ],
-      "htmlPath": "papers/2026-06-05/03-gPINN-梯度增强损失.html"
+      "htmlPath": "papers/2026-06-05/03-gPINN-梯度增强损失.html",
+      "readLink": {
+        "type": "doi",
+        "url": "https://doi.org/10.1016/j.cma.2022.114823",
+        "label": "DOI ↗"
+      }
     },
     {
       "id": "2026-06-05/04-ConFIG-无冲突梯度训练",
@@ -56,7 +128,12 @@
       "tags": [
         "自适应权重"
       ],
-      "htmlPath": "papers/2026-06-05/04-ConFIG-无冲突梯度训练.html"
+      "htmlPath": "papers/2026-06-05/04-ConFIG-无冲突梯度训练.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-05/2408.11104.pdf",
+        "label": "PDF ↗"
+      }
     },
     {
       "id": "2026-06-05/05-WHC-PINN-双曲守恒律加权",
@@ -70,7 +147,12 @@
       "tags": [
         "自适应权重"
       ],
-      "htmlPath": "papers/2026-06-05/05-WHC-PINN-双曲守恒律加权.html"
+      "htmlPath": "papers/2026-06-05/05-WHC-PINN-双曲守恒律加权.html",
+      "readLink": {
+        "type": "doi",
+        "url": "https://doi.org/10.1038/s41598-025-34263-1",
+        "label": "DOI ↗"
+      }
     },
     {
       "id": "2026-06-05/06-PD-PINN-原始对偶鲁棒训练",
@@ -84,7 +166,12 @@
       "tags": [
         "自适应权重"
       ],
-      "htmlPath": "papers/2026-06-05/06-PD-PINN-原始对偶鲁棒训练.html"
+      "htmlPath": "papers/2026-06-05/06-PD-PINN-原始对偶鲁棒训练.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-05/2501.18582.pdf",
+        "label": "PDF ↗"
+      }
     },
     {
       "id": "2026-06-04/01-BRDR-平衡残差衰减率",
@@ -98,7 +185,12 @@
       "tags": [
         "自适应权重"
       ],
-      "htmlPath": "papers/2026-06-04/01-BRDR-平衡残差衰减率.html"
+      "htmlPath": "papers/2026-06-04/01-BRDR-平衡残差衰减率.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-04/2407.01613.pdf",
+        "label": "PDF ↗"
+      }
     },
     {
       "id": "2026-06-04/02-LA-PINN-损失注意力",
@@ -112,7 +204,12 @@
       "tags": [
         "自适应权重"
       ],
-      "htmlPath": "papers/2026-06-04/02-LA-PINN-损失注意力.html"
+      "htmlPath": "papers/2026-06-04/02-LA-PINN-损失注意力.html",
+      "readLink": {
+        "type": "doi",
+        "url": "https://doi.org/10.1016/j.jcp.2024.112781",
+        "label": "DOI ↗"
+      }
     },
     {
       "id": "2026-06-04/03-DB-PINN-双层次平衡",
@@ -126,7 +223,12 @@
       "tags": [
         "自适应权重"
       ],
-      "htmlPath": "papers/2026-06-04/03-DB-PINN-双层次平衡.html"
+      "htmlPath": "papers/2026-06-04/03-DB-PINN-双层次平衡.html",
+      "readLink": {
+        "type": "doi",
+        "url": "https://doi.org/10.24963/ijcai.2025/797",
+        "label": "DOI ↗"
+      }
     },
     {
       "id": "2026-06-04/04-ReLoBRaLo-相对损失平衡",
@@ -140,7 +242,12 @@
       "tags": [
         "自适应权重"
       ],
-      "htmlPath": "papers/2026-06-04/04-ReLoBRaLo-相对损失平衡.html"
+      "htmlPath": "papers/2026-06-04/04-ReLoBRaLo-相对损失平衡.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-04/2110.09813.pdf",
+        "label": "PDF ↗"
+      }
     },
     {
       "id": "2026-06-04/05-NTK-特征值加权",
@@ -154,7 +261,12 @@
       "tags": [
         "自适应权重"
       ],
-      "htmlPath": "papers/2026-06-04/05-NTK-特征值加权.html"
+      "htmlPath": "papers/2026-06-04/05-NTK-特征值加权.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-04/2007.14527.pdf",
+        "label": "PDF ↗"
+      }
     },
     {
       "id": "2026-06-04/06-RBA-残差注意力",
@@ -168,7 +280,12 @@
       "tags": [
         "自适应权重"
       ],
-      "htmlPath": "papers/2026-06-04/06-RBA-残差注意力.html"
+      "htmlPath": "papers/2026-06-04/06-RBA-残差注意力.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-04/2307.00379.pdf",
+        "label": "PDF ↗"
+      }
     },
     {
       "id": "2026-06-04/07-AL-PINN-增广拉格朗日",
@@ -182,7 +299,12 @@
       "tags": [
         "自适应权重"
       ],
-      "htmlPath": "papers/2026-06-04/07-AL-PINN-增广拉格朗日.html"
+      "htmlPath": "papers/2026-06-04/07-AL-PINN-增广拉格朗日.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-04/2205.01059.pdf",
+        "label": "PDF ↗"
+      }
     },
     {
       "id": "2026-06-04/08-MOO-VARI-多目标优化加权",
@@ -196,7 +318,12 @@
       "tags": [
         "自适应权重"
       ],
-      "htmlPath": "papers/2026-06-04/08-MOO-VARI-多目标优化加权.html"
+      "htmlPath": "papers/2026-06-04/08-MOO-VARI-多目标优化加权.html",
+      "readLink": {
+        "type": "doi",
+        "url": "https://doi.org/10.1609/aaai.v40i32.39900",
+        "label": "DOI ↗"
+      }
     },
     {
       "id": "2026-06-04/09-因果训练加权",
@@ -210,7 +337,12 @@
       "tags": [
         "自适应权重"
       ],
-      "htmlPath": "papers/2026-06-04/09-因果训练加权.html"
+      "htmlPath": "papers/2026-06-04/09-因果训练加权.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-04/2203.07404.pdf",
+        "label": "PDF ↗"
+      }
     },
     {
       "id": "2026-06-04/10-因果注意力-CA",
@@ -224,7 +356,12 @@
       "tags": [
         "自适应权重"
       ],
-      "htmlPath": "papers/2026-06-04/10-因果注意力-CA.html"
+      "htmlPath": "papers/2026-06-04/10-因果注意力-CA.html",
+      "readLink": {
+        "type": "doi",
+        "url": "https://doi.org/10.1016/j.jcp.2026.112424",
+        "label": "DOI ↗"
+      }
     },
     {
       "id": "2026-06-04/11-BPINN-贝叶斯自适应加权",
@@ -238,7 +375,12 @@
       "tags": [
         "自适应权重"
       ],
-      "htmlPath": "papers/2026-06-04/11-BPINN-贝叶斯自适应加权.html"
+      "htmlPath": "papers/2026-06-04/11-BPINN-贝叶斯自适应加权.html",
+      "readLink": {
+        "type": "doi",
+        "url": "https://doi.org/10.1016/j.jcp.2023.112342",
+        "label": "DOI ↗"
+      }
     },
     {
       "id": "2026-06-04/12-NeurIPS-失败模式与课程学习",
@@ -252,7 +394,12 @@
       "tags": [
         "自适应权重"
       ],
-      "htmlPath": "papers/2026-06-04/12-NeurIPS-失败模式与课程学习.html"
+      "htmlPath": "papers/2026-06-04/12-NeurIPS-失败模式与课程学习.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-04/2109.01050.pdf",
+        "label": "PDF ↗"
+      }
     },
     {
       "id": "2026-06-04/13-vRBA-变分残差注意力",
@@ -266,7 +413,12 @@
       "tags": [
         "自适应权重"
       ],
-      "htmlPath": "papers/2026-06-04/13-vRBA-变分残差注意力.html"
+      "htmlPath": "papers/2026-06-04/13-vRBA-变分残差注意力.html",
+      "readLink": {
+        "type": "doi",
+        "url": "https://doi.org/10.1038/s44387-026-00084-4",
+        "label": "DOI ↗"
+      }
     }
   ]
 }

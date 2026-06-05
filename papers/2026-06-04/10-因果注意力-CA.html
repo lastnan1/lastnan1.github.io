@@ -12,8 +12,20 @@
     .paper-back { display:inline-flex; align-items:center; gap:6px; color:var(--text-muted); font-size:.85rem; margin-bottom:32px; transition:color var(--transition); }
     .paper-back:hover { color:var(--accent); }
     .paper-meta-bar { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:20px 0 28px; }
+    .paper-read-link { font-size:.85rem; font-weight:600; padding:8px 18px; border-radius:6px; transition:var(--transition); }
+    .paper-read-link--pdf, .paper-read-link--arxiv-pdf { background:var(--accent); color:var(--bg); border:1px solid var(--accent); }
+    .paper-read-link--pdf:hover, .paper-read-link--arxiv-pdf:hover { filter:brightness(1.08); box-shadow:0 4px 16px rgba(212,168,83,.3); }
+    .paper-read-link--doi { background:transparent; color:var(--accent); border:1px solid rgba(212,168,83,.4); }
+    .paper-read-link--doi:hover { background:var(--accent); color:var(--bg); }
     .paper-ext-link { font-size:.8rem; padding:4px 12px; border:1px solid var(--border); border-radius:4px; color:var(--accent); transition:var(--transition); }
     .paper-ext-link:hover { background:var(--accent); color:var(--bg); }
+    .pdf-embed-wrap { margin:12px 0 20px; }
+    .paper-pdf-embed { display:inline-flex; align-items:center; gap:6px; font-size:.88rem; font-weight:500; padding:10px 20px; background:var(--accent-dim); border:1px solid rgba(212,168,83,.35); border-radius:8px; color:var(--accent); transition:var(--transition); }
+    .paper-pdf-embed:hover { background:var(--accent); color:var(--bg); }
+    .paper-pdf-embed--doi { background:rgba(139,149,168,.1); border-color:var(--border-planned); color:var(--text-muted); }
+    .paper-pdf-embed--doi:hover { background:var(--accent-dim); color:var(--accent); }
+    .pdf-fallback { background:var(--bg-3); border-left:3px solid var(--border-planned); padding:12px 16px; margin:16px 0; border-radius:0 8px 8px 0; }
+    .pdf-fallback p { color:var(--text-faint); font-size:.88rem; margin-bottom:10px; }
     .paper-tags { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 32px; }
     .paper-tag { font-size:.72rem; padding:3px 10px; border-radius:4px; background:var(--bg-3); color:var(--text-muted); border:1px solid rgba(255,255,255,.06); }
     .paper-body h2 { font-family:var(--font-display); font-size:1.15rem; font-weight:600; margin:40px 0 14px; padding-bottom:8px; border-bottom:1px solid var(--border); color:var(--text); }
@@ -68,6 +80,7 @@
     <h1 class="paper-zh-title">Causal Attention (CA)：自适应因果权重（JCP 2026）</h1>
 
     <div class="paper-meta-bar">
+      <a href="https://doi.org/10.1016/j.jcp.2026.112424" target="_blank" rel="noopener" class="paper-read-link paper-read-link--doi">DOI ↗</a>
       <span class="status-badge grade-sci1">SCI 一区</span>
       <span style="font-size:.88rem;color:var(--text-muted)">Journal of Computational Physics</span>
       <span style="font-size:.78rem;color:var(--text-faint)">2026-06-04</span>
@@ -78,7 +91,7 @@
     <div class="paper-tags"><span class="paper-tag">自适应权重</span></div>
 
     <div class="paper-body">
-      <h1 id="Causal-Attention--CA--自适应因果权重-JCP-2026-">Causal Attention (CA)：自适应因果权重（JCP 2026）</h1><h2 id="元信息">元信息</h2><ul><li><strong>作者 / 年份</strong>：（JCP 2026 新文，因果 PINN 改进线）</li><li><strong>发表于</strong>：Journal of Computational Physics（SCI 一区）</li><li><strong>链接</strong>：<a href="https://www.sciencedirect.com/science/article/abs/pii/S0021999126004249" target="_blank" rel="noopener">https://www.sciencedirect.com/science/article/abs/pii/S0021999126004249</a></li><li><strong>引用数</strong>：新文</li></ul><h2 id="核心内容">核心内容</h2><p>改进 Wang 等因果指数权：提出 <strong>Causal Attention (CA)</strong>，用 IC 拟合相对误差构造<strong>有界、低开销</strong>的时间单调权重，无需大 ε 调参，且兼容任意配点重采样。</p><h2 id="创新点">创新点</h2><ol><li>相对经典因果权，减少对超参 ε 的敏感性与调参负担。</li><li>权重计算便宜，适合高维时空问题。</li><li>与重采样兼容，训练更稳。</li><li>针对混沌初值敏感问题表现更好。</li></ol><h2 id="相关汇报">相关汇报</h2><div class="table-wrap"><table><thead><tr><th>汇报</th><th>关联理由</th></tr></thead><tbody><tr><td><a href="09-因果训练加权.html" class="wikilink">09-因果训练加权</a></td><td>直接改进同一因果加权思想链。</td></tr><tr><td><a href="02-LA-PINN-损失注意力.html" class="wikilink">02-LA-PINN-损失注意力</a></td><td>都含「attention」式加权，CA 专用于时间因果，LA-PINN 用于空间难点。</td></tr><tr><td><a href="06-RBA-残差注意力.html" class="wikilink">06-RBA-残差注意力</a></td><td>RBA 空间残差注意力 + CA 时间因果权可叠加。</td></tr></tbody></table></div><h2 id="与我研究的关联">与我研究的关联</h2><p>2D 声波正演若出现反射波时间超前，可试 CA 替代固定因果 ε。</p><h2 id="备注">备注</h2><ul><li>DOI 以期刊页为准；汇报批次：第 2 次检索 #10</li></ul>
+      <h1 id="Causal-Attention--CA--自适应因果权重-JCP-2026-">Causal Attention (CA)：自适应因果权重（JCP 2026）</h1><h2 id="元信息">元信息</h2><ul><li><strong>作者 / 年份</strong>：（JCP 2026 新文，因果 PINN 改进线）</li><li><strong>发表于</strong>：Journal of Computational Physics（SCI 一区）</li><li><strong>链接</strong>：<a href="https://www.sciencedirect.com/science/article/abs/pii/S0021999126004249" target="_blank" rel="noopener">https://www.sciencedirect.com/science/article/abs/pii/S0021999126004249</a></li><li><strong>引用数</strong>：新文</li></ul><h2 id="核心内容">核心内容</h2><p>改进 Wang 等因果指数权：提出 <strong>Causal Attention (CA)</strong>，用 IC 拟合相对误差构造<strong>有界、低开销</strong>的时间单调权重，无需大 ε 调参，且兼容任意配点重采样。</p><h2 id="创新点">创新点</h2><ol><li>相对经典因果权，减少对超参 ε 的敏感性与调参负担。</li><li>权重计算便宜，适合高维时空问题。</li><li>与重采样兼容，训练更稳。</li><li>针对混沌初值敏感问题表现更好。</li></ol><h2 id="相关汇报">相关汇报</h2><div class="table-wrap"><table><thead><tr><th>汇报</th><th>关联理由</th></tr></thead><tbody><tr><td><a href="09-因果训练加权.html" class="wikilink">09-因果训练加权</a></td><td>直接改进同一因果加权思想链。</td></tr><tr><td><a href="02-LA-PINN-损失注意力.html" class="wikilink">02-LA-PINN-损失注意力</a></td><td>都含「attention」式加权，CA 专用于时间因果，LA-PINN 用于空间难点。</td></tr><tr><td><a href="06-RBA-残差注意力.html" class="wikilink">06-RBA-残差注意力</a></td><td>RBA 空间残差注意力 + CA 时间因果权可叠加。</td></tr></tbody></table></div><h2 id="与我研究的关联">与我研究的关联</h2><p>2D 声波正演若出现反射波时间超前，可试 CA 替代固定因果 ε。</p><h2 id="备注">备注</h2><ul><li>DOI 以期刊页为准；汇报批次：第 2 次检索 #10</li></ul><h2 id="本地-PDF">本地 PDF</h2><div class="pdf-fallback"><p>暂无本地 PDF（本篇无 arXiv 预印本，仅期刊/会议发表）。</p><a href="https://doi.org/10.1016/j.jcp.2026.112424" class="paper-pdf-embed paper-pdf-embed--doi" target="_blank" rel="noopener">🔗 打开 DOI 链接</a></div><ul><li>DOI：<a href="https://doi.org/10.1016/j.jcp.2026.112424" target="_blank" rel="noopener">https://doi.org/10.1016/j.jcp.2026.112424</a></li></ul>
     </div>
 
     <div class="siblings-nav"><span class="siblings-label">同日其他论文：</span><a href="01-BRDR-平衡残差衰减率.html" class="sibling-link">BRDR-平衡残差衰减率</a><a href="02-LA-PINN-损失注意力.html" class="sibling-link">LA-PINN</a><a href="03-DB-PINN-双层次平衡.html" class="sibling-link">DB-PINN</a><a href="04-ReLoBRaLo-相对损失平衡.html" class="sibling-link">ReLoBRaLo-相对损失平衡</a><a href="05-NTK-特征值加权.html" class="sibling-link">NTK-特征值加权</a><a href="06-RBA-残差注意力.html" class="sibling-link">RBA-残差注意力</a><a href="07-AL-PINN-增广拉格朗日.html" class="sibling-link">AL-PINN</a><a href="08-MOO-VARI-多目标优化加权.html" class="sibling-link">MOO-VARI</a><a href="09-因果训练加权.html" class="sibling-link">因果训练加权</a><a href="11-BPINN-贝叶斯自适应加权.html" class="sibling-link">BPINN-贝叶斯自适应加权</a><a href="12-NeurIPS-失败模式与课程学习.html" class="sibling-link">NeurIPS-失败模式与课程学习</a><a href="13-vRBA-变分残差注意力.html" class="sibling-link">vRBA-变分残差注意力</a></div>

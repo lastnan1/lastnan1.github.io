@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Residual-based attention in physics-informed neural networks · 论文笔记</title>
+  <title>Physics-informed neural networks with adaptive loss weighting algorithm for solving partial differential equations · 论文笔记</title>
   <link rel="stylesheet" href="../../style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.cn" crossorigin />
   <link href="https://fonts.googleapis.cn/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
   <style>
     .paper-back { display:inline-flex; align-items:center; gap:6px; color:var(--text-muted); font-size:.85rem; margin-bottom:32px; transition:color var(--transition); }
     .paper-back:hover { color:var(--accent); }
@@ -76,28 +76,46 @@
   <main class="paper-page">
     <a href="../../knowledge.html" class="paper-back">← 返回知识库</a>
 
-    <p class="paper-en-title">Residual-based attention in physics-informed neural networks</p>
-    <h1 class="paper-zh-title">RBA：残差注意力配点加权（CMAME）</h1>
+    <p class="paper-en-title">Physics-informed neural networks with adaptive loss weighting algorithm for solving partial differential equations</p>
+    <h1 class="paper-zh-title">APINN：多任务视角的自适应损失加权（Gao et al. 2025）</h1>
 
     <div class="paper-meta-bar">
-      <a href="2307.00379.pdf" target="_blank" rel="noopener" class="paper-read-link paper-read-link--pdf">PDF ↗</a>
-      <span class="status-badge grade-sci1">SCI 一区</span>
-      <span style="font-size:.88rem;color:var(--text-muted)">Computer Methods in Applied Mechanics and Engineering</span>
-      <span style="font-size:.78rem;color:var(--text-faint)">2026-06-04</span>
-      <a href="https://doi.org/10.1016/j.cma.2024.116805" target="_blank" rel="noopener" class="paper-ext-link">DOI ↗</a>
-      <a href="https://arxiv.org/abs/2307.00379" target="_blank" rel="noopener" class="paper-ext-link">arXiv ↗</a>
+      <a href="https://doi.org/10.1016/j.camwa.2025.01.007" target="_blank" rel="noopener" class="paper-read-link paper-read-link--doi">DOI ↗</a>
+      <span class="status-badge grade-sci">SCI</span>
+      <span style="font-size:.88rem;color:var(--text-muted)">Computers & Mathematics with Applications</span>
+      <span style="font-size:.78rem;color:var(--text-faint)">2026-06-06</span>
+      <a href="https://doi.org/10.1016/j.camwa.2025.01.007" target="_blank" rel="noopener" class="paper-ext-link">DOI ↗</a>
+      
     </div>
 
     <div class="paper-tags"><span class="paper-tag">自适应权重</span></div>
 
     <div class="paper-body">
-      <h1 id="RBA-残差注意力配点加权-CMAME-">RBA：残差注意力配点加权（CMAME）</h1><h2 id="元信息">元信息</h2><ul><li><strong>作者 / 年份</strong>：Anagnostopoulos 等, 2024</li><li><strong>发表于</strong>：Computer Methods in Applied Mechanics and Engineering（SCI 一区）</li><li><strong>链接</strong>：<a href="https://doi.org/10.1016/j.cma.2024.116805" target="_blank" rel="noopener">https://doi.org/10.1016/j.cma.2024.116805</a></li><li><strong>引用数</strong>：增长中</li></ul><h2 id="核心内容">核心内容</h2><p>提出 <strong>Residual-Based Attention (RBA)</strong>：根据配点<strong>累积残差历史</strong>计算有界点权，无梯度、无对抗网络，使优化器聚焦高残差区域，常带来约一个数量级加速。</p><h2 id="创新点">创新点</h2><ol><li>梯度无关的点级权重，实现简单、开销可忽略。</li><li>与信息瓶颈（IB）理论联系，解释权重分布两阶段演化。</li><li>在标准 benchmark 与脑脊液 Navier-Stokes 逆问题上有明显精度提升。</li><li>可与精确边界条件、重参数化等方法叠加。</li></ol><h2 id="相关汇报">相关汇报</h2><div class="table-wrap"><table><thead><tr><th>汇报</th><th>关联理由</th></tr></thead><tbody><tr><td><a href="01-BRDR-平衡残差衰减率.html" class="wikilink">01-BRDR-平衡残差衰减率</a></td><td>均为<strong>配点级</strong>、基于残差统计的权重；BRDR 强调衰减率平衡，RBA 强调累积残差注意力。</td></tr><tr><td><a href="02-LA-PINN-损失注意力.html" class="wikilink">02-LA-PINN-损失注意力</a></td><td>LA-PINN 用神经网络学注意力，RBA 用闭式残差函数，可对比复杂度。</td></tr><tr><td><a href="13-vRBA-变分残差注意力.html" class="wikilink">13-vRBA-变分残差注意力</a></td><td>vRBA 为 RBA 的变分理论推广（见 #13）。</td></tr></tbody></table></div><h2 id="与我研究的关联">与我研究的关联</h2><p>与 BRDR 二选一或串联：声波正演 PDE 配点可用 RBA 掩码，快照项仍用项级 λ。</p><h2 id="备注">备注</h2><ul><li>汇报批次：第 2 次检索 #06</li></ul><h2 id="本地-PDF">本地 PDF</h2><div class="pdf-embed-wrap"><a href="2307.00379.pdf" class="paper-pdf-embed" target="_blank" rel="noopener">📄 打开 PDF</a></div><ul><li>arXiv：<a href="https://arxiv.org/abs/2307.00379" target="_blank" rel="noopener">https://arxiv.org/abs/2307.00379</a></li><li>文件：<code>每日论文/2026-06-04/2307.00379.pdf</code></li></ul>
+      <h1 id="APINN-多任务视角的自适应损失加权-Gao-et-al--2025-">APINN：多任务视角的自适应损失加权（Gao et al. 2025）</h1><h2 id="方法图示">方法图示</h2><blockquote>将 PINN 训练显式建模为多任务学习，在线平衡各损失项量级。</blockquote><div class="mermaid-wrap"><pre class="mermaid">flowchart LR
+    subgraph Tasks ["多任务损失"]
+        L_PDE["L_PDE 物理残差"]
+        L_IC["L_IC 初值"]
+        L_BC["L_BC 边界"]
+    end
+    L_PDE --&gt; WeightCalc[自适应权重更新]
+    L_IC --&gt; WeightCalc
+    L_BC --&gt; WeightCalc
+    WeightCalc --&gt; WeightedSum["加权总损失 L = Σ λ_k L_k"]
+    WeightedSum --&gt; Adam[Adam 更新网络参数]
+    Adam --&gt; Tasks
+</pre></div><div class="mermaid-wrap"><pre class="mermaid">flowchart TD
+    Init[初始化 λ_k] --&gt; Forward[前向计算各损失项]
+    Forward --&gt; Balance[按损失量级/梯度统计调整 λ]
+    Balance --&gt; Check{各任务贡献均衡?}
+    Check --&gt;|否| Forward
+    Check --&gt;|是| Output[输出满足 PDE+IC+BC 的 u_θ]
+</pre></div><h2 id="元信息">元信息</h2><ul><li><strong>作者 / 年份</strong>：Bo Gao, Ruoxia Yao, Yan Li, 2025</li><li><strong>发表于</strong>：Computers &amp; Mathematics with Applications, Vol. 181（等级：SCI）</li><li><strong>链接</strong>：<a href="https://doi.org/10.1016/j.camwa.2025.01.007" target="_blank" rel="noopener">https://doi.org/10.1016/j.camwa.2025.01.007</a> | <a href="https://papers.ssrn.com/abstract=4916430" target="_blank" rel="noopener">https://papers.ssrn.com/abstract=4916430</a></li><li><strong>引用数</strong>：待查（2025 年新发表）</li></ul><h2 id="核心内容">核心内容</h2><p>将 PINN 训练视为<strong>多任务学习（MTL）</strong>问题，提出 APINN 自适应损失加权算法，在训练过程中动态平衡 PDE 残差、初值与边界各损失项的量级，使不同量纲/尺度的参数对总损失贡献均衡。在 Benjamin-Ono 孤波、Sine-Gordon 与 Mukherjee-Kundu 呼吸子波等 benchmark 上，相对固定权重 PINN 预测误差可降低约一个数量级（BO 方程从 ~60% 降至 ~1%）。</p><h2 id="创新点">创新点</h2><ol><li>从 MTL 框架重新表述 PINN 多目标优化，而非仅作启发式调 λ。</li><li>自适应算法在训练全程在线更新权重，无需手工网格搜索各损失系数。</li><li>在强非线性波动方程（BO、SG）上展示显著精度提升，验证项级平衡对复杂 PDE 的必要性。</li><li>与 GradNorm/SoftAdapt 等 MTL 方法形成对照，但专门针对 PINN 物理约束结构定制。</li></ol><h2 id="相关汇报">相关汇报</h2><div class="table-wrap"><table><thead><tr><th>汇报</th><th>关联理由</th></tr></thead><tbody><tr><td><a href="../2026-06-04/04-ReLoBRaLo-相对损失平衡.html" class="wikilink">04-ReLoBRaLo-相对损失平衡</a></td><td>同为 <strong>项级多目标损失平衡</strong>：ReLoBRaLo 用随机回看损失比率，APINN 用 MTL 自适应量级；可作对照基线。</td></tr><tr><td><a href="../2026-06-04/03-DB-PINN-双层次平衡.html" class="wikilink">03-DB-PINN-双层次平衡</a></td><td>DB-PINN 分 inter/intra 两层平衡，APINN 聚焦项间量级；可组合「MTL 项级 + 条件内难度」实验。</td></tr><tr><td><a href="../2026-06-04/08-MOO-VARI-多目标优化加权.html" class="wikilink">08-MOO-VARI-多目标优化加权</a></td><td>均将 PINN 视为多目标优化；MOO-VARI 用 Pareto/NSGA-II，APINN 用在线自适应 λ，方法论互补。</td></tr><tr><td><a href="02-IDW-逆Dirichlet梯度方差加权.html" class="wikilink">02-IDW-逆Dirichlet梯度方差加权</a></td><td>今日另一篇项级加权：IDW 基于梯度方差，APINN 基于损失量级/MTL；可对比「损失统计 vs 梯度统计」。</td></tr></tbody></table></div><h2 id="与我研究的关联">与我研究的关联</h2><p>你的 2D 声波 PINN 有四项损失（PDE/快照/边界/初值），APINN 的 MTL 项级平衡可直接替换固定 <code>λ_pde, λ_snap</code> 等超参；首个实验可在现有 <code>losses.py</code> 四项损失上实现在线 λ 更新，与 ReLoBRaLo 做消融。</p><h2 id="备注">备注</h2><ul><li>汇报批次：2026-06-06 第 1 次触发（浅海三文鱼）</li></ul><h2 id="本地-PDF">本地 PDF</h2><div class="pdf-fallback"><p>暂无本地 PDF（本篇无 arXiv 预印本，仅期刊/会议发表）。</p><a href="https://doi.org/10.1016/j.camwa.2025.01.007" class="paper-pdf-embed paper-pdf-embed--doi" target="_blank" rel="noopener">🔗 打开 DOI 链接</a></div><ul><li>DOI：<a href="https://doi.org/10.1016/j.camwa.2025.01.007" target="_blank" rel="noopener">https://doi.org/10.1016/j.camwa.2025.01.007</a></li></ul>
     </div>
 
-    <div class="siblings-nav"><span class="siblings-label">同日其他论文：</span><a href="01-BRDR-平衡残差衰减率.html" class="sibling-link">BRDR-平衡残差衰减率</a><a href="02-LA-PINN-损失注意力.html" class="sibling-link">LA-PINN</a><a href="03-DB-PINN-双层次平衡.html" class="sibling-link">DB-PINN</a><a href="04-ReLoBRaLo-相对损失平衡.html" class="sibling-link">ReLoBRaLo-相对损失平衡</a><a href="05-NTK-特征值加权.html" class="sibling-link">NTK-特征值加权</a><a href="07-AL-PINN-增广拉格朗日.html" class="sibling-link">AL-PINN</a><a href="08-MOO-VARI-多目标优化加权.html" class="sibling-link">MOO-VARI</a><a href="09-因果训练加权.html" class="sibling-link">因果训练加权</a><a href="10-因果注意力-CA.html" class="sibling-link">因果注意力-CA</a><a href="11-BPINN-贝叶斯自适应加权.html" class="sibling-link">BPINN-贝叶斯自适应加权</a><a href="12-NeurIPS-失败模式与课程学习.html" class="sibling-link">NeurIPS-失败模式与课程学习</a><a href="13-vRBA-变分残差注意力.html" class="sibling-link">vRBA-变分残差注意力</a></div>
+    <div class="siblings-nav"><span class="siblings-label">同日其他论文：</span><a href="02-IDW-逆Dirichlet梯度方差加权.html" class="sibling-link">IDW-逆Dirichlet梯度方差加权</a><a href="03-BRDR-SAS-加权与采样联合.html" class="sibling-link">BRDR-SAS</a></div>
   </main>
 
-  
+  <script>mermaid.initialize({startOnLoad:true,theme:"dark",themeVariables:{primaryColor:"#d4a853",primaryTextColor:"#e8e4dc",primaryBorderColor:"#d4a853",lineColor:"#8b95a8",sectionBkgColor:"#1a2235",altSectionBkgColor:"#141c2e",gridColor:"rgba(212,168,83,0.1)",titleColor:"#d4a853",edgeLabelBackground:"#1a2235",tertiaryColor:"#1a2235"}});</script>
   <script>
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {

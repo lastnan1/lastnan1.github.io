@@ -13,6 +13,81 @@ const path = require('path');
 
 const PAPERS_DIR = path.join(__dirname, 'papers');
 const OUTPUT_JSON = path.join(__dirname, 'papers.json');
+const SOURCE_NOTES_DIR = 'D:\\study\\root\\note\\每日论文';
+const SOURCE_ARXIV_DIR = path.join(SOURCE_NOTES_DIR, '_arxiv-papers');
+
+// ── PDF / readLink 解析 ────────────────────────────────────────────────
+function extractArxivId(meta, body) {
+  if (meta.arxiv) return meta.arxiv.trim();
+  const embed = body.match(/!\[\[(\d+\.\d+)\.pdf\]\]/);
+  if (embed) return embed[1];
+  return null;
+}
+
+function copyPdfIfAvailable(arxivId, dateStr, targetDir) {
+  const pdfName = `${arxivId}.pdf`;
+  const targetPath = path.join(targetDir, pdfName);
+  if (fs.existsSync(targetPath)) return true;
+
+  const sources = [
+    path.join(SOURCE_NOTES_DIR, dateStr, pdfName),
+    path.join(SOURCE_ARXIV_DIR, arxivId, pdfName),
+    path.join(PAPERS_DIR, dateStr, pdfName),
+  ];
+
+  for (const src of sources) {
+    if (fs.existsSync(src)) {
+      fs.copyFileSync(src, targetPath);
+      console.log(`  [PDF]  ${path.relative(__dirname, targetPath)} ← ${path.relative(SOURCE_NOTES_DIR, src)}`);
+      return true;
+    }
+  }
+  return false;
+}
+
+function resolveReadLink(paper) {
+  const { meta, body, dateStr, mdPath } = paper;
+  const arxivId = extractArxivId(meta, body);
+  const paperDir = path.dirname(mdPath);
+  const relId = path.relative(PAPERS_DIR, mdPath).replace(/\\/g, '/').replace(/\.md$/, '');
+
+  if (arxivId) {
+    const hasLocal = copyPdfIfAvailable(arxivId, dateStr, paperDir);
+    if (hasLocal) {
+      return {
+        type: 'pdf',
+        url: `${arxivId}.pdf`,
+        siteUrl: `papers/${relId.replace(/\/[^/]+$/, '')}/${arxivId}.pdf`,
+        label: 'PDF ↗',
+      };
+    }
+    return {
+      type: 'arxiv-pdf',
+      url: `https://arxiv.org/pdf/${arxivId}.pdf`,
+      siteUrl: `https://arxiv.org/pdf/${arxivId}.pdf`,
+      label: 'PDF ↗',
+    };
+  }
+
+  if (meta.doi) {
+    return {
+      type: 'doi',
+      url: `https://doi.org/${meta.doi}`,
+      siteUrl: `https://doi.org/${meta.doi}`,
+      label: 'DOI ↗',
+    };
+  }
+
+  return null;
+}
+
+function readLinkEmbedHtml(readLink) {
+  if (!readLink) return '';
+  const cls = readLink.type === 'doi' ? 'paper-pdf-embed paper-pdf-embed--doi' : 'paper-pdf-embed';
+  const icon = readLink.type === 'doi' ? '🔗' : '📄';
+  const text = readLink.type === 'doi' ? '打开 DOI 链接' : '打开 PDF';
+  return `<a href="${readLink.url}" class="${cls}" target="_blank" rel="noopener">${icon} ${text}</a>`;
+}
 
 // ── 1. YAML frontmatter 解析 ──────────────────────────────────────────
 function parseFrontmatter(src) {
@@ -44,7 +119,7 @@ function parseFrontmatter(src) {
 }
 
 // ── 2. Markdown → HTML ────────────────────────────────────────────────
-function mdToHtml(md, paperDir) {
+function mdToHtml(md, paperDir, readLink) {
   const lines = md.split(/\r?\n/);
   let html = '';
   let i = 0;
@@ -117,6 +192,14 @@ function mdToHtml(md, paperDir) {
       continue;
     }
 
+    // Obsidian PDF 嵌入：![[2407.01613.pdf]]
+    const pdfEmbed = line.match(/^!\[\[(\d+\.\d+)\.pdf\]\]\s*$/);
+    if (pdfEmbed) {
+      html += `<div class="pdf-embed-wrap">${readLinkEmbedHtml(readLink)}</div>`;
+      i++;
+      continue;
+    }
+
     // blockquote
     if (line.startsWith('> ')) {
       let bq = '';
@@ -124,7 +207,12 @@ function mdToHtml(md, paperDir) {
         bq += inlineToHtml(escHtml(lines[i].slice(2))) + ' ';
         i++;
       }
-      html += `<blockquote>${bq.trim()}</blockquote>`;
+      const bqText = bq.trim();
+      if (bqText.includes('暂无本地 PDF') && readLink && readLink.type === 'doi') {
+        html += `<div class="pdf-fallback"><p>${bqText}</p>${readLinkEmbedHtml(readLink)}</div>`;
+      } else {
+        html += `<blockquote>${bqText}</blockquote>`;
+      }
       continue;
     }
 
@@ -227,6 +315,11 @@ function generatePaperHtml(paper, siblingPapers) {
   const cssPath = '../../style.css';
   const knowledgePath = '../../knowledge.html';
 
+  const readLink = paper.readLink;
+  const mainReadBtn = readLink
+    ? `<a href="${readLink.url}" target="_blank" rel="noopener" class="paper-read-link paper-read-link--${readLink.type}">${readLink.label}</a>`
+    : '';
+
   const doiLink = meta.doi
     ? `<a href="https://doi.org/${meta.doi}" target="_blank" rel="noopener" class="paper-ext-link">DOI ↗</a>`
     : '';
@@ -264,8 +357,20 @@ function generatePaperHtml(paper, siblingPapers) {
     .paper-back { display:inline-flex; align-items:center; gap:6px; color:var(--text-muted); font-size:.85rem; margin-bottom:32px; transition:color var(--transition); }
     .paper-back:hover { color:var(--accent); }
     .paper-meta-bar { display:flex; flex-wrap:wrap; gap:12px; align-items:center; margin:20px 0 28px; }
+    .paper-read-link { font-size:.85rem; font-weight:600; padding:8px 18px; border-radius:6px; transition:var(--transition); }
+    .paper-read-link--pdf, .paper-read-link--arxiv-pdf { background:var(--accent); color:var(--bg); border:1px solid var(--accent); }
+    .paper-read-link--pdf:hover, .paper-read-link--arxiv-pdf:hover { filter:brightness(1.08); box-shadow:0 4px 16px rgba(212,168,83,.3); }
+    .paper-read-link--doi { background:transparent; color:var(--accent); border:1px solid rgba(212,168,83,.4); }
+    .paper-read-link--doi:hover { background:var(--accent); color:var(--bg); }
     .paper-ext-link { font-size:.8rem; padding:4px 12px; border:1px solid var(--border); border-radius:4px; color:var(--accent); transition:var(--transition); }
     .paper-ext-link:hover { background:var(--accent); color:var(--bg); }
+    .pdf-embed-wrap { margin:12px 0 20px; }
+    .paper-pdf-embed { display:inline-flex; align-items:center; gap:6px; font-size:.88rem; font-weight:500; padding:10px 20px; background:var(--accent-dim); border:1px solid rgba(212,168,83,.35); border-radius:8px; color:var(--accent); transition:var(--transition); }
+    .paper-pdf-embed:hover { background:var(--accent); color:var(--bg); }
+    .paper-pdf-embed--doi { background:rgba(139,149,168,.1); border-color:var(--border-planned); color:var(--text-muted); }
+    .paper-pdf-embed--doi:hover { background:var(--accent-dim); color:var(--accent); }
+    .pdf-fallback { background:var(--bg-3); border-left:3px solid var(--border-planned); padding:12px 16px; margin:16px 0; border-radius:0 8px 8px 0; }
+    .pdf-fallback p { color:var(--text-faint); font-size:.88rem; margin-bottom:10px; }
     .paper-tags { display:flex; flex-wrap:wrap; gap:8px; margin:16px 0 32px; }
     .paper-tag { font-size:.72rem; padding:3px 10px; border-radius:4px; background:var(--bg-3); color:var(--text-muted); border:1px solid rgba(255,255,255,.06); }
     .paper-body h2 { font-family:var(--font-display); font-size:1.15rem; font-weight:600; margin:40px 0 14px; padding-bottom:8px; border-bottom:1px solid var(--border); color:var(--text); }
@@ -320,6 +425,7 @@ function generatePaperHtml(paper, siblingPapers) {
     <h1 class="paper-zh-title">${mdTitle}</h1>
 
     <div class="paper-meta-bar">
+      ${mainReadBtn}
       ${meta.venue_grade ? `<span class="status-badge ${venueGradeClass(meta.venue_grade)}">${gradeLabel(meta.venue_grade)}</span>` : ''}
       ${meta.venue ? `<span style="font-size:.88rem;color:var(--text-muted)">${meta.venue}</span>` : ''}
       ${meta.date ? `<span style="font-size:.78rem;color:var(--text-faint)">${meta.date}</span>` : ''}
@@ -408,10 +514,11 @@ function build() {
 
   let generated = 0;
 
-  // 第二遍：生成每篇 HTML
+  // 第二遍：解析 readLink + 生成每篇 HTML
   for (const paper of allPapers) {
+    paper.readLink = resolveReadLink(paper);
     const paperDir = path.dirname(paper.mdPath);
-    const bodyHtml = mdToHtml(paper.body, paperDir);
+    const bodyHtml = mdToHtml(paper.body, paperDir, paper.readLink);
     paper.bodyHtml = bodyHtml;
 
     const siblings = byDate[paper.dateStr] || [];
@@ -436,7 +543,12 @@ function build() {
       doi: p.meta.doi || '',
       arxiv: p.meta.arxiv || '',
       tags: (p.meta.tags || []).filter(t => !['AI', 'PINN', '论文汇报', '论文日报'].includes(t)),
-      htmlPath: p.htmlPath
+      htmlPath: p.htmlPath,
+      readLink: p.readLink ? {
+        type: p.readLink.type,
+        url: p.readLink.siteUrl,
+        label: p.readLink.label,
+      } : null,
     }))
   };
 
