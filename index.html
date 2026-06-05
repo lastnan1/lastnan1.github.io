@@ -3,23 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>我的个人网站</title>
+  <title>研究实验进度看板</title>
   <link rel="stylesheet" href="style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 </head>
 <body>
 
-  <!-- 导航栏 -->
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="grid-overlay" aria-hidden="true"></div>
+
   <nav class="navbar" id="navbar">
     <div class="nav-container">
-      <a href="#home" class="nav-logo">YourName<span class="dot">.</span></a>
+      <a href="#home" class="nav-logo" id="navLogo">Research<span class="dot">.</span></a>
       <ul class="nav-links" id="navLinks">
-        <li><a href="#about">关于我</a></li>
-        <li><a href="#skills">技能</a></li>
-        <li><a href="#projects">项目</a></li>
-        <li><a href="#contact">联系</a></li>
+        <li><a href="#home">概览</a></li>
+        <li><a href="#experiments">实验看板</a></li>
+        <li><a href="#about">关于</a></li>
       </ul>
       <button class="nav-toggle" id="navToggle" aria-label="菜单">
         <span></span><span></span><span></span>
@@ -27,239 +28,40 @@
     </div>
   </nav>
 
-  <!-- Hero 区域 -->
   <section class="hero" id="home">
-    <div class="hero-bg">
-      <div class="blob blob-1"></div>
-      <div class="blob blob-2"></div>
-      <div class="blob blob-3"></div>
-    </div>
     <div class="hero-content">
-      <p class="hero-greeting">👋 你好，我是</p>
-      <h1 class="hero-name">Your Name</h1>
-      <div class="hero-role">
-        <span class="role-prefix">一名</span>
-        <span class="role-text" id="roleText"></span>
-        <span class="role-cursor">|</span>
-      </div>
-      <p class="hero-desc">热爱编程，专注于构建优雅且实用的数字产品。</p>
-      <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">查看项目</a>
-        <a href="#contact" class="btn btn-outline">联系我</a>
-      </div>
-    </div>
-    <div class="hero-scroll">
-      <span>向下滚动</span>
-      <div class="scroll-arrow"></div>
+      <p class="hero-label">论文实验进度看板</p>
+      <h1 class="hero-name" id="heroName">Your Name</h1>
+      <p class="hero-subtitle" id="heroSubtitle">PINN 硕士研究生 · 声波正演研究</p>
+      <p class="hero-desc">向导师汇报研究进展。更新 <code>experiments.json</code> 即可同步实验状态。</p>
+      <div class="summary-strip" id="summaryStrip"></div>
+      <a href="#experiments" class="btn btn-primary">查看实验看板 ↓</a>
     </div>
   </section>
 
-  <!-- 关于我 -->
+  <section class="experiments section" id="experiments">
+    <div class="container">
+      <h2 class="section-title">实验看板 <span class="title-line"></span></h2>
+      <p class="section-lead">每项实验展示整体进度、里程碑与最近更新日期，便于快速把握研究状态。</p>
+      <div class="experiment-grid" id="experimentGrid"></div>
+    </div>
+  </section>
+
   <section class="about section" id="about">
     <div class="container">
-      <h2 class="section-title">关于我 <span class="title-line"></span></h2>
-      <div class="about-grid">
-        <div class="about-image-wrap">
-          <div class="about-avatar">
-            <div class="avatar-placeholder">
-              <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="50" cy="38" r="22" fill="currentColor" opacity="0.8"/>
-                <ellipse cx="50" cy="85" rx="35" ry="22" fill="currentColor" opacity="0.6"/>
-              </svg>
-            </div>
-          </div>
-          <div class="about-badge about-badge-1">🎓 硕士研究生</div>
-          <div class="about-badge about-badge-2">🔬 PINN 研究者</div>
-        </div>
-        <div class="about-text">
-          <h3>嗨，很高兴认识你！</h3>
-          <p>我是一名 <strong>PINN（物理信息神经网络）</strong> 领域的硕士研究生，专注于将深度学习与偏微分方程求解相结合，研究地震波正演与自适应损失权重策略。</p>
-          <p>目前主要围绕二维声波传播问题，设计并对比多种 PINN 优化方案，涵盖自适应 λ 权重、残差驱动配点重采样和不确定性感知损失等前沿方向。</p>
-          <div class="about-stats">
-            <div class="stat-item">
-              <span class="stat-num" data-target="20">0</span><span>+</span>
-              <p>完成项目</p>
-            </div>
-            <div class="stat-item">
-              <span class="stat-num" data-target="3">0</span><span>+</span>
-              <p>年经验</p>
-            </div>
-            <div class="stat-item">
-              <span class="stat-num" data-target="5">0</span><span>+</span>
-              <p>开源贡献</p>
-            </div>
-          </div>
-          <a href="#" class="btn btn-primary" download>下载简历 ↓</a>
-        </div>
+      <h2 class="section-title">关于 <span class="title-line"></span></h2>
+      <div class="about-content">
+        <p>我是一名 <strong>PINN（物理信息神经网络）</strong> 领域的硕士研究生，专注于将深度学习与偏微分方程求解相结合，研究地震波正演与自适应损失权重策略。</p>
+        <p>目前主要围绕二维声波传播问题，设计并对比多种 PINN 优化方案，涵盖自适应 λ 权重、残差驱动配点重采样和不确定性感知损失等前沿方向。</p>
+        <div class="about-links" id="aboutLinks"></div>
       </div>
     </div>
   </section>
 
-  <!-- 技能 -->
-  <section class="skills section" id="skills">
-    <div class="container">
-      <h2 class="section-title">技能栈 <span class="title-line"></span></h2>
-      <div class="skills-grid">
-        <div class="skill-card" data-delay="0">
-          <div class="skill-icon">🧠</div>
-          <h3>深度学习 / PINN</h3>
-          <div class="skill-tags">
-            <span>PyTorch</span><span>PINN</span><span>自适应损失权重</span>
-            <span>偏微分方程</span><span>声波方程</span><span>有限差分</span>
-          </div>
-        </div>
-        <div class="skill-card" data-delay="100">
-          <div class="skill-icon">🔬</div>
-          <h3>科学计算</h3>
-          <div class="skill-tags">
-            <span>NumPy</span><span>SciPy</span><span>Matplotlib</span>
-            <span>波场正演</span><span>残差采样</span><span>Ricker 子波</span>
-          </div>
-        </div>
-        <div class="skill-card" data-delay="200">
-          <div class="skill-icon">💻</div>
-          <h3>编程语言 / 工具</h3>
-          <div class="skill-tags">
-            <span>Python</span><span>JavaScript</span><span>Git</span>
-            <span>Linux</span><span>AutoDL</span><span>JupyterLab</span>
-          </div>
-        </div>
-        <div class="skill-card" data-delay="300">
-          <div class="skill-icon">📊</div>
-          <h3>实验评价 / 可视化</h3>
-          <div class="skill-tags">
-            <span>RMSE</span><span>Rel-L2</span><span>相关系数</span>
-            <span>误差图</span><span>波场对比</span><span>中心剖面</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 项目 -->
-  <section class="projects section" id="projects">
-    <div class="container">
-      <h2 class="section-title">我的项目 <span class="title-line"></span></h2>
-      <div class="projects-grid">
-
-        <!-- PINN 研究项目（主要项目） -->
-        <div class="project-card project-featured">
-          <div class="project-header" style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);">
-            <div class="project-links">
-              <a href="https://github.com/lastnan1" target="_blank" title="GitHub">📂</a>
-            </div>
-            <div class="project-icon">🌊</div>
-          </div>
-          <div class="project-body">
-            <div class="project-badge">硕士研究 · 在研</div>
-            <h3>PINN 声波正演对比研究</h3>
-            <p>基于物理信息神经网络（PINN）求解二维均匀介质声波传播问题，系统设计并对比六种自适应损失权重策略（A–F），复现 Hou et al. 2023、Shi &amp; Beer 2024、Jing et al. 2025 等三篇前沿论文方案。</p>
-            <ul class="project-highlights">
-              <li>🔬 提出 Softmax 归一化 + 梯度模长初始化自适应 λ 方案，解决权重塌缩问题</li>
-              <li>📐 引入雷克子波 × 高斯空间震源，使 PDE 残差与 FD 正演物理一致</li>
-              <li>📊 设计 RMSE / Rel-L2 / Corr / MaxAE 多维评价体系，外推至 t=0.12s 验证泛化能力</li>
-            </ul>
-            <div class="project-tech">
-              <span>Python</span><span>PyTorch</span><span>PINN</span>
-              <span>声波方程</span><span>自适应权重</span><span>有限差分</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
-            <div class="project-links">
-              <a href="#" target="_blank" title="查看 Demo">🔗</a>
-              <a href="#" target="_blank" title="GitHub">📂</a>
-            </div>
-            <div class="project-icon">📊</div>
-          </div>
-          <div class="project-body">
-            <h3>项目二</h3>
-            <p>数据可视化仪表板，整合多个 API 数据源，提供直观的图表分析界面。</p>
-            <div class="project-tech">
-              <span>Vue</span><span>Python</span><span>Chart.js</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-header" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
-            <div class="project-links">
-              <a href="#" target="_blank" title="查看 Demo">🔗</a>
-              <a href="#" target="_blank" title="GitHub">📂</a>
-            </div>
-            <div class="project-icon">🤖</div>
-          </div>
-          <div class="project-body">
-            <h3>项目三</h3>
-            <p>基于大语言模型的智能助手工具，支持多轮对话与知识库检索。</p>
-            <div class="project-tech">
-              <span>TypeScript</span><span>FastAPI</span><span>OpenAI</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- 联系 -->
-  <section class="contact section" id="contact">
-    <div class="container">
-      <h2 class="section-title">联系我 <span class="title-line"></span></h2>
-      <div class="contact-wrap">
-        <div class="contact-info">
-          <p class="contact-lead">有项目合作或任何问题？欢迎随时联系我！</p>
-          <div class="contact-items">
-            <a href="mailto:your@email.com" class="contact-item">
-              <span class="contact-icon">📧</span>
-              <div>
-                <strong>邮箱</strong>
-                <p>your@email.com</p>
-              </div>
-            </a>
-            <a href="https://github.com/yourusername" target="_blank" class="contact-item">
-              <span class="contact-icon">🐙</span>
-              <div>
-                <strong>GitHub</strong>
-                <p>github.com/yourusername</p>
-              </div>
-            </a>
-            <a href="https://linkedin.com/in/yourusername" target="_blank" class="contact-item">
-              <span class="contact-icon">💼</span>
-              <div>
-                <strong>LinkedIn</strong>
-                <p>linkedin.com/in/yourusername</p>
-              </div>
-            </a>
-          </div>
-        </div>
-        <form class="contact-form" id="contactForm">
-          <div class="form-group">
-            <input type="text" id="name" placeholder="你的姓名" required />
-          </div>
-          <div class="form-group">
-            <input type="email" id="email" placeholder="你的邮箱" required />
-          </div>
-          <div class="form-group">
-            <textarea id="message" placeholder="你想说..." rows="5" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary btn-full">发送消息 →</button>
-          <p class="form-note" id="formNote"></p>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <!-- 页脚 -->
   <footer class="footer">
     <div class="container">
-      <p>© 2026 Your Name · 用 ❤️ 构建</p>
-      <div class="footer-links">
-        <a href="https://github.com/yourusername" target="_blank">GitHub</a>
-        <a href="https://linkedin.com/in/yourusername" target="_blank">LinkedIn</a>
-      </div>
+      <p>© 2026 <span id="footerName">Your Name</span> · 研究进度看板</p>
+      <div class="footer-links" id="footerLinks"></div>
     </div>
   </footer>
 

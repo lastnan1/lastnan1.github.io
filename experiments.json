@@ -1,0 +1,61 @@
+{
+  "profile": {
+    "name": "Your Name",
+    "subtitle": "PINN 硕士研究生 · 声波正演研究",
+    "email": "your@email.com",
+    "github": "https://github.com/lastnan1",
+    "siteLastUpdated": "2026-06-05"
+  },
+  "experiments": [
+    {
+      "id": "pinn-acoustic",
+      "title": "PINN 声波正演对比研究",
+      "status": "in-progress",
+      "progress": 65,
+      "featured": true,
+      "lastUpdated": "2026-06-01",
+      "summary": "基于物理信息神经网络（PINN）求解二维均匀介质声波传播问题，系统设计并对比六种自适应损失权重策略（A–F），复现 Hou et al. 2023、Shi & Beer 2024、Jing et al. 2025 等前沿方案。",
+      "highlights": [
+        "提出 Softmax 归一化 + 梯度模长初始化自适应 λ 方案，解决权重塌缩问题",
+        "引入雷克子波 × 高斯空间震源，使 PDE 残差与 FD 正演物理一致",
+        "设计 RMSE / Rel-L2 / Corr / MaxAE 多维评价体系，外推至 t=0.12s 验证泛化能力"
+      ],
+      "milestones": [
+        { "label": "文献方案复现", "status": "done" },
+        { "label": "评价体系建设", "status": "done" },
+        { "label": "外推验证 t=0.12s", "status": "in-progress" },
+        { "label": "论文撰写", "status": "pending" }
+      ],
+      "tags": ["Python", "PyTorch", "PINN", "声波方程", "自适应权重"],
+      "links": { "github": "https://github.com/lastnan1" }
+    },
+    {
+      "id": "exp-placeholder-1",
+      "title": "实验二（待定义）",
+      "status": "planned",
+      "progress": 0,
+      "featured": false,
+      "lastUpdated": "—",
+      "summary": "预留实验框架，确定课题方向后填写研究内容与里程碑。",
+      "milestones": [
+        { "label": "课题立项", "status": "pending" },
+        { "label": "初步实验", "status": "pending" }
+      ],
+      "tags": []
+    },
+    {
+      "id": "exp-placeholder-2",
+      "title": "实验三（待定义）",
+      "status": "planned",
+      "progress": 0,
+      "featured": false,
+      "lastUpdated": "—",
+      "summary": "预留实验框架，可与主课题并行推进的辅助研究方向。",
+      "milestones": [
+        { "label": "文献调研", "status": "pending" },
+        { "label": "方案设计", "status": "pending" }
+      ],
+      "tags": []
+    }
+  ]
+}
