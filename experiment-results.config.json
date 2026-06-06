@@ -7,7 +7,8 @@
     "title": "PINN 声波正演对比研究",
     "images": [
       { "file": "wavefield_comparison.png", "caption": "六种方案波场对比" },
-      { "file": "loss_curves.png", "caption": "训练损失曲线" }
+      { "file": "loss_curves.png", "caption": "训练损失曲线" },
+      { "file": "prediction_vs_actual.png", "caption": "预测值与实际值对比" }
     ],
     "table": "comparison_table.md"
   }
