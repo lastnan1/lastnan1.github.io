@@ -589,6 +589,26 @@ ul { list-style: none; }
   text-decoration: underline;
 }
 
+.experiment-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+}
+
+.experiment-link--results {
+  padding: 4px 12px;
+  border: 1px solid rgba(212, 168, 83, 0.35);
+  border-radius: 6px;
+  background: var(--accent-dim);
+}
+
+.experiment-link--results:hover {
+  background: var(--accent);
+  color: var(--bg);
+  text-decoration: none;
+}
+
 .load-error {
   grid-column: 1 / -1;
   padding: 32px;
@@ -738,4 +758,218 @@ ul { list-style: none; }
   .milestone-step {
     width: 100%;
   }
+}
+
+/* ===== 实验结果页 ===== */
+.result-page {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 100px 24px 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.result-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 32px;
+  transition: color var(--transition);
+}
+
+.result-back:hover {
+  color: var(--accent);
+}
+
+.result-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.result-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2.1rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-bottom: 8px;
+}
+
+.result-meta {
+  font-size: 0.82rem;
+  color: var(--text-faint);
+  margin-bottom: 40px;
+}
+
+.result-meta code {
+  font-size: 0.9em;
+  background: var(--bg-3);
+  padding: 2px 8px;
+  border-radius: 4px;
+  color: var(--accent);
+}
+
+.result-meta-sep {
+  margin: 0 8px;
+  opacity: 0.5;
+}
+
+.result-section {
+  margin-bottom: 48px;
+}
+
+.result-section-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.result-body h2 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 32px 0 12px;
+  color: var(--text);
+}
+
+.result-body h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 24px 0 10px;
+  color: var(--accent);
+}
+
+.result-body p {
+  color: var(--text-muted);
+  line-height: 1.75;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+}
+
+.result-body ul {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.75;
+  padding-left: 22px;
+  margin-bottom: 14px;
+}
+
+.result-body .table-wrap {
+  overflow-x: auto;
+  margin-bottom: 20px;
+}
+
+.result-body .table-wrap table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.result-body .table-wrap th {
+  background: var(--bg-3);
+  color: var(--accent);
+  padding: 10px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+.result-body .table-wrap td {
+  color: var(--text-muted);
+  padding: 9px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.result-body .table-wrap tr:hover td {
+  background: rgba(212, 168, 83, 0.04);
+}
+
+.result-gallery {
+  display: grid;
+  gap: 28px;
+}
+
+.result-figure {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.result-figure a {
+  display: block;
+}
+
+.result-figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: opacity var(--transition);
+}
+
+.result-figure a:hover img {
+  opacity: 0.92;
+}
+
+.result-figure figcaption {
+  padding: 12px 16px;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.result-missing {
+  background: var(--bg-3);
+  border: 1px dashed var(--border-planned);
+  border-radius: var(--radius);
+  padding: 24px;
+  text-align: center;
+}
+
+.result-missing p {
+  color: var(--text-faint);
+  font-size: 0.88rem;
+  margin-bottom: 8px;
+}
+
+.result-missing p:last-child {
+  margin-bottom: 0;
+}
+
+.result-missing-hint {
+  font-size: 0.8rem !important;
+}
+
+.result-missing code {
+  font-size: 0.85em;
+  background: var(--bg-card);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: var(--accent);
+}
+
+.result-footer {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+}
+
+.result-github-link {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--accent);
+  transition: var(--transition);
+}
+
+.result-github-link:hover {
+  color: #e8c47a;
+  text-decoration: underline;
 }

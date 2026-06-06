@@ -11,11 +11,27 @@ const MILESTONE_ICONS = {
   pending: '○'
 };
 
+let resultsManifest = {};
+
+async function loadResultsManifest() {
+  try {
+    const res = await fetch('experiment-results/manifest.json');
+    if (!res.ok) return {};
+    return await res.json();
+  } catch {
+    return {};
+  }
+}
+
 async function init() {
   try {
-    const res = await fetch('experiments.json');
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
+    const [expRes, manifest] = await Promise.all([
+      fetch('experiments.json'),
+      loadResultsManifest(),
+    ]);
+    if (!expRes.ok) throw new Error(`HTTP ${expRes.status}`);
+    const data = await expRes.json();
+    resultsManifest = manifest;
     populateProfile(data.profile);
     renderSummary(data.profile, data.experiments);
     renderExperiments(data.experiments);
@@ -89,8 +105,16 @@ function createExperimentCard(exp, index) {
   const tags = exp.tags?.length
     ? `<div class="experiment-tags">${exp.tags.map(t => `<span>${t}</span>`).join('')}</div>`
     : '';
-  const links = exp.links?.github
-    ? `<a href="${exp.links.github}" target="_blank" rel="noopener" class="experiment-link" title="GitHub">GitHub ↗</a>`
+  const linkItems = [];
+  const resultEntry = resultsManifest[exp.id];
+  if (resultEntry?.page) {
+    linkItems.push(`<a href="${resultEntry.page}" class="experiment-link experiment-link--results" title="查看实验结果">实验结果 ↗</a>`);
+  }
+  if (exp.links?.github) {
+    linkItems.push(`<a href="${exp.links.github}" target="_blank" rel="noopener" class="experiment-link" title="GitHub">GitHub ↗</a>`);
+  }
+  const links = linkItems.length
+    ? `<div class="experiment-links">${linkItems.join('')}</div>`
     : '';
 
   return `

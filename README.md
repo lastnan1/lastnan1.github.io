@@ -15,6 +15,15 @@ personal web/
 ├── experiments.json    实验进度数据（唯一需要手动更新的文件）
 ├── papers.json         论文索引（由 build-papers.js 自动生成，勿手动修改）
 ├── build-papers.js     论文构建脚本
+├── build-experiment-results.js  实验结果构建脚本
+├── experiment-results.config.json  实验结果源目录配置（手动维护）
+├── experiment-results/  实验结果页 + 图片（脚本生成，勿手改 HTML）
+│   ├── manifest.json   ← 主页据此显示「实验结果」链接
+│   └── pinn-acoustic/
+│       ├── results.html
+│       ├── wavefield_comparison.png
+│       ├── loss_curves.png
+│       └── comparison_table.md
 ├── papers/             论文 MD 笔记 + PDF + 生成的 HTML
 │   ├── 2026-06-04/
 │   │   ├── 01-BRDR-平衡残差衰减率.md
@@ -186,7 +195,68 @@ git push
 
 ---
 
-## 三、本地预览
+## 三、同步实验结果
+
+将本地实验项目**指定结果文件夹**同步到网站，生成独立结果页；有结果的实验卡片会自动出现「实验结果 ↗」链接。
+
+一个项目下常有多个结果目录（如 `outputs`、`outputs_quick`、`outputs_full`），通过 `outputDir` 指定要展示哪一个。
+
+### 配置
+
+编辑 [`experiment-results.config.json`](experiment-results.config.json)，`id` 需与 `experiments.json` 中一致：
+
+```json
+{
+  "_defaults": {
+    "projectRoot": "D:/study/Project/project"
+  },
+  "pinn-acoustic": {
+    "outputDir": "outputs_full",
+    "title": "PINN 声波正演对比研究",
+    "images": [
+      { "file": "wavefield_comparison.png", "caption": "六种方案波场对比" },
+      { "file": "loss_curves.png", "caption": "训练损失曲线" }
+    ],
+    "table": "comparison_table.md"
+  }
+}
+```
+
+| 字段 | 说明 |
+|------|------|
+| `_defaults.projectRoot` | 实验代码项目根目录，多个实验可共用 |
+| `outputDir` | **要同步的结果子文件夹名**（相对 `projectRoot`），如 `outputs_full` / `outputs_quick` |
+| `projectRoot` | 可选，覆盖 `_defaults`（不同实验来自不同项目时） |
+| `outputLabel` | 可选，结果页显示名；默认用 `outputDir` |
+| `sourceDir` | 可选，直接写完整路径（兼容旧配置，与 `outputDir` 二选一） |
+
+切换展示文件夹时，只需改 `outputDir` 后重新运行 `node build-experiment-results.js`：
+
+```json
+"outputDir": "outputs_quick"
+```
+
+### 操作步骤
+
+```powershell
+# 1. 从云端下载最新 outputs（若本地尚无 PNG）
+python D:\study\Project\project\scripts\download_jupyter_outputs.py
+
+# 2. 构建结果页
+cd "D:\personal web"
+node build-experiment-results.js
+
+# 3. 推送
+git add experiment-results/ experiment-results.config.json build-experiment-results.js
+git commit -m "更新 PINN 实验结果"
+git push
+```
+
+脚本会复制图片与对比表、生成 `experiment-results/{id}/results.html` 和 `manifest.json`。缺失 PNG 时仍会生成页面（含对比表 + 图片占位提示）。
+
+---
+
+## 四、本地预览
 
 > 必须通过 HTTP 服务器访问，直接双击 `index.html` 会因 `fetch` 跨域失败导致数据不加载。
 
@@ -198,7 +268,7 @@ npx serve .
 
 ---
 
-## 四、发布到 GitHub Pages
+## 五、发布到 GitHub Pages
 
 仓库已配置 GitHub Pages（`main` 分支根目录），直接 `git push` 即生效，等待约 1 分钟后在 https://lastnan1.github.io 查看。
 
@@ -206,21 +276,23 @@ npx serve .
 
 ---
 
-## 五、常用命令速查
+## 六、常用命令速查
 
 | 操作 | 命令 |
 |------|------|
 | 本地预览 | `npx serve .` |
 | 构建论文 HTML | `node build-papers.js` |
+| 构建实验结果页 | `node build-experiment-results.js` |
 | 推送所有变更 | `git add . && git commit -m "描述" && git push` |
 | 仅推送实验进度 | `git add experiments.json && git commit -m "更新进度" && git push` |
 | 查看状态 | `git status` |
 
 ---
 
-## 六、注意事项
+## 七、注意事项
 
 - `papers.json` 和 `papers/**/*.html` 均由脚本自动生成，**不要手动修改**
+- `experiment-results/manifest.json` 和 `experiment-results/**/results.html` 由 `build-experiment-results.js` 生成，**不要手动修改**
 - `papers/**/*.pdf` 由构建脚本从笔记目录复制，会进入 Git 仓库（单篇约 1–5 MB）
 - 复制日期文件夹时务必先 `Remove-Item` 旧目录，避免出现 `papers/2026-06-04/2026-06-04/` 嵌套重复
 - `siteLastUpdated` 字段每次发版时手动改为当天日期，老师在页面顶部能直接看到

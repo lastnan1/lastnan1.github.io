@@ -1,0 +1,11 @@
+{
+  "pinn-acoustic": {
+    "page": "experiment-results/pinn-acoustic/results.html",
+    "title": "PINN 声波正演对比研究",
+    "outputDir": "outputs_full",
+    "sourceDir": "D:\\study\\Project\\project\\outputs_full",
+    "lastBuilt": "2026-06-06",
+    "hasImages": true,
+    "hasTable": true
+  }
+}

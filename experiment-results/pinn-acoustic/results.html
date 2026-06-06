@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PINN 声波正演对比研究 · 实验结果</title>
+  <link rel="stylesheet" href="../../style.css?v=2" />
+  <link rel="preconnect" href="https://fonts.googleapis.cn" crossorigin />
+  <link href="https://fonts.googleapis.cn/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="noise-overlay" aria-hidden="true"></div>
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <nav class="navbar scrolled">
+    <div class="nav-container">
+      <a href="../../index.html" class="nav-logo">Research<span class="dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="../../index.html#experiments">实验看板</a></li>
+        <li><a href="../../knowledge.html">知识库</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="result-page">
+    <a href="../../index.html#experiments" class="result-back">← 返回实验看板</a>
+    <p class="result-label">实验结果</p>
+    <h1 class="result-title">PINN 声波正演对比研究</h1>
+    <p class="result-meta">构建于 2026-06-06<span class="result-meta-sep">·</span><span>数据来源 <code>outputs_full</code></span></p>
+
+    
+    <section class="result-section">
+      <h2 class="result-section-title">数值对比</h2>
+      <div class="result-body"><h1 id="ABCDEF-方案模型效率对比">ABCDEF 方案模型效率对比</h1><ul><li>运行模式: full (完整)</li><li>训练步数: A/B/D/F = 80000, C/E = 80000</li><li>共享网络: 4 层 × 50 神经元; 配点 n_pde=10000, n_bc=5000, n_ic=5000</li><li>指标说明: RMSE 越小越好; CC(相关系数) 越接近 1 越好; ACC = max(0, 1-Rel_L2)×100% 越高越好。</li></ul><h2 id="方案来源">方案来源</h2><div class="table-wrap"><table><thead><tr><th>方案</th><th>方法</th><th>论文 / 来源</th></tr></thead><tbody><tr><td>A</td><td>原始 PINN (固定 λ, Tanh)</td><td>基线</td></tr><tr><td>B</td><td>论文优化 PINN (Tanh-ELU + 可学习 λ_PDE)</td><td>基线优化</td></tr><tr><td>C</td><td>三项自适应 λ (梯度初始化 + 相对进度 Softmax)</td><td>流程图方案</td></tr><tr><td>D</td><td>PINNC 加权双损失 + 残差配点细化</td><td>Shi & Beer 2024 (复现)</td></tr><tr><td>E</td><td>AMAW-PINN 配点移动 + 不确定性权重</td><td>Hou et al. 2023 (开源复现)</td></tr><tr><td>F</td><td>Huber+ 残差驱动逐点动态权重</td><td>Jing et al. 2025 (复现)</td></tr></tbody></table></div><h2 id="t-0-04s--训练快照1-">t=0.04s (训练快照1)</h2><div class="table-wrap"><table><thead><tr><th>方案</th><th>RMSE</th><th>CC</th><th>ACC (%)</th><th>Rel_L2</th><th>MaxAE</th><th>MSE</th></tr></thead><tbody><tr><td>A_原始PINN</td><td>6.9869e-07</td><td>1.0000</td><td>99.52</td><td>4.7532e-03</td><td>2.2534e-06</td><td>4.8817e-13</td></tr><tr><td>B_论文优化PINN</td><td>7.6574e-07</td><td>1.0000</td><td>99.48</td><td>5.2093e-03</td><td>2.6238e-06</td><td>5.8635e-13</td></tr><tr><td>C_三项自适应λ</td><td>1.1770e-06</td><td>0.9999</td><td>99.20</td><td>8.0070e-03</td><td>2.5021e-06</td><td>1.3853e-12</td></tr><tr><td>D_PINNC加权双损失</td><td>4.3220e-07</td><td>1.0000</td><td>99.71</td><td>2.9403e-03</td><td>3.4190e-06</td><td>1.8680e-13</td></tr><tr><td>E_AMAW配点移动</td><td>3.7600e-07</td><td>1.0000</td><td>99.74</td><td>2.5580e-03</td><td>1.6626e-06</td><td>1.4138e-13</td></tr><tr><td>F_Huber残差加权</td><td>1.3311e-06</td><td>0.9999</td><td>99.09</td><td>9.0556e-03</td><td>4.1802e-06</td><td>1.7719e-12</td></tr></tbody></table></div><h2 id="t-0-06s--训练快照2-">t=0.06s (训练快照2)</h2><div class="table-wrap"><table><thead><tr><th>方案</th><th>RMSE</th><th>CC</th><th>ACC (%)</th><th>Rel_L2</th><th>MaxAE</th><th>MSE</th></tr></thead><tbody><tr><td>A_原始PINN</td><td>8.4790e-07</td><td>1.0000</td><td>99.21</td><td>7.8602e-03</td><td>6.0827e-06</td><td>7.1893e-13</td></tr><tr><td>B_论文优化PINN</td><td>1.0977e-06</td><td>0.9999</td><td>98.98</td><td>1.0176e-02</td><td>8.7754e-06</td><td>1.2049e-12</td></tr><tr><td>C_三项自适应λ</td><td>9.2765e-07</td><td>1.0000</td><td>99.14</td><td>8.5996e-03</td><td>9.0585e-06</td><td>8.6054e-13</td></tr><tr><td>D_PINNC加权双损失</td><td>6.0835e-07</td><td>1.0000</td><td>99.44</td><td>5.6395e-03</td><td>1.2417e-05</td><td>3.7008e-13</td></tr><tr><td>E_AMAW配点移动</td><td>7.0904e-07</td><td>1.0000</td><td>99.34</td><td>6.5730e-03</td><td>7.9152e-06</td><td>5.0273e-13</td></tr><tr><td>F_Huber残差加权</td><td>1.3685e-06</td><td>0.9999</td><td>98.73</td><td>1.2686e-02</td><td>1.7326e-05</td><td>1.8727e-12</td></tr></tbody></table></div><h2 id="t-0-12s--外推预测-">t=0.12s (外推预测)</h2><div class="table-wrap"><table><thead><tr><th>方案</th><th>RMSE</th><th>CC</th><th>ACC (%)</th><th>Rel_L2</th><th>MaxAE</th><th>MSE</th></tr></thead><tbody><tr><td>A_原始PINN</td><td>2.1329e-05</td><td>0.9982</td><td>87.10</td><td>1.2896e-01</td><td>4.6395e-05</td><td>4.5494e-10</td></tr><tr><td>B_论文优化PINN</td><td>2.2328e-05</td><td>0.9976</td><td>86.50</td><td>1.3500e-01</td><td>5.4802e-05</td><td>4.9852e-10</td></tr><tr><td>C_三项自适应λ</td><td>1.8537e-05</td><td>0.9985</td><td>88.79</td><td>1.1208e-01</td><td>4.3059e-05</td><td>3.4361e-10</td></tr><tr><td>D_PINNC加权双损失</td><td>2.2189e-05</td><td>0.9982</td><td>86.58</td><td>1.3416e-01</td><td>4.8407e-05</td><td>4.9236e-10</td></tr><tr><td>E_AMAW配点移动</td><td>4.3630e-05</td><td>0.9604</td><td>73.62</td><td>2.6380e-01</td><td>1.2978e-04</td><td>1.9035e-09</td></tr><tr><td>F_Huber残差加权</td><td>2.0192e-05</td><td>0.9983</td><td>87.79</td><td>1.2209e-01</td><td>4.4090e-05</td><td>4.0773e-10</td></tr></tbody></table></div><h2 id="外推时刻--t-0-12s--按-RMSE-排名">外推时刻 (t=0.12s) 按 RMSE 排名</h2><div class="table-wrap"><table><thead><tr><th>名次</th><th>方案</th><th>RMSE</th><th>CC</th><th>ACC (%)</th></tr></thead><tbody><tr><td>1</td><td>C_三项自适应λ</td><td>1.8537e-05</td><td>0.9985</td><td>88.79</td></tr><tr><td>2</td><td>F_Huber残差加权</td><td>2.0192e-05</td><td>0.9983</td><td>87.79</td></tr><tr><td>3</td><td>A_原始PINN</td><td>2.1329e-05</td><td>0.9982</td><td>87.10</td></tr><tr><td>4</td><td>D_PINNC加权双损失</td><td>2.2189e-05</td><td>0.9982</td><td>86.58</td></tr><tr><td>5</td><td>B_论文优化PINN</td><td>2.2328e-05</td><td>0.9976</td><td>86.50</td></tr><tr><td>6</td><td>E_AMAW配点移动</td><td>4.3630e-05</td><td>0.9604</td><td>73.62</td></tr></tbody></table></div></div>
+    </section>
+
+    
+    <section class="result-section">
+      <h2 class="result-section-title">可视化结果</h2>
+      <div class="result-gallery">
+        <figure class="result-figure">
+          <a href="wavefield_comparison.png" target="_blank" rel="noopener">
+            <img src="wavefield_comparison.png" alt="六种方案波场对比" loading="lazy" />
+          </a>
+          <figcaption>六种方案波场对比</figcaption>
+        </figure>
+        <figure class="result-figure">
+          <a href="loss_curves.png" target="_blank" rel="noopener">
+            <img src="loss_curves.png" alt="训练损失曲线" loading="lazy" />
+          </a>
+          <figcaption>训练损失曲线</figcaption>
+        </figure></div>
+    </section>
+
+    <footer class="result-footer">
+      <a href="https://github.com/lastnan1" target="_blank" rel="noopener" class="result-github-link">查看 GitHub 项目 ↗</a>
+    </footer>
+  </main>
+</body>
+</html>
