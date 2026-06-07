@@ -1,7 +1,64 @@
 {
   "generated": "2026-06-07",
-  "total": 28,
+  "total": 31,
   "papers": [
+    {
+      "id": "2026-06-08/01-ParetoFront-系统参数与损失权重",
+      "date": "2026-06-08",
+      "title": "Data vs. Physics: The Apparent Pareto Front of Physics-Informed Neural Networks",
+      "zhTitle": "ParetoFront：系统参数缩放与 PINN 损失权重（Rohrhofer et al. 2023）",
+      "venue": "IEEE Access",
+      "venue_grade": "SCI",
+      "doi": "10.1109/ACCESS.2023.3302892",
+      "arxiv": "2105.00862",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-08/01-ParetoFront-系统参数与损失权重.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-08/2105.00862.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-08/02-OptimalWeight-相对误差最优缩放",
+      "date": "2026-06-08",
+      "title": "Optimally weighted loss functions for solving PDEs with Neural Networks",
+      "zhTitle": "OptimalWeight：相对误差最优的损失缩放参数（van der Meer et al. 2022）",
+      "venue": "Journal of Computational and Applied Mathematics",
+      "venue_grade": "SCI",
+      "doi": "10.1016/j.cam.2021.113887",
+      "arxiv": "2002.06269",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-08/02-OptimalWeight-相对误差最优缩放.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-08/2002.06269.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-08/03-PCNN-MM-DualDimer-minimax权重",
+      "date": "2026-06-08",
+      "title": "A Dual-Dimer method for training physics-constrained neural networks with minimax architecture",
+      "zhTitle": "PCNN-MM：Dual-Dimer minimax 架构系统化损失权重（Liu & Wang 2021）",
+      "venue": "Neural Networks",
+      "venue_grade": "CCF-B / SCI",
+      "doi": "10.1016/j.neunet.2021.01.021",
+      "arxiv": "2005.00615",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-08/03-PCNN-MM-DualDimer-minimax权重.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-08/2005.00615.pdf",
+        "label": "PDF ↗"
+      }
+    },
     {
       "id": "2026-06-07/01-CoPINN-认知课程学习",
       "date": "2026-06-07",
