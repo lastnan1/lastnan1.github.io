@@ -1,7 +1,64 @@
 {
-  "generated": "2026-06-05",
-  "total": 22,
+  "generated": "2026-06-07",
+  "total": 25,
   "papers": [
+    {
+      "id": "2026-06-07/01-CoPINN-认知课程学习",
+      "date": "2026-06-07",
+      "title": "CoPINN: Cognitive Physics-Informed Neural Networks",
+      "zhTitle": "CoPINN：认知式由易到难课程训练（Duan et al. 2025）",
+      "venue": "ICML 2025",
+      "venue_grade": "CCF-A",
+      "doi": "\"",
+      "arxiv": "\"",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-07/01-CoPINN-认知课程学习.html",
+      "readLink": {
+        "type": "arxiv-pdf",
+        "url": "https://arxiv.org/pdf/\".pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-07/02-lbPINNs-高斯MLE项级权重",
+      "date": "2026-06-07",
+      "title": "Self-adaptive loss balanced Physics-informed neural networks",
+      "zhTitle": "lbPINNs：高斯似然 + MLE 自适应项级权重（Xiang et al. 2022）",
+      "venue": "Neurocomputing",
+      "venue_grade": "CCF-B / SCI",
+      "doi": "10.1016/j.neucom.2022.05.015",
+      "arxiv": "2104.06217",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-07/02-lbPINNs-高斯MLE项级权重.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-07/2104.06217.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-07/03-I-PINN-有界不确定性加权",
+      "date": "2026-06-07",
+      "title": "Improved physics-informed neural network in mitigating gradient-related failures",
+      "zhTitle": "I-PINN：有界不确定性加权 + 改进架构（Niu et al. 2025）",
+      "venue": "Neurocomputing",
+      "venue_grade": "CCF-B / SCI",
+      "doi": "10.1016/j.neucom.2025.130167",
+      "arxiv": "2407.19421",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-07/03-I-PINN-有界不确定性加权.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-07/2407.19421.pdf",
+        "label": "PDF ↗"
+      }
+    },
     {
       "id": "2026-06-06/01-APINN-多任务自适应加权",
       "date": "2026-06-06",
