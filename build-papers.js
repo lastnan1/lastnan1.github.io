@@ -17,9 +17,17 @@ const SOURCE_NOTES_DIR = 'D:\\study\\root\\note\\每日论文';
 const SOURCE_ARXIV_DIR = path.join(SOURCE_NOTES_DIR, '_arxiv-papers');
 
 // ── PDF / readLink 解析 ────────────────────────────────────────────────
+function normalizeYamlValue(value) {
+  if (value == null) return null;
+  const v = value.trim().replace(/^["']+|["']+$/g, '');
+  if (v === '' || v === '"') return null;
+  return v;
+}
+
 function extractArxivId(meta, body) {
-  if (meta.arxiv) return meta.arxiv.trim();
-  const embed = body.match(/!\[\[(\d+\.\d+)\.pdf\]\]/);
+  const fromMeta = normalizeYamlValue(meta.arxiv);
+  if (fromMeta && /^\d{4}\.\d{4,5}$/.test(fromMeta)) return fromMeta;
+  const embed = body.match(/!\[\[(\d{4}\.\d{4,5})\.pdf\]\]/);
   if (embed) return embed[1];
   return null;
 }
@@ -112,8 +120,10 @@ function parseFrontmatter(src) {
   // 解析其余简单 key: value 字段
   const simpleFields = ['date', 'paper_title', 'venue', 'venue_grade', 'doi', 'arxiv'];
   for (const field of simpleFields) {
-    const m = rawYaml.match(new RegExp(`^${field}:\\s*["']?(.+?)["']?\\s*$`, 'm'));
-    if (m) meta[field] = m[1];
+    const m = rawYaml.match(new RegExp(`^${field}:\\s*(.+?)\\s*$`, 'm'));
+    if (!m) continue;
+    const normalized = normalizeYamlValue(m[1]);
+    if (normalized) meta[field] = normalized;
   }
   return { meta, body };
 }

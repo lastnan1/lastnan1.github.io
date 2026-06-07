@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Physics-informed neural networks with adaptive loss weighting algorithm for solving partial differential equations · 论文笔记</title>
+  <title>Gradient Statistics-Based Multi-Objective Optimization in Physics-Informed Neural Networks · 论文笔记</title>
   <link rel="stylesheet" href="../../style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.cn" crossorigin />
   <link href="https://fonts.googleapis.cn/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -76,43 +76,41 @@
   <main class="paper-page">
     <a href="../../knowledge.html" class="paper-back">← 返回知识库</a>
 
-    <p class="paper-en-title">Physics-informed neural networks with adaptive loss weighting algorithm for solving partial differential equations</p>
-    <h1 class="paper-zh-title">APINN：多任务视角的自适应损失加权（Gao et al. 2025）</h1>
+    <p class="paper-en-title">Gradient Statistics-Based Multi-Objective Optimization in Physics-Informed Neural Networks</p>
+    <h1 class="paper-zh-title">GradStat-MOO：梯度统计多目标加权（Vemuri & Denzler 2023）</h1>
 
     <div class="paper-meta-bar">
-      <a href="https://doi.org/10.1016/j.camwa.2025.01.007" target="_blank" rel="noopener" class="paper-read-link paper-read-link--doi">DOI ↗</a>
+      <a href="https://doi.org/10.3390/s23218665" target="_blank" rel="noopener" class="paper-read-link paper-read-link--doi">DOI ↗</a>
       <span class="status-badge grade-sci">SCI</span>
-      <span style="font-size:.88rem;color:var(--text-muted)">Computers & Mathematics with Applications</span>
+      <span style="font-size:.88rem;color:var(--text-muted)">Sensors</span>
       <span style="font-size:.78rem;color:var(--text-faint)">2026-06-06</span>
-      <a href="https://doi.org/10.1016/j.camwa.2025.01.007" target="_blank" rel="noopener" class="paper-ext-link">DOI ↗</a>
+      <a href="https://doi.org/10.3390/s23218665" target="_blank" rel="noopener" class="paper-ext-link">DOI ↗</a>
       
     </div>
 
     <div class="paper-tags"><span class="paper-tag">自适应权重</span></div>
 
     <div class="paper-body">
-      <h1 id="APINN-多任务视角的自适应损失加权-Gao-et-al--2025-">APINN：多任务视角的自适应损失加权（Gao et al. 2025）</h1><h2 id="方法图示">方法图示</h2><blockquote>将 PINN 训练显式建模为多任务学习，在线平衡各损失项量级。</blockquote><div class="mermaid-wrap"><pre class="mermaid">flowchart LR
-    subgraph Tasks ["多任务损失"]
-        L_PDE["L_PDE 物理残差"]
-        L_IC["L_IC 初值"]
-        L_BC["L_BC 边界"]
-    end
-    L_PDE --&gt; WeightCalc[自适应权重更新]
-    L_IC --&gt; WeightCalc
-    L_BC --&gt; WeightCalc
-    WeightCalc --&gt; WeightedSum["加权总损失 L = Σ λ_k L_k"]
-    WeightedSum --&gt; Adam[Adam 更新网络参数]
-    Adam --&gt; Tasks
-</pre></div><div class="mermaid-wrap"><pre class="mermaid">flowchart TD
-    Init[初始化 λ_k] --&gt; Forward[前向计算各损失项]
-    Forward --&gt; Balance[按损失量级/梯度统计调整 λ]
-    Balance --&gt; Check{各任务贡献均衡?}
-    Check --&gt;|否| Forward
-    Check --&gt;|是| Output[输出满足 PDE+IC+BC 的 u_θ]
-</pre></div><h2 id="元信息">元信息</h2><ul><li><strong>作者 / 年份</strong>：Bo Gao, Ruoxia Yao, Yan Li, 2025</li><li><strong>发表于</strong>：Computers &amp; Mathematics with Applications, Vol. 181（等级：SCI）</li><li><strong>链接</strong>：<a href="https://doi.org/10.1016/j.camwa.2025.01.007" target="_blank" rel="noopener">https://doi.org/10.1016/j.camwa.2025.01.007</a> | <a href="https://papers.ssrn.com/abstract=4916430" target="_blank" rel="noopener">https://papers.ssrn.com/abstract=4916430</a></li><li><strong>引用数</strong>：待查（2025 年新发表）</li></ul><h2 id="核心内容">核心内容</h2><p>将 PINN 训练视为<strong>多任务学习（MTL）</strong>问题，提出 APINN 自适应损失加权算法，在训练过程中动态平衡 PDE 残差、初值与边界各损失项的量级，使不同量纲/尺度的参数对总损失贡献均衡。在 Benjamin-Ono 孤波、Sine-Gordon 与 Mukherjee-Kundu 呼吸子波等 benchmark 上，相对固定权重 PINN 预测误差可降低约一个数量级（BO 方程从 ~60% 降至 ~1%）。</p><h2 id="创新点">创新点</h2><ol><li>从 MTL 框架重新表述 PINN 多目标优化，而非仅作启发式调 λ。</li><li>自适应算法在训练全程在线更新权重，无需手工网格搜索各损失系数。</li><li>在强非线性波动方程（BO、SG）上展示显著精度提升，验证项级平衡对复杂 PDE 的必要性。</li><li>与 GradNorm/SoftAdapt 等 MTL 方法形成对照，但专门针对 PINN 物理约束结构定制。</li></ol><h2 id="相关汇报">相关汇报</h2><div class="table-wrap"><table><thead><tr><th>汇报</th><th>关联理由</th></tr></thead><tbody><tr><td><a href="../2026-06-04/04-ReLoBRaLo-相对损失平衡.html" class="wikilink">04-ReLoBRaLo-相对损失平衡</a></td><td>同为 <strong>项级多目标损失平衡</strong>：ReLoBRaLo 用随机回看损失比率，APINN 用 MTL 自适应量级；可作对照基线。</td></tr><tr><td><a href="../2026-06-04/03-DB-PINN-双层次平衡.html" class="wikilink">03-DB-PINN-双层次平衡</a></td><td>DB-PINN 分 inter/intra 两层平衡，APINN 聚焦项间量级；可组合「MTL 项级 + 条件内难度」实验。</td></tr><tr><td><a href="../2026-06-04/08-MOO-VARI-多目标优化加权.html" class="wikilink">08-MOO-VARI-多目标优化加权</a></td><td>均将 PINN 视为多目标优化；MOO-VARI 用 Pareto/NSGA-II，APINN 用在线自适应 λ，方法论互补。</td></tr><tr><td><a href="02-IDW-逆Dirichlet梯度方差加权.html" class="wikilink">02-IDW-逆Dirichlet梯度方差加权</a></td><td>今日另一篇项级加权：IDW 基于梯度方差，APINN 基于损失量级/MTL；可对比「损失统计 vs 梯度统计」。</td></tr></tbody></table></div><h2 id="与我研究的关联">与我研究的关联</h2><p>你的 2D 声波 PINN 有四项损失（PDE/快照/边界/初值），APINN 的 MTL 项级平衡可直接替换固定 <code>λ_pde, λ_snap</code> 等超参；首个实验可在现有 <code>losses.py</code> 四项损失上实现在线 λ 更新，与 ReLoBRaLo 做消融。</p><h2 id="备注">备注</h2><ul><li>汇报批次：2026-06-06 第 1 次触发（浅海三文鱼）</li></ul><h2 id="本地-PDF">本地 PDF</h2><div class="pdf-fallback"><p>暂无本地 PDF（本篇无 arXiv 预印本，仅期刊/会议发表）。</p><a href="https://doi.org/10.1016/j.camwa.2025.01.007" class="paper-pdf-embed paper-pdf-embed--doi" target="_blank" rel="noopener">🔗 打开 DOI 链接</a></div><ul><li>DOI：<a href="https://doi.org/10.1016/j.camwa.2025.01.007" target="_blank" rel="noopener">https://doi.org/10.1016/j.camwa.2025.01.007</a></li></ul>
+      <h1 id="GradStat-MOO-梯度统计多目标加权-Vemuri---Denzler-2023-">GradStat-MOO：梯度统计多目标加权（Vemuri &amp; Denzler 2023）</h1><h2 id="方法图示">方法图示</h2><blockquote>从各损失项反向传播梯度提取 mean/std/kurtosis，构造多种项级权重方案。</blockquote><div class="mermaid-wrap"><pre class="mermaid">flowchart LR
+    L_PDE["L_PDE"] --&gt; G_PDE["∇L_PDE"]
+    L_BC["L_BC"] --&gt; G_BC["∇L_BC"]
+    L_IC["L_IC"] --&gt; G_IC["∇L_IC"]
+    G_PDE --&gt; Stats["统计: mean / std / kurtosis"]
+    G_BC --&gt; Stats
+    G_IC --&gt; Stats
+    Stats --&gt; Schemes["μ / 1/σ / μ+σ / μ×σ / kurt+σ"]
+    Schemes --&gt; Lambda["项级权重 λ_k"]
+    Lambda --&gt; TotalL["L = Σ λ_k L_k"]
+</pre></div><div class="mermaid-wrap"><pre class="mermaid">graph TD
+    Root["梯度统计加权族"] --&gt; MeanW["均值 μ 加权 Wang LRA"]
+    Root --&gt; InvStd["逆标准差 1/σ IDW 类"]
+    Root --&gt; SumMS["μ + σ 组合"]
+    Root --&gt; ProdMS["μ × σ 组合"]
+    Root --&gt; KurtW["kurtosis + σ 峰度加权"]
+</pre></div><h2 id="元信息">元信息</h2><ul><li><strong>作者 / 年份</strong>：Sai Karthikeya Vemuri, Joachim Denzler, 2023</li><li><strong>发表于</strong>：Sensors, Vol. 23, No. 21（等级：SCI）</li><li><strong>链接</strong>：<a href="https://doi.org/10.3390/s23218665" target="_blank" rel="noopener">https://doi.org/10.3390/s23218665</a></li><li><strong>引用数</strong>：30+（梯度统计加权方法汇编）</li></ul><h2 id="核心内容">核心内容</h2><p>系统梳理 PINN 多目标损失中 PDE 残差、初值与边界项梯度<strong>量级与分布差异</strong>导致的训练失败，在已有 mean-based（Wang LRA）与 inverse-std（IDW）方案基础上，提出三种新权重：<strong>μ+σ、μ×σ、kurtosis+σ</strong>。通过在多个前向/逆问题 benchmark 上对比五种方案，给出不同 PDE 类型下更稳健的梯度统计选择指南。</p><h2 id="创新点">创新点</h2><ol><li>首次将<strong>峰度（kurtosis）</strong>引入 PINN 项级权重，捕捉梯度分布尖峰程度，补充均值/方差信息。</li><li>统一实验框架对比五种梯度统计方案，而非单点提出一种方法。</li><li>强调权重应在训练中<strong>动态更新</strong>，与固定 λ 手工调参形成鲜明对照。</li><li>为后续 DB-PINN、ReLoBRaLo 综述中的梯度统计基线提供方法族谱。</li></ol><h2 id="相关汇报">相关汇报</h2><div class="table-wrap"><table><thead><tr><th>汇报</th><th>关联理由</th></tr></thead><tbody><tr><td><a href="02-IDW-逆Dirichlet梯度方差加权.html" class="wikilink">02-IDW-逆Dirichlet梯度方差加权</a></td><td>IDW 对应本文 inverse-std 方案；GradStat 在其上扩展 μ+σ、峰度组合，直接可消融。</td></tr><tr><td><a href="06-LRA-梯度病理学习率退火.html" class="wikilink">06-LRA-梯度病理学习率退火</a></td><td>Wang LRA 的 mean-based 加权是本文五种方案之一，LRA 提供机理，GradStat 做系统扩展。</td></tr><tr><td><a href="../2026-06-04/03-DB-PINN-双层次平衡.html" class="wikilink">03-DB-PINN-双层次平衡</a></td><td>DB-PINN inter-balancing 也用梯度均值统计，与 GradStat 的 μ 路线同源。</td></tr><tr><td><a href="../2026-06-04/04-ReLoBRaLo-相对损失平衡.html" class="wikilink">04-ReLoBRaLo-相对损失平衡</a></td><td>ReLoBRaLo 避开梯度统计；GradStat 证明梯度分布高阶矩仍有价值，适合正反对照。</td></tr></tbody></table></div><h2 id="与我研究的关联">与我研究的关联</h2><p>在 2D 声波四项损失上，可并行跑 IDW（1/σ）与 kurtosis+σ 两种在线 λ，观察波前 stiff 区域是否因峰度加权获得更快收敛；实现仅需在现有 backward 后追加梯度向量统计，无需改网络结构。</p><h2 id="备注">备注</h2><ul><li>汇报批次：2026-06-06 第 2 次检索（16:42）</li></ul><h2 id="本地-PDF">本地 PDF</h2><div class="pdf-fallback"><p>暂无本地 PDF（本篇无 arXiv 预印本，仅期刊发表）。</p><a href="https://doi.org/10.3390/s23218665" class="paper-pdf-embed paper-pdf-embed--doi" target="_blank" rel="noopener">🔗 打开 DOI 链接</a></div><ul><li>DOI：<a href="https://doi.org/10.3390/s23218665" target="_blank" rel="noopener">https://doi.org/10.3390/s23218665</a></li></ul>
     </div>
 
-    <div class="siblings-nav"><span class="siblings-label">同日其他论文：</span><a href="02-IDW-逆Dirichlet梯度方差加权.html" class="sibling-link">IDW-逆Dirichlet梯度方差加权</a><a href="03-BRDR-SAS-加权与采样联合.html" class="sibling-link">BRDR-SAS</a><a href="04-MultiAdam-尺度不变优化器.html" class="sibling-link">MultiAdam-尺度不变优化器</a><a href="05-GradStat-梯度统计多目标.html" class="sibling-link">GradStat-梯度统计多目标</a><a href="06-LRA-梯度病理学习率退火.html" class="sibling-link">LRA-梯度病理学习率退火</a></div>
+    <div class="siblings-nav"><span class="siblings-label">同日其他论文：</span><a href="01-APINN-多任务自适应加权.html" class="sibling-link">APINN-多任务自适应加权</a><a href="02-IDW-逆Dirichlet梯度方差加权.html" class="sibling-link">IDW-逆Dirichlet梯度方差加权</a><a href="03-BRDR-SAS-加权与采样联合.html" class="sibling-link">BRDR-SAS</a><a href="04-MultiAdam-尺度不变优化器.html" class="sibling-link">MultiAdam-尺度不变优化器</a><a href="06-LRA-梯度病理学习率退火.html" class="sibling-link">LRA-梯度病理学习率退火</a></div>
   </main>
 
   <script>mermaid.initialize({startOnLoad:true,theme:"dark",themeVariables:{primaryColor:"#d4a853",primaryTextColor:"#e8e4dc",primaryBorderColor:"#d4a853",lineColor:"#8b95a8",sectionBkgColor:"#1a2235",altSectionBkgColor:"#141c2e",gridColor:"rgba(212,168,83,0.1)",titleColor:"#d4a853",edgeLabelBackground:"#1a2235",tertiaryColor:"#1a2235"}});</script>

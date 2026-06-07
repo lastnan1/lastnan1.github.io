@@ -1,6 +1,6 @@
 {
   "generated": "2026-06-07",
-  "total": 25,
+  "total": 28,
   "papers": [
     {
       "id": "2026-06-07/01-CoPINN-认知课程学习",
@@ -9,17 +9,13 @@
       "zhTitle": "CoPINN：认知式由易到难课程训练（Duan et al. 2025）",
       "venue": "ICML 2025",
       "venue_grade": "CCF-A",
-      "doi": "\"",
-      "arxiv": "\"",
+      "doi": "",
+      "arxiv": "",
       "tags": [
         "自适应权重"
       ],
       "htmlPath": "papers/2026-06-07/01-CoPINN-认知课程学习.html",
-      "readLink": {
-        "type": "arxiv-pdf",
-        "url": "https://arxiv.org/pdf/\".pdf",
-        "label": "PDF ↗"
-      }
+      "readLink": null
     },
     {
       "id": "2026-06-07/02-lbPINNs-高斯MLE项级权重",
@@ -113,6 +109,63 @@
       "readLink": {
         "type": "pdf",
         "url": "papers/2026-06-06/2511.05452.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-06/04-MultiAdam-尺度不变优化器",
+      "date": "2026-06-06",
+      "title": "MultiAdam: Parameter-wise Scale-invariant Optimizer for Multiscale Training of Physics-informed Neural Networks",
+      "zhTitle": "MultiAdam：参数级尺度不变优化器（Yao et al. 2023）",
+      "venue": "International Conference on Machine Learning (ICML 2023)",
+      "venue_grade": "CCF-A",
+      "doi": "",
+      "arxiv": "2306.02816",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-06/04-MultiAdam-尺度不变优化器.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-06/2306.02816.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-06/05-GradStat-梯度统计多目标",
+      "date": "2026-06-06",
+      "title": "Gradient Statistics-Based Multi-Objective Optimization in Physics-Informed Neural Networks",
+      "zhTitle": "GradStat-MOO：梯度统计多目标加权（Vemuri & Denzler 2023）",
+      "venue": "Sensors",
+      "venue_grade": "SCI",
+      "doi": "10.3390/s23218665",
+      "arxiv": "",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-06/05-GradStat-梯度统计多目标.html",
+      "readLink": {
+        "type": "doi",
+        "url": "https://doi.org/10.3390/s23218665",
+        "label": "DOI ↗"
+      }
+    },
+    {
+      "id": "2026-06-06/06-LRA-梯度病理学习率退火",
+      "date": "2026-06-06",
+      "title": "Understanding and mitigating gradient flow pathologies in physics-informed neural networks",
+      "zhTitle": "LRA：梯度病理与学习率退火加权（Wang et al. 2021）",
+      "venue": "SIAM Journal on Scientific Computing (SISC)",
+      "venue_grade": "SCI / CCF-B(计算)",
+      "doi": "10.1137/20M1318043",
+      "arxiv": "2001.04536",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-06/06-LRA-梯度病理学习率退火.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-06/2001.04536.pdf",
         "label": "PDF ↗"
       }
     },

@@ -8,8 +8,6 @@ date: 2026-06-07
 paper_title: "CoPINN: Cognitive Physics-Informed Neural Networks"
 venue: "ICML 2025"
 venue_grade: "CCF-A"
-doi: ""
-arxiv: ""
 ---
 
 # CoPINN：认知式由易到难课程训练（Duan et al. 2025）

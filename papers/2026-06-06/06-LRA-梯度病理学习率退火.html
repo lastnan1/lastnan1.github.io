@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Physics-informed neural networks with adaptive loss weighting algorithm for solving partial differential equations · 论文笔记</title>
+  <title>Understanding and mitigating gradient flow pathologies in physics-informed neural networks · 论文笔记</title>
   <link rel="stylesheet" href="../../style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.cn" crossorigin />
   <link href="https://fonts.googleapis.cn/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -76,43 +76,38 @@
   <main class="paper-page">
     <a href="../../knowledge.html" class="paper-back">← 返回知识库</a>
 
-    <p class="paper-en-title">Physics-informed neural networks with adaptive loss weighting algorithm for solving partial differential equations</p>
-    <h1 class="paper-zh-title">APINN：多任务视角的自适应损失加权（Gao et al. 2025）</h1>
+    <p class="paper-en-title">Understanding and mitigating gradient flow pathologies in physics-informed neural networks</p>
+    <h1 class="paper-zh-title">LRA：梯度病理与学习率退火加权（Wang et al. 2021）</h1>
 
     <div class="paper-meta-bar">
-      <a href="https://doi.org/10.1016/j.camwa.2025.01.007" target="_blank" rel="noopener" class="paper-read-link paper-read-link--doi">DOI ↗</a>
+      <a href="2001.04536.pdf" target="_blank" rel="noopener" class="paper-read-link paper-read-link--pdf">PDF ↗</a>
       <span class="status-badge grade-sci">SCI</span>
-      <span style="font-size:.88rem;color:var(--text-muted)">Computers & Mathematics with Applications</span>
+      <span style="font-size:.88rem;color:var(--text-muted)">SIAM Journal on Scientific Computing (SISC)</span>
       <span style="font-size:.78rem;color:var(--text-faint)">2026-06-06</span>
-      <a href="https://doi.org/10.1016/j.camwa.2025.01.007" target="_blank" rel="noopener" class="paper-ext-link">DOI ↗</a>
-      
+      <a href="https://doi.org/10.1137/20M1318043" target="_blank" rel="noopener" class="paper-ext-link">DOI ↗</a>
+      <a href="https://arxiv.org/abs/2001.04536" target="_blank" rel="noopener" class="paper-ext-link">arXiv ↗</a>
     </div>
 
     <div class="paper-tags"><span class="paper-tag">自适应权重</span></div>
 
     <div class="paper-body">
-      <h1 id="APINN-多任务视角的自适应损失加权-Gao-et-al--2025-">APINN：多任务视角的自适应损失加权（Gao et al. 2025）</h1><h2 id="方法图示">方法图示</h2><blockquote>将 PINN 训练显式建模为多任务学习，在线平衡各损失项量级。</blockquote><div class="mermaid-wrap"><pre class="mermaid">flowchart LR
-    subgraph Tasks ["多任务损失"]
-        L_PDE["L_PDE 物理残差"]
-        L_IC["L_IC 初值"]
-        L_BC["L_BC 边界"]
-    end
-    L_PDE --&gt; WeightCalc[自适应权重更新]
-    L_IC --&gt; WeightCalc
-    L_BC --&gt; WeightCalc
-    WeightCalc --&gt; WeightedSum["加权总损失 L = Σ λ_k L_k"]
-    WeightedSum --&gt; Adam[Adam 更新网络参数]
-    Adam --&gt; Tasks
-</pre></div><div class="mermaid-wrap"><pre class="mermaid">flowchart TD
-    Init[初始化 λ_k] --&gt; Forward[前向计算各损失项]
-    Forward --&gt; Balance[按损失量级/梯度统计调整 λ]
-    Balance --&gt; Check{各任务贡献均衡?}
-    Check --&gt;|否| Forward
-    Check --&gt;|是| Output[输出满足 PDE+IC+BC 的 u_θ]
-</pre></div><h2 id="元信息">元信息</h2><ul><li><strong>作者 / 年份</strong>：Bo Gao, Ruoxia Yao, Yan Li, 2025</li><li><strong>发表于</strong>：Computers &amp; Mathematics with Applications, Vol. 181（等级：SCI）</li><li><strong>链接</strong>：<a href="https://doi.org/10.1016/j.camwa.2025.01.007" target="_blank" rel="noopener">https://doi.org/10.1016/j.camwa.2025.01.007</a> | <a href="https://papers.ssrn.com/abstract=4916430" target="_blank" rel="noopener">https://papers.ssrn.com/abstract=4916430</a></li><li><strong>引用数</strong>：待查（2025 年新发表）</li></ul><h2 id="核心内容">核心内容</h2><p>将 PINN 训练视为<strong>多任务学习（MTL）</strong>问题，提出 APINN 自适应损失加权算法，在训练过程中动态平衡 PDE 残差、初值与边界各损失项的量级，使不同量纲/尺度的参数对总损失贡献均衡。在 Benjamin-Ono 孤波、Sine-Gordon 与 Mukherjee-Kundu 呼吸子波等 benchmark 上，相对固定权重 PINN 预测误差可降低约一个数量级（BO 方程从 ~60% 降至 ~1%）。</p><h2 id="创新点">创新点</h2><ol><li>从 MTL 框架重新表述 PINN 多目标优化，而非仅作启发式调 λ。</li><li>自适应算法在训练全程在线更新权重，无需手工网格搜索各损失系数。</li><li>在强非线性波动方程（BO、SG）上展示显著精度提升，验证项级平衡对复杂 PDE 的必要性。</li><li>与 GradNorm/SoftAdapt 等 MTL 方法形成对照，但专门针对 PINN 物理约束结构定制。</li></ol><h2 id="相关汇报">相关汇报</h2><div class="table-wrap"><table><thead><tr><th>汇报</th><th>关联理由</th></tr></thead><tbody><tr><td><a href="../2026-06-04/04-ReLoBRaLo-相对损失平衡.html" class="wikilink">04-ReLoBRaLo-相对损失平衡</a></td><td>同为 <strong>项级多目标损失平衡</strong>：ReLoBRaLo 用随机回看损失比率，APINN 用 MTL 自适应量级；可作对照基线。</td></tr><tr><td><a href="../2026-06-04/03-DB-PINN-双层次平衡.html" class="wikilink">03-DB-PINN-双层次平衡</a></td><td>DB-PINN 分 inter/intra 两层平衡，APINN 聚焦项间量级；可组合「MTL 项级 + 条件内难度」实验。</td></tr><tr><td><a href="../2026-06-04/08-MOO-VARI-多目标优化加权.html" class="wikilink">08-MOO-VARI-多目标优化加权</a></td><td>均将 PINN 视为多目标优化；MOO-VARI 用 Pareto/NSGA-II，APINN 用在线自适应 λ，方法论互补。</td></tr><tr><td><a href="02-IDW-逆Dirichlet梯度方差加权.html" class="wikilink">02-IDW-逆Dirichlet梯度方差加权</a></td><td>今日另一篇项级加权：IDW 基于梯度方差，APINN 基于损失量级/MTL；可对比「损失统计 vs 梯度统计」。</td></tr></tbody></table></div><h2 id="与我研究的关联">与我研究的关联</h2><p>你的 2D 声波 PINN 有四项损失（PDE/快照/边界/初值），APINN 的 MTL 项级平衡可直接替换固定 <code>λ_pde, λ_snap</code> 等超参；首个实验可在现有 <code>losses.py</code> 四项损失上实现在线 λ 更新，与 ReLoBRaLo 做消融。</p><h2 id="备注">备注</h2><ul><li>汇报批次：2026-06-06 第 1 次触发（浅海三文鱼）</li></ul><h2 id="本地-PDF">本地 PDF</h2><div class="pdf-fallback"><p>暂无本地 PDF（本篇无 arXiv 预印本，仅期刊/会议发表）。</p><a href="https://doi.org/10.1016/j.camwa.2025.01.007" class="paper-pdf-embed paper-pdf-embed--doi" target="_blank" rel="noopener">🔗 打开 DOI 链接</a></div><ul><li>DOI：<a href="https://doi.org/10.1016/j.camwa.2025.01.007" target="_blank" rel="noopener">https://doi.org/10.1016/j.camwa.2025.01.007</a></li></ul>
+      <h1 id="LRA-梯度病理与学习率退火加权-Wang-et-al--2021-">LRA：梯度病理与学习率退火加权（Wang et al. 2021）</h1><h2 id="方法图示">方法图示</h2><blockquote>诊断 PINN 多损失梯度失衡，用梯度模长统计动态调整各损失项权重（Learning Rate Annealing）。</blockquote><div class="mermaid-wrap"><pre class="mermaid">flowchart TD
+    Forward["NN 前向 u_θ(x)"] --&gt; Losses["L_PDE / L_BC / L_IC"]
+    Losses --&gt; Backprop["反向传播各分项梯度"]
+    Backprop --&gt; GradMag["统计梯度模长 mean|∇L_k|"]
+    GradMag --&gt; LRA["λ_k ∝ max|∇| / mean|∇L_k|"]
+    LRA --&gt; WeightedL["L = Σ λ_k L_k"]
+    WeightedL --&gt; Adam["Adam 更新 θ"]
+    Adam --&gt; Forward
+</pre></div><div class="mermaid-wrap"><pre class="mermaid">flowchart LR
+    Stiff["数值刚性区域"] --&gt; Pathology["梯度病理: 某项主导/消失"]
+    Pathology --&gt; Diagnose["诊断 BC vs PDE 梯度冲突"]
+    Diagnose --&gt; FixLRA["LRA 在线重平衡 λ"]
+    Diagnose --&gt; FixArch["改良网络架构抗病理"]
+</pre></div><h2 id="元信息">元信息</h2><ul><li><strong>作者 / 年份</strong>：Sifan Wang, Yujun Teng, Paris Perdikaris, 2021</li><li><strong>发表于</strong>：SIAM Journal on Scientific Computing, Vol. 43, No. 5（等级：SCI / CCF-B）</li><li><strong>链接</strong>：<a href="https://arxiv.org/abs/2001.04536" target="_blank" rel="noopener">https://arxiv.org/abs/2001.04536</a> | <a href="https://doi.org/10.1137/20M1318043" target="_blank" rel="noopener">https://doi.org/10.1137/20M1318043</a></li><li><strong>引用数</strong>：1000+（PINN 梯度病理奠基文献，开源 GradientPathologiesPINNs）</li></ul><h2 id="核心内容">核心内容</h2><p>揭示 PINN 训练失败的<strong>梯度流病理（gradient flow pathologies）</strong>：数值刚性导致 PDE 残差、边界/初值各损失项反向传播梯度量级悬殊，优化陷入局部停滞。提出 <strong>Learning Rate Annealing（LRA）</strong>：每步用各损失项梯度模长的均值比值动态设置 λ，使各分项对参数更新的有效学习率相当；并设计更抗病理的网络结构，在多种计算物理问题上相对 vanilla PINN 精度提升 50–100×。</p><h2 id="创新点">创新点</h2><ol><li>首次系统命名并实验验证 PINN <strong>梯度病理</strong>现象，影响后续 NTK、ConFIG、DB-PINN 等全系列权重工作。</li><li>LRA 仅需梯度模长统计，是后来 Wang JCP NTK 加权与 ReLoBRaLo 综述中 LR Annealing 基线的<strong>原始出处</strong>。</li><li>同时从架构侧缓解病理，提供「损失加权 + 结构」双路径。</li><li>开源代码与数据，成为 PINN 训练诊断的标准参考实现。</li></ol><h2 id="相关汇报">相关汇报</h2><div class="table-wrap"><table><thead><tr><th>汇报</th><th>关联理由</th></tr></thead><tbody><tr><td><a href="../2026-06-04/05-NTK-特征值加权.html" class="wikilink">05-NTK-特征值加权</a></td><td>同作者 Wang 系列：LRA 是经验梯度模长加权，NTK 给出特征值理论解释，应串联阅读。</td></tr><tr><td><a href="../2026-06-04/04-ReLoBRaLo-相对损失平衡.html" class="wikilink">04-ReLoBRaLo-相对损失平衡</a></td><td>ReLoBRaLo 论文将 LRA 列为三大基线之一；LRA 看梯度模长，ReLoBRaLo 看损失进展率。</td></tr><tr><td><a href="05-GradStat-梯度统计多目标.html" class="wikilink">05-GradStat-梯度统计多目标</a></td><td>GradStat 将 LRA 的 mean-based 方案纳入五类梯度统计族，LRA 为其理论源头。</td></tr><tr><td><a href="02-IDW-逆Dirichlet梯度方差加权.html" class="wikilink">02-IDW-逆Dirichlet梯度方差加权</a></td><td>LRA 用梯度<strong>模长均值</strong>，IDW 用梯度<strong>方差</strong>；同属梯度统计项级加权，统计量不同。</td></tr><tr><td><a href="../2026-06-05/04-ConFIG-无冲突梯度训练.html" class="wikilink">04-ConFIG-无冲突梯度训练</a></td><td>ConFIG 从梯度冲突几何角度解决病理，LRA 从损失权重尺度角度，问题同源解法互补。</td></tr></tbody></table></div><h2 id="与我研究的关联">与我研究的关联</h2><p>LRA 是改动最小的「第一项自适应权重」基线：在 <code>trainers.py</code> 每 N 步统计四项损失对 θ 的梯度 L2 范数，按 Wang 公式更新 λ，再与现有固定 λ 预训练流程对比，可快速判断你的 2D 声波任务是否属于梯度病理主导失败。</p><h2 id="备注">备注</h2><ul><li>汇报批次：2026-06-06 第 2 次检索（16:42）</li></ul><h2 id="本地-PDF">本地 PDF</h2><div class="pdf-embed-wrap"><a href="2001.04536.pdf" class="paper-pdf-embed" target="_blank" rel="noopener">📄 打开 PDF</a></div><ul><li>arXiv：<a href="https://arxiv.org/abs/2001.04536" target="_blank" rel="noopener">https://arxiv.org/abs/2001.04536</a></li><li>文件：<code>每日论文/2026-06-06/2001.04536.pdf</code></li></ul>
     </div>
 
-    <div class="siblings-nav"><span class="siblings-label">同日其他论文：</span><a href="02-IDW-逆Dirichlet梯度方差加权.html" class="sibling-link">IDW-逆Dirichlet梯度方差加权</a><a href="03-BRDR-SAS-加权与采样联合.html" class="sibling-link">BRDR-SAS</a><a href="04-MultiAdam-尺度不变优化器.html" class="sibling-link">MultiAdam-尺度不变优化器</a><a href="05-GradStat-梯度统计多目标.html" class="sibling-link">GradStat-梯度统计多目标</a><a href="06-LRA-梯度病理学习率退火.html" class="sibling-link">LRA-梯度病理学习率退火</a></div>
+    <div class="siblings-nav"><span class="siblings-label">同日其他论文：</span><a href="01-APINN-多任务自适应加权.html" class="sibling-link">APINN-多任务自适应加权</a><a href="02-IDW-逆Dirichlet梯度方差加权.html" class="sibling-link">IDW-逆Dirichlet梯度方差加权</a><a href="03-BRDR-SAS-加权与采样联合.html" class="sibling-link">BRDR-SAS</a><a href="04-MultiAdam-尺度不变优化器.html" class="sibling-link">MultiAdam-尺度不变优化器</a><a href="05-GradStat-梯度统计多目标.html" class="sibling-link">GradStat-梯度统计多目标</a></div>
   </main>
 
   <script>mermaid.initialize({startOnLoad:true,theme:"dark",themeVariables:{primaryColor:"#d4a853",primaryTextColor:"#e8e4dc",primaryBorderColor:"#d4a853",lineColor:"#8b95a8",sectionBkgColor:"#1a2235",altSectionBkgColor:"#141c2e",gridColor:"rgba(212,168,83,0.1)",titleColor:"#d4a853",edgeLabelBackground:"#1a2235",tertiaryColor:"#1a2235"}});</script>

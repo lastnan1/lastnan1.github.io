@@ -61,3 +61,54 @@ APINN, 逆Dirichlet加权, IDW, 梯度方差, BRDR, 自适应采样, 多任务�
 - 检索来源：WebSearch（CAMWA APINN 2025、Maddu IDW arXiv:2107.00940、Chen BRDR-SAS arXiv:2511.05452 / MLST ae556e）
 - 本次新增单篇文件：`01-APINN-多任务自适应加权.md`、`02-IDW-逆Dirichlet梯度方差加权.md`、`03-BRDR-SAS-加权与采样联合.md`
 - 本地 PDF：2/3 已下载（2107.00940、2511.05452）；APINN 无 arXiv，标注暂无
+
+---
+
+## 第 2 次检索（16:42）
+
+### 摘要补充
+
+追加 3 篇补全「优化器层隐式平衡（MultiAdam）」「梯度统计方法族（GradStat）」「梯度病理奠基（LRA）」三条脉络，与上午的 IDW/APINN/BRDR-SAS 形成从理论源头到实现变体的完整对照矩阵。
+
+### 本次新增论文
+
+| # | 汇报 | 发表于 |
+|---|------|--------|
+| 4 | [[04-MultiAdam-尺度不变优化器]] | ICML 2023（CCF-A） |
+| 5 | [[05-GradStat-梯度统计多目标]] | Sensors 2023（SCI） |
+| 6 | [[06-LRA-梯度病理学习率退火]] | SISC 2021（SCI） |
+
+### 可复现 Idea（第 2 批）
+
+#### Idea 4：MultiAdam 双组优化替代固定 λ（参考 [[04-MultiAdam-尺度不变优化器]]）
+- **思路**：将 PDE 残差损失与 BC/IC/快照损失拆成两组，用 MultiAdam 分别维护动量并合并更新，替代手工 λ。
+- **关键改动**：封装 `MultiAdamOptimizer`，每组损失独立 `backward(retain_graph=True)` 后按二阶矩重标度再平均；其余网络与配点不变。
+- **首个实验**：
+  - 方程/数据：2D 声波正演
+  - 基线：Adam + 固定 λ
+  - 指标：相对 L2、各组梯度模长比、收敛步数
+- **风险 / 难度**：多组 backward 增加显存；需验证与现有 `balance_loss_scales` 是否冗余。
+
+#### Idea 5：kurtosis+σ vs IDW 消融（参考 [[05-GradStat-梯度统计多目标]] + [[02-IDW-逆Dirichlet梯度方差加权]]）
+- **思路**：在同一训练脚本中切换 GradStat 的 `1/σ`（IDW）与 `kurtosis+σ` 两种在线 λ，检验波前 stiff 区是否受益于峰度加权。
+- **关键改动**：每 N 步收集各损失项梯度向量，计算 std 与 kurtosis，按 GradStat 公式更新 λ 并 EMA 平滑。
+- **首个实验**：
+  - 方程/数据：2D 声波 + 1D Burgers 对照
+  - 基线：固定 λ、IDW
+  - 指标：λ 轨迹、最终 L2、训练稳定性（loss 震荡）
+- **风险 / 难度**：小 batch 下 kurtosis 估计噪声大；需足够滑动窗口长度。
+
+#### Idea 6：LRA 作为 C 方案预训练后在线微调（参考 [[06-LRA-梯度病理学习率退火]]）
+- **思路**：固定 λ 预训练收敛后，切换 Wang LRA 按梯度模长动态调整四项 λ，观察是否突破平台期。
+- **关键改动**：预训练 M epoch 后启用 `λ_k ∝ max_j mean|∇L_j| / mean|∇L_k|`，每步或每 N 步更新；记录梯度模长诊断日志。
+- **首个实验**：
+  - 方程/数据：2D 声波（已知 PDE 残差梯度偏大）
+  - 基线：仅固定 λ、仅 LRA 从头训练
+  - 指标：平台期前后 L2 变化、各分项梯度模长比
+- **风险 / 难度**：LRA 与 ReLoBRaLo 同时启用可能过调；需设 λ 上下界防止发散。
+
+### 第 2 次检索备注
+
+- 检索来源：WebSearch（ICML MultiAdam arXiv:2306.02816、Sensors GradStat DOI:10.3390/s23218665、SISC LRA arXiv:2001.04536）
+- 本次新增单篇文件：`04-MultiAdam-尺度不变优化器.md`、`05-GradStat-梯度统计多目标.md`、`06-LRA-梯度病理学习率退火.md`
+- 本地 PDF：2/3 已下载（2306.02816、2001.04536）；GradStat 无 arXiv，标注暂无
