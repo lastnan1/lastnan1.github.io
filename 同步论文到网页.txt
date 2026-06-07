@@ -1,0 +1,12 @@
+# 每日论文 → GitHub Pages 知识库（一键同步 + 发布）
+# 用法：把下面 -Date 和 commit 信息里的日期改成当天 YYYY-MM-DD，整段复制到 PowerShell 执行。
+
+powershell -ExecutionPolicy Bypass -File "D:\personal web\sync-from-study.ps1" -Date 2026-06-07
+cd "D:\personal web"
+git add papers/ papers.json
+git commit -m "同步论文 2026-06-07"
+git push
+
+# 约 1 分钟后打开并强制刷新：
+# https://lastnan1.github.io/knowledge.html
+# Ctrl + Shift + R
