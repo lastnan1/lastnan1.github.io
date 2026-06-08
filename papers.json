@@ -1,6 +1,6 @@
 {
-  "generated": "2026-06-07",
-  "total": 31,
+  "generated": "2026-06-08",
+  "total": 34,
   "papers": [
     {
       "id": "2026-06-08/01-ParetoFront-系统参数与损失权重",
@@ -56,6 +56,63 @@
       "readLink": {
         "type": "pdf",
         "url": "papers/2026-06-08/2005.00615.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-08/04-LearnableBlend-可学习损失平衡",
+      "date": "2026-06-08",
+      "title": "Physics-Informed Neural Networks with Learnable Loss Balancing and Transfer Learning",
+      "zhTitle": "Physics-Informed Neural Networks with Learnable Loss Balancing and Transfer Learning",
+      "venue": "arXiv",
+      "venue_grade": "预印本",
+      "doi": "",
+      "arxiv": "2605.05217",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-08/04-LearnableBlend-可学习损失平衡.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-08/2605.05217.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-08/05-naPINN-噪声门控",
+      "date": "2026-06-08",
+      "title": "naPINN: Noise-Adaptive Physics-Informed Neural Networks for Recovering Physics from Corrupted Measurement",
+      "zhTitle": "naPINN: Noise-Adaptive Physics-Informed Neural Networks for Recovering Physics from Corrupted Measurement",
+      "venue": "arXiv",
+      "venue_grade": "预印本",
+      "doi": "",
+      "arxiv": "2602.02547",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-08/05-naPINN-噪声门控.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-08/2602.02547.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-08/06-ScaleAwareRes-尺度感知残差",
+      "date": "2026-06-08",
+      "title": "Physics-Informed Neural ODEs with Scale-Aware Residuals for Learning Stiff Biophysical Dynamics",
+      "zhTitle": "Physics-Informed Neural ODEs with Scale-Aware Residuals for Learning Stiff Biophysical Dynamics",
+      "venue": "MSML 2025",
+      "venue_grade": "待确认",
+      "doi": "",
+      "arxiv": "2511.11734",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-08/06-ScaleAwareRes-尺度感知残差.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-08/2511.11734.pdf",
         "label": "PDF ↗"
       }
     },

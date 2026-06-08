@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data vs. Physics: The Apparent Pareto Front of Physics-Informed Neural Networks · 论文笔记</title>
+  <title>Physics-Informed Neural Networks with Learnable Loss Balancing and Transfer Learning · 论文笔记</title>
   <link rel="stylesheet" href="../../style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.cn" crossorigin />
   <link href="https://fonts.googleapis.cn/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -76,37 +76,36 @@
   <main class="paper-page">
     <a href="../../knowledge.html" class="paper-back">← 返回知识库</a>
 
-    <p class="paper-en-title">Data vs. Physics: The Apparent Pareto Front of Physics-Informed Neural Networks</p>
-    <h1 class="paper-zh-title">ParetoFront：系统参数缩放与 PINN 损失权重（Rohrhofer et al. 2023）</h1>
+    <p class="paper-en-title">Physics-Informed Neural Networks with Learnable Loss Balancing and Transfer Learning</p>
+    <h1 class="paper-zh-title">Physics-Informed Neural Networks with Learnable Loss Balancing and Transfer Learning</h1>
 
     <div class="paper-meta-bar">
-      <a href="2105.00862.pdf" target="_blank" rel="noopener" class="paper-read-link paper-read-link--pdf">PDF ↗</a>
-      <span class="status-badge grade-sci">SCI</span>
-      <span style="font-size:.88rem;color:var(--text-muted)">IEEE Access</span>
+      <a href="2605.05217.pdf" target="_blank" rel="noopener" class="paper-read-link paper-read-link--pdf">PDF ↗</a>
+      <span class="status-badge grade-preprint">预印本</span>
+      <span style="font-size:.88rem;color:var(--text-muted)">arXiv</span>
       <span style="font-size:.78rem;color:var(--text-faint)">2026-06-08</span>
-      <a href="https://doi.org/10.1109/ACCESS.2023.3302892" target="_blank" rel="noopener" class="paper-ext-link">DOI ↗</a>
-      <a href="https://arxiv.org/abs/2105.00862" target="_blank" rel="noopener" class="paper-ext-link">arXiv ↗</a>
+      
+      <a href="https://arxiv.org/abs/2605.05217" target="_blank" rel="noopener" class="paper-ext-link">arXiv ↗</a>
     </div>
 
     <div class="paper-tags"><span class="paper-tag">自适应权重</span></div>
 
     <div class="paper-body">
-      <h1 id="ParetoFront-系统参数缩放与-PINN-损失权重-Rohrhofer-et-al--2023-">ParetoFront：系统参数缩放与 PINN 损失权重（Rohrhofer et al. 2023）</h1><h2 id="方法图示">方法图示</h2><blockquote>从多目标优化视角：物理系统参数（特征长度/时间尺度、域大小、方程系数）单独缩放各损失残差，形成「表观 Pareto 前沿」；手工 λ 相当于在 MOO 标量化曲线上选点。</blockquote><div class="mermaid-wrap"><pre class="mermaid">flowchart TD
-    SysParams["系统参数 L_tau_D_k"] --&gt; ScaleRes["各损失残差被独立缩放"]
-    ScaleRes --&gt; MOO["多目标标量化 L = sum lambda_i L_i"]
-    MOO --&gt; AppPF["表观 Pareto 前沿\n梯度训练可达损失集合"]
-    AppPF --&gt; WeightTune["调整 lambda 补偿缩放"]
-    WeightTune --&gt; PhysSol["对齐物理真解的 Pareto 点"]
-    ReParam["重参数化方程"] --&gt; ShiftPF["前沿平移/局部凸化"]
-    ShiftPF --&gt; AppPF
-</pre></div><div class="mermaid-wrap"><pre class="mermaid">graph LR
-    DataLoss["L_data 数据项"] --- ParetoSet["Pareto 前沿"]
-    PhysLoss["L_physics PDE项"] --- ParetoSet
-    WeightVec["lambda 向量"] --&gt; ParetoSet
-</pre></div><h2 id="元信息">元信息</h2><ul><li><strong>作者 / 年份</strong>：Franz M. Rohrhofer, Stefan Posch, Clemens Gößnitzer, Bernhard C. Geiger, 2023</li><li><strong>发表于</strong>：IEEE Access, Vol. 11, pp. 86252–86261（等级：SCI）</li><li><strong>链接</strong>：<a href="https://doi.org/10.1109/ACCESS.2023.3302892" target="_blank" rel="noopener">https://doi.org/10.1109/ACCESS.2023.3302892</a> | <a href="https://arxiv.org/abs/2105.00862" target="_blank" rel="noopener">https://arxiv.org/abs/2105.00862</a></li><li><strong>引用数</strong>：约 150+（Semantic Scholar，2026-06）</li></ul><h2 id="核心内容">核心内容</h2><p>PINN 将数据拟合与 PDE 残差通过标量化多目标损失合并，但 <strong>系统参数</strong>（特征时间/长度尺度、计算域、方程系数）会 <strong>单独缩放</strong> 各损失项，导致 MOO 严重失衡。作者定义 <strong>表观 Pareto 前沿（apparent Pareto front）</strong> 为梯度训练实际可达的损失组合集合，并可视化其与物理真解的偏差。实验表明：适当 <strong>损失权重</strong> 可补偿系统参数引起的缩放；<strong>重参数化 PDE</strong> 可平移前沿并产生局部凸区域，从而扩大成功训练的 λ 可行域。</p><h2 id="创新点">创新点</h2><ol><li>首次从 <strong>系统参数 → 残差缩放 → MOO 失衡</strong> 给出 PINN 调权困难的理论解释。</li><li>引入 <strong>表观 Pareto 前沿</strong> 概念，将手工调 λ 与多目标权衡可视化挂钩。</li><li>证明 <strong>重参数化</strong> 与 <strong>权重补偿</strong> 可联合改善训练成功域。</li><li>为后续 Pareto/MOO 自适应加权（MOO-VARI、BPINN 等）提供问题建模基础。</li></ol><h2 id="相关汇报">相关汇报</h2><div class="table-wrap"><table><thead><tr><th>汇报</th><th>关联理由</th></tr></thead><tbody><tr><td><a href="../2026-06-04/08-MOO-VARI-多目标优化加权.html" class="wikilink">08-MOO-VARI-多目标优化加权</a></td><td>MOO-VARI 用 NSGA-II 探索 Pareto 前沿并转 VARI 权重；本篇从 <strong>系统参数</strong> 解释前沿形状，二者互补「为何 MOO」与「如何搜前沿」。</td></tr><tr><td><a href="../2026-06-04/11-BPINN-贝叶斯自适应加权.html" class="wikilink">11-BPINN-贝叶斯自适应加权</a></td><td>BPINN 在后验空间做 Pareto 探索调权；本篇的表观前沿是 <strong>确定性梯度训练</strong> 下的 MOO 几何解释。</td></tr><tr><td><a href="../2026-06-04/04-ReLoBRaLo-相对损失平衡.html" class="wikilink">04-ReLoBRaLo-相对损失平衡</a></td><td>ReLoBRaLo 在线平衡项级损失；本篇说明 <strong>固定 λ 失败</strong> 常与系统尺度有关，而非仅优化算法。</td></tr><tr><td><a href="../2026-06-04/05-NTK-特征值加权.html" class="wikilink">05-NTK-特征值加权</a></td><td>NTK 从核谱解释 stiff；本篇从 <strong>方程参数化/尺度</strong> 解释 stiff，属 MOO 与 NTK 两条理论线。</td></tr><tr><td><a href="02-OptimalWeight-相对误差最优缩放.html" class="wikilink">02-OptimalWeight-相对误差最优缩放</a></td><td>van der Meer 给出 <strong>解析最优缩放</strong>；本篇给出 <strong>几何/前沿</strong> 视角，可联合指导 λ 初值与可行域分析。</td></tr></tbody></table></div><h2 id="与我研究的关联">与我研究的关联</h2><p>2D 声波正演中波速、频率、域尺寸会改变 PDE 残差与边界/快照项的量级比；可按本篇思路 <strong>绘制训练过程中 (L_pde, L_bc, L_data) 轨迹</strong> 对照表观前沿，再决定 ReLoBRaLo/lbPINNs 的 λ 初值或是否需 <strong>无量纲化重参数化</strong>。</p><h2 id="备注">备注</h2><ul><li>汇报批次：2026-06-08 第 1 次触发（浅海三文鱼）</li><li>预印本 2021，IEEE Access 正式版 2023</li></ul><h2 id="本地-PDF">本地 PDF</h2><div class="pdf-embed-wrap"><a href="2105.00862.pdf" class="paper-pdf-embed" target="_blank" rel="noopener">📄 打开 PDF</a></div><ul><li>arXiv：<a href="https://arxiv.org/abs/2105.00862" target="_blank" rel="noopener">https://arxiv.org/abs/2105.00862</a></li><li>文件：<code>每日论文/2026-06-08/2105.00862.pdf</code></li></ul>
+      <h1 id="Physics-Informed-Neural-Networks-with-Learnable-Loss-Balancing-and-Transfer-Learning">Physics-Informed Neural Networks with Learnable Loss Balancing and Transfer Learning</h1><h2 id="方法图示">方法图示</h2><div class="mermaid-wrap"><pre class="mermaid">flowchart TD
+    SourceData["源任务数据（transfer source）"] --&gt; Pretrain["预训练 PINN θ*"]
+    Pretrain --&gt; InitTarget["初始化 θ_target^0 ← θ*（迁移）"]
+    InitTarget --&gt; Freeze["冻结前几层，只微调后层与 α"]
+    PhysLoss["物理残差 L_physics"] --&gt; Blend["可学习 blending 神经元 α"]
+    DataLoss["数据损失 L_data"] --&gt; Blend
+    Blend --&gt; LambdaD["λ_d = σ(α)"]
+    Blend --&gt; LambdaP["λ_p = 1 - σ(α)"]
+    LambdaD --&gt; Total["L = λ_d·L_data + λ_p·L_physics"]
+    LambdaP --&gt; Total
+    Total --&gt; Adam["反向传播：更新 θ（少数层）与 α"]
+</pre></div><h2 id="元信息">元信息</h2><ul><li><strong>作者 / 年份</strong>：Reza Pirayeshshirazinezhad（2026）</li><li><strong>发表于</strong>：arXiv（等级：预印本）</li><li><strong>链接</strong>：<a href="https://arxiv.org/abs/2605.05217" target="_blank" rel="noopener">https://arxiv.org/abs/2605.05217</a></li><li><strong>引用数</strong>：未在 arXiv abs 页面显示</li></ul><h2 id="核心内容">核心内容</h2><p>本文提出一个自监督的 PINN 框架，用“可学习的 blending 神经元”在训练过程中自动平衡物理残差与数据驱动监督：令 <code>λ_d = σ(α)</code>、<code>λ_p = 1-σ(α)</code>，其中 <code>α</code> 是可训练标量并通过反向传播更新。为缓解极小数据场景下的收敛不稳，作者还引入迁移学习：先在源域训练，再将参数（至少部分隐藏表征）初始化到目标域，并只对后层与 blending 参数进行微调。</p><h2 id="创新点">创新点</h2><ol><li><strong>自监督可学习权重</strong>：把物理-数据权衡系数显式化为 <code>α</code> 并用 sigmoid 映射到 <code>λ_d/λ_p</code>。</li><li><strong>与迁移学习联动</strong>：通过 θ 的初始化与“少层微调”提升 87 点级别数据下的稳定性与泛化。</li><li><strong>小样本热传案例验证</strong>：在液态钠微型换热器热传预测任务上，展示无需手动调参的稳定训练。</li></ol><h2 id="相关汇报">相关汇报</h2><div class="table-wrap"><table><thead><tr><th>汇报</th><th>关联理由</th></tr></thead><tbody><tr><td><a href="../2026-06-07/02-lbPINNs-高斯MLE项级权重.html" class="wikilink">02-lbPINNs-高斯MLE项级权重</a></td><td>两者都把“权衡系数”与（某种不确定性/可学习参数）绑定，用以自动调节物理项与数据项贡献。</td></tr><tr><td><a href="../2026-06-04/04-ReLoBRaLo-相对损失平衡.html" class="wikilink">04-ReLoBRaLo-相对损失平衡</a></td><td>ReLoBRaLo 用相对进展统计做损失平衡；本篇用更轻量的可学习 blending neuron 达到同类目标（减少手动权重）。</td></tr><tr><td><a href="../2026-06-06/04-MultiAdam-尺度不变优化器.html" class="wikilink">04-MultiAdam-尺度不变优化器</a></td><td>都关注“多项损失在训练中的尺度失衡”问题，只是控制信号来自权重网络（本篇）与优化器尺度不变性（历史篇）。</td></tr></tbody></table></div><h2 id="与我研究的关联">与我研究的关联</h2><p>2D 声波正演里，PDE 残差与观测快照损失往往量级/可学习难度差异很大；可把 blending neuron 直接挂到 <code>λ_pde/λ_data</code> 上，让权重系数随训练不确定性自适应变化，从而减少你手工调 λ 的成本。</p><h2 id="备注">备注</h2><ul><li>汇报批次：2026-06-08 第 2 次触发（浅海三文鱼）</li></ul><h2 id="本地-PDF">本地 PDF</h2><div class="pdf-embed-wrap"><a href="2605.05217.pdf" class="paper-pdf-embed" target="_blank" rel="noopener">📄 打开 PDF</a></div><ul><li>arXiv：<a href="https://arxiv.org/abs/2605.05217" target="_blank" rel="noopener">https://arxiv.org/abs/2605.05217</a></li><li>文件：<code>每日论文/2026-06-08/2605.05217.pdf</code></li></ul>
     </div>
 
-    <div class="siblings-nav"><span class="siblings-label">同日其他论文：</span><a href="02-OptimalWeight-相对误差最优缩放.html" class="sibling-link">OptimalWeight-相对误差最优缩放</a><a href="03-PCNN-MM-DualDimer-minimax权重.html" class="sibling-link">PCNN-MM</a><a href="04-LearnableBlend-可学习损失平衡.html" class="sibling-link">LearnableBlend-可学习损失平衡</a><a href="05-naPINN-噪声门控.html" class="sibling-link">naPINN-噪声门控</a><a href="06-ScaleAwareRes-尺度感知残差.html" class="sibling-link">ScaleAwareRes-尺度感知残差</a></div>
+    <div class="siblings-nav"><span class="siblings-label">同日其他论文：</span><a href="01-ParetoFront-系统参数与损失权重.html" class="sibling-link">ParetoFront-系统参数与损失权重</a><a href="02-OptimalWeight-相对误差最优缩放.html" class="sibling-link">OptimalWeight-相对误差最优缩放</a><a href="03-PCNN-MM-DualDimer-minimax权重.html" class="sibling-link">PCNN-MM</a><a href="05-naPINN-噪声门控.html" class="sibling-link">naPINN-噪声门控</a><a href="06-ScaleAwareRes-尺度感知残差.html" class="sibling-link">ScaleAwareRes-尺度感知残差</a></div>
   </main>
 
   <script>mermaid.initialize({startOnLoad:true,theme:"dark",themeVariables:{primaryColor:"#d4a853",primaryTextColor:"#e8e4dc",primaryBorderColor:"#d4a853",lineColor:"#8b95a8",sectionBkgColor:"#1a2235",altSectionBkgColor:"#141c2e",gridColor:"rgba(212,168,83,0.1)",titleColor:"#d4a853",edgeLabelBackground:"#1a2235",tertiaryColor:"#1a2235"}});</script>

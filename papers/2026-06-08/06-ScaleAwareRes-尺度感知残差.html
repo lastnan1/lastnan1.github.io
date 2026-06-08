@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data vs. Physics: The Apparent Pareto Front of Physics-Informed Neural Networks · 论文笔记</title>
+  <title>Physics-Informed Neural ODEs with Scale-Aware Residuals for Learning Stiff Biophysical Dynamics · 论文笔记</title>
   <link rel="stylesheet" href="../../style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.cn" crossorigin />
   <link href="https://fonts.googleapis.cn/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -76,37 +76,34 @@
   <main class="paper-page">
     <a href="../../knowledge.html" class="paper-back">← 返回知识库</a>
 
-    <p class="paper-en-title">Data vs. Physics: The Apparent Pareto Front of Physics-Informed Neural Networks</p>
-    <h1 class="paper-zh-title">ParetoFront：系统参数缩放与 PINN 损失权重（Rohrhofer et al. 2023）</h1>
+    <p class="paper-en-title">Physics-Informed Neural ODEs with Scale-Aware Residuals for Learning Stiff Biophysical Dynamics</p>
+    <h1 class="paper-zh-title">Physics-Informed Neural ODEs with Scale-Aware Residuals for Learning Stiff Biophysical Dynamics</h1>
 
     <div class="paper-meta-bar">
-      <a href="2105.00862.pdf" target="_blank" rel="noopener" class="paper-read-link paper-read-link--pdf">PDF ↗</a>
-      <span class="status-badge grade-sci">SCI</span>
-      <span style="font-size:.88rem;color:var(--text-muted)">IEEE Access</span>
+      <a href="2511.11734.pdf" target="_blank" rel="noopener" class="paper-read-link paper-read-link--pdf">PDF ↗</a>
+      <span class="status-badge grade-default">待确认</span>
+      <span style="font-size:.88rem;color:var(--text-muted)">MSML 2025</span>
       <span style="font-size:.78rem;color:var(--text-faint)">2026-06-08</span>
-      <a href="https://doi.org/10.1109/ACCESS.2023.3302892" target="_blank" rel="noopener" class="paper-ext-link">DOI ↗</a>
-      <a href="https://arxiv.org/abs/2105.00862" target="_blank" rel="noopener" class="paper-ext-link">arXiv ↗</a>
+      
+      <a href="https://arxiv.org/abs/2511.11734" target="_blank" rel="noopener" class="paper-ext-link">arXiv ↗</a>
     </div>
 
     <div class="paper-tags"><span class="paper-tag">自适应权重</span></div>
 
     <div class="paper-body">
-      <h1 id="ParetoFront-系统参数缩放与-PINN-损失权重-Rohrhofer-et-al--2023-">ParetoFront：系统参数缩放与 PINN 损失权重（Rohrhofer et al. 2023）</h1><h2 id="方法图示">方法图示</h2><blockquote>从多目标优化视角：物理系统参数（特征长度/时间尺度、域大小、方程系数）单独缩放各损失残差，形成「表观 Pareto 前沿」；手工 λ 相当于在 MOO 标量化曲线上选点。</blockquote><div class="mermaid-wrap"><pre class="mermaid">flowchart TD
-    SysParams["系统参数 L_tau_D_k"] --&gt; ScaleRes["各损失残差被独立缩放"]
-    ScaleRes --&gt; MOO["多目标标量化 L = sum lambda_i L_i"]
-    MOO --&gt; AppPF["表观 Pareto 前沿\n梯度训练可达损失集合"]
-    AppPF --&gt; WeightTune["调整 lambda 补偿缩放"]
-    WeightTune --&gt; PhysSol["对齐物理真解的 Pareto 点"]
-    ReParam["重参数化方程"] --&gt; ShiftPF["前沿平移/局部凸化"]
-    ShiftPF --&gt; AppPF
-</pre></div><div class="mermaid-wrap"><pre class="mermaid">graph LR
-    DataLoss["L_data 数据项"] --- ParetoSet["Pareto 前沿"]
-    PhysLoss["L_physics PDE项"] --- ParetoSet
-    WeightVec["lambda 向量"] --&gt; ParetoSet
-</pre></div><h2 id="元信息">元信息</h2><ul><li><strong>作者 / 年份</strong>：Franz M. Rohrhofer, Stefan Posch, Clemens Gößnitzer, Bernhard C. Geiger, 2023</li><li><strong>发表于</strong>：IEEE Access, Vol. 11, pp. 86252–86261（等级：SCI）</li><li><strong>链接</strong>：<a href="https://doi.org/10.1109/ACCESS.2023.3302892" target="_blank" rel="noopener">https://doi.org/10.1109/ACCESS.2023.3302892</a> | <a href="https://arxiv.org/abs/2105.00862" target="_blank" rel="noopener">https://arxiv.org/abs/2105.00862</a></li><li><strong>引用数</strong>：约 150+（Semantic Scholar，2026-06）</li></ul><h2 id="核心内容">核心内容</h2><p>PINN 将数据拟合与 PDE 残差通过标量化多目标损失合并，但 <strong>系统参数</strong>（特征时间/长度尺度、计算域、方程系数）会 <strong>单独缩放</strong> 各损失项，导致 MOO 严重失衡。作者定义 <strong>表观 Pareto 前沿（apparent Pareto front）</strong> 为梯度训练实际可达的损失组合集合，并可视化其与物理真解的偏差。实验表明：适当 <strong>损失权重</strong> 可补偿系统参数引起的缩放；<strong>重参数化 PDE</strong> 可平移前沿并产生局部凸区域，从而扩大成功训练的 λ 可行域。</p><h2 id="创新点">创新点</h2><ol><li>首次从 <strong>系统参数 → 残差缩放 → MOO 失衡</strong> 给出 PINN 调权困难的理论解释。</li><li>引入 <strong>表观 Pareto 前沿</strong> 概念，将手工调 λ 与多目标权衡可视化挂钩。</li><li>证明 <strong>重参数化</strong> 与 <strong>权重补偿</strong> 可联合改善训练成功域。</li><li>为后续 Pareto/MOO 自适应加权（MOO-VARI、BPINN 等）提供问题建模基础。</li></ol><h2 id="相关汇报">相关汇报</h2><div class="table-wrap"><table><thead><tr><th>汇报</th><th>关联理由</th></tr></thead><tbody><tr><td><a href="../2026-06-04/08-MOO-VARI-多目标优化加权.html" class="wikilink">08-MOO-VARI-多目标优化加权</a></td><td>MOO-VARI 用 NSGA-II 探索 Pareto 前沿并转 VARI 权重；本篇从 <strong>系统参数</strong> 解释前沿形状，二者互补「为何 MOO」与「如何搜前沿」。</td></tr><tr><td><a href="../2026-06-04/11-BPINN-贝叶斯自适应加权.html" class="wikilink">11-BPINN-贝叶斯自适应加权</a></td><td>BPINN 在后验空间做 Pareto 探索调权；本篇的表观前沿是 <strong>确定性梯度训练</strong> 下的 MOO 几何解释。</td></tr><tr><td><a href="../2026-06-04/04-ReLoBRaLo-相对损失平衡.html" class="wikilink">04-ReLoBRaLo-相对损失平衡</a></td><td>ReLoBRaLo 在线平衡项级损失；本篇说明 <strong>固定 λ 失败</strong> 常与系统尺度有关，而非仅优化算法。</td></tr><tr><td><a href="../2026-06-04/05-NTK-特征值加权.html" class="wikilink">05-NTK-特征值加权</a></td><td>NTK 从核谱解释 stiff；本篇从 <strong>方程参数化/尺度</strong> 解释 stiff，属 MOO 与 NTK 两条理论线。</td></tr><tr><td><a href="02-OptimalWeight-相对误差最优缩放.html" class="wikilink">02-OptimalWeight-相对误差最优缩放</a></td><td>van der Meer 给出 <strong>解析最优缩放</strong>；本篇给出 <strong>几何/前沿</strong> 视角，可联合指导 λ 初值与可行域分析。</td></tr></tbody></table></div><h2 id="与我研究的关联">与我研究的关联</h2><p>2D 声波正演中波速、频率、域尺寸会改变 PDE 残差与边界/快照项的量级比；可按本篇思路 <strong>绘制训练过程中 (L_pde, L_bc, L_data) 轨迹</strong> 对照表观前沿，再决定 ReLoBRaLo/lbPINNs 的 λ 初值或是否需 <strong>无量纲化重参数化</strong>。</p><h2 id="备注">备注</h2><ul><li>汇报批次：2026-06-08 第 1 次触发（浅海三文鱼）</li><li>预印本 2021，IEEE Access 正式版 2023</li></ul><h2 id="本地-PDF">本地 PDF</h2><div class="pdf-embed-wrap"><a href="2105.00862.pdf" class="paper-pdf-embed" target="_blank" rel="noopener">📄 打开 PDF</a></div><ul><li>arXiv：<a href="https://arxiv.org/abs/2105.00862" target="_blank" rel="noopener">https://arxiv.org/abs/2105.00862</a></li><li>文件：<code>每日论文/2026-06-08/2105.00862.pdf</code></li></ul>
+      <h1 id="Physics-Informed-Neural-ODEs-with-Scale-Aware-Residuals-for-Learning-Stiff-Biophysical-Dynamics">Physics-Informed Neural ODEs with Scale-Aware Residuals for Learning Stiff Biophysical Dynamics</h1><h2 id="方法图示">方法图示</h2><div class="mermaid-wrap"><pre class="mermaid">flowchart TD
+    NeuralODE["学习向量场 f_θ(z,t)（Neural ODE）"] --&gt; Solve["用 Heun 显式积分得到轨迹 ẑ(t)"]
+    Solve --&gt; DataLoss["数据重构损失 L_data"]
+    Solve --&gt; Residual["计算物理残差 r_ij（对应 ODE）"]
+    Residual --&gt; Scale["用变量尺度 s_j 归一化：r_ij / s_j"]
+    Scale --&gt; PhysLoss["尺度感知物理损失 L_physics = Σ (r_ij/s_j)^2"]
+    DataLoss --&gt; Total["L_total = L_data + λ·L_physics"]
+    PhysLoss --&gt; Total
+    Total --&gt; Adam["Adam 更新参数 θ"]
+</pre></div><h2 id="元信息">元信息</h2><ul><li><strong>作者 / 年份</strong>：Kamalpreet Singh Kainth 等（2025）</li><li><strong>发表于</strong>：MSML 2025（等级：待确认）</li><li><strong>链接</strong>：<a href="https://arxiv.org/abs/2511.11734" target="_blank" rel="noopener">https://arxiv.org/abs/2511.11734</a></li><li><strong>引用数</strong>：未在 arXiv abs 页面显示</li></ul><h2 id="核心内容">核心内容</h2><p>本文提出 PI-NODE-SR：把物理残差的计算与“尺度感知残差归一化”结合起来，用来解决刚性系统中不同状态变量演化尺度/时间尺度差异极大的问题。具体做法是：对物理残差向量的各分量按变量尺度 <code>s_j</code> 进行归一化（文中以训练窗口中导数的经验标准差作为尺度），并与低阶显式求解器 Heun 的神经 ODE 训练形成协同，从而在 Hodgkin–Huxley 刚性生物动力学上实现更稳定的长时外推。</p><h2 id="创新点">创新点</h2><ol><li><strong>尺度感知残差归一化</strong>：用 <code>s_j</code> 拉齐不同状态分量的残差尺度，避免 fast 变量主导梯度而 slow 变量消失。</li><li><strong>solver–loss 协同</strong>：尽管 Heun 单独用于刚性问题常不稳定，但与尺度感知残差配合能恢复训练稳定性。</li><li><strong>面向刚性长时外推的可复现验证</strong>：在 Hodgkin–Huxley 上展示频率/幅值更可靠的外推，并给出系统的消融分析。</li></ol><h2 id="相关汇报">相关汇报</h2><div class="table-wrap"><table><thead><tr><th>汇报</th><th>关联理由</th></tr></thead><tbody><tr><td><a href="../2026-06-06/04-MultiAdam-尺度不变优化器.html" class="wikilink">04-MultiAdam-尺度不变优化器</a></td><td>都在处理“多变量/多项在训练中的尺度失衡”，一个用优化器尺度不变性，一个用残差分量归一化。</td></tr><tr><td><a href="../2026-06-06/06-LRA-梯度病理学习率退火.html" class="wikilink">06-LRA-梯度病理学习率退火</a></td><td>LRA 关注梯度病理与复合损失项的失衡；本篇把失衡建模为变量尺度差异并在残差层面消解。</td></tr><tr><td><a href="02-OptimalWeight-相对误差最优缩放.html" class="wikilink">02-OptimalWeight-相对误差最优缩放</a></td><td>都涉及“基于尺度/量纲的调权或归一化”思想，用以获得更稳定的损失几何与可训练域。</td></tr></tbody></table></div><h2 id="与我研究的关联">与我研究的关联</h2><p>2D 声波正演里（尤其是你同时建模 PDE、多类边界/快照损失时），不同损失/残差项常会呈现量级差异；PI-NODE-SR 的“分量尺度归一化”可以作为一种更结构化的 λ 设定方式，帮助你减少训练失败与长时漂移。</p><h2 id="备注">备注</h2><ul><li>汇报批次：2026-06-08 第 2 次触发（浅海三文鱼）</li></ul><h2 id="本地-PDF">本地 PDF</h2><div class="pdf-embed-wrap"><a href="2511.11734.pdf" class="paper-pdf-embed" target="_blank" rel="noopener">📄 打开 PDF</a></div><ul><li>arXiv：<a href="https://arxiv.org/abs/2511.11734" target="_blank" rel="noopener">https://arxiv.org/abs/2511.11734</a></li><li>文件：<code>每日论文/2026-06-08/2511.11734.pdf</code></li></ul>
     </div>
 
-    <div class="siblings-nav"><span class="siblings-label">同日其他论文：</span><a href="02-OptimalWeight-相对误差最优缩放.html" class="sibling-link">OptimalWeight-相对误差最优缩放</a><a href="03-PCNN-MM-DualDimer-minimax权重.html" class="sibling-link">PCNN-MM</a><a href="04-LearnableBlend-可学习损失平衡.html" class="sibling-link">LearnableBlend-可学习损失平衡</a><a href="05-naPINN-噪声门控.html" class="sibling-link">naPINN-噪声门控</a><a href="06-ScaleAwareRes-尺度感知残差.html" class="sibling-link">ScaleAwareRes-尺度感知残差</a></div>
+    <div class="siblings-nav"><span class="siblings-label">同日其他论文：</span><a href="01-ParetoFront-系统参数与损失权重.html" class="sibling-link">ParetoFront-系统参数与损失权重</a><a href="02-OptimalWeight-相对误差最优缩放.html" class="sibling-link">OptimalWeight-相对误差最优缩放</a><a href="03-PCNN-MM-DualDimer-minimax权重.html" class="sibling-link">PCNN-MM</a><a href="04-LearnableBlend-可学习损失平衡.html" class="sibling-link">LearnableBlend-可学习损失平衡</a><a href="05-naPINN-噪声门控.html" class="sibling-link">naPINN-噪声门控</a></div>
   </main>
 
   <script>mermaid.initialize({startOnLoad:true,theme:"dark",themeVariables:{primaryColor:"#d4a853",primaryTextColor:"#e8e4dc",primaryBorderColor:"#d4a853",lineColor:"#8b95a8",sectionBkgColor:"#1a2235",altSectionBkgColor:"#141c2e",gridColor:"rgba(212,168,83,0.1)",titleColor:"#d4a853",edgeLabelBackground:"#1a2235",tertiaryColor:"#1a2235"}});</script>
