@@ -1,7 +1,497 @@
 {
-  "generated": "2026-06-08",
-  "total": 34,
+  "generated": "2026-06-09",
+  "total": 60,
   "papers": [
+    {
+      "id": "2026-06-09/01-反向传播",
+      "date": "2026-06-09",
+      "title": "Learning representations by back-propagating errors",
+      "zhTitle": "Learning representations by back-propagating errors",
+      "venue": "Nature",
+      "venue_grade": "经典",
+      "doi": "10.1038/323533a0",
+      "arxiv": "",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/01-反向传播.html",
+      "readLink": {
+        "type": "doi",
+        "url": "https://doi.org/10.1038/323533a0",
+        "label": "DOI ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/02-万能逼近定理",
+      "date": "2026-06-09",
+      "title": "Approximation by superpositions of a sigmoidal function",
+      "zhTitle": "Approximation by superpositions of a sigmoidal function",
+      "venue": "Mathematics of Control, Signals and Systems",
+      "venue_grade": "经典/奠基",
+      "doi": "10.1007/BF02551274",
+      "arxiv": "",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/02-万能逼近定理.html",
+      "readLink": {
+        "type": "doi",
+        "url": "https://doi.org/10.1007/BF02551274",
+        "label": "DOI ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/03-LeNet5",
+      "date": "2026-06-09",
+      "title": "Gradient-based learning applied to document recognition",
+      "zhTitle": "Gradient-based learning applied to document recognition",
+      "venue": "Proc. IEEE",
+      "venue_grade": "经典/奠基",
+      "doi": "10.1109/5.726791",
+      "arxiv": "",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/03-LeNet5.html",
+      "readLink": {
+        "type": "doi",
+        "url": "https://doi.org/10.1109/5.726791",
+        "label": "DOI ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/04-初始化与动量",
+      "date": "2026-06-09",
+      "title": "On the importance of initialization and momentum in deep learning",
+      "zhTitle": "On the importance of initialization and momentum in deep ...",
+      "venue": "ICML",
+      "venue_grade": "经典",
+      "doi": "",
+      "arxiv": "1301.3781",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/04-初始化与动量.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-09/1301.3781.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/05-AlexNet",
+      "date": "2026-06-09",
+      "title": "ImageNet Classification with Deep Convolutional Neural Networks (AlexNet)",
+      "zhTitle": "ImageNet Classification with Deep Convolutional Neural Ne...",
+      "venue": "NeurIPS",
+      "venue_grade": "经典",
+      "doi": "",
+      "arxiv": "",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/05-AlexNet.html",
+      "readLink": null
+    },
+    {
+      "id": "2026-06-09/06-VGG",
+      "date": "2026-06-09",
+      "title": "Very Deep Convolutional Networks for Large-Scale Image Recognition (VGG)",
+      "zhTitle": "Very Deep Convolutional Networks for Large-Scale Image Re...",
+      "venue": "ICLR",
+      "venue_grade": "经典/奠基",
+      "doi": "",
+      "arxiv": "1409.1556",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/06-VGG.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-09/1409.1556.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/07-BatchNorm",
+      "date": "2026-06-09",
+      "title": "Batch Normalization: Accelerating Deep Network Training",
+      "zhTitle": "Batch Normalization: Accelerating Deep Network Training",
+      "venue": "ICML",
+      "venue_grade": "经典",
+      "doi": "",
+      "arxiv": "1502.03167",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/07-BatchNorm.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-09/1502.03167.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/08-ResNet",
+      "date": "2026-06-09",
+      "title": "Deep Residual Learning for Image Recognition (ResNet)",
+      "zhTitle": "Deep Residual Learning for Image Recognition (ResNet)",
+      "venue": "CVPR",
+      "venue_grade": "经典",
+      "doi": "",
+      "arxiv": "1512.03385",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/08-ResNet.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-09/1512.03385.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/09-Dropout",
+      "date": "2026-06-09",
+      "title": "Dropout: A Simple Way to Prevent Neural Networks from Overfitting",
+      "zhTitle": "Dropout: A Simple Way to Prevent Neural Networks from Ove...",
+      "venue": "JMLR",
+      "venue_grade": "经典/奠基",
+      "doi": "",
+      "arxiv": "1207.0580",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/09-Dropout.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-09/1207.0580.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/10-Adam",
+      "date": "2026-06-09",
+      "title": "Adam: A Method for Stochastic Optimization",
+      "zhTitle": "Adam: A Method for Stochastic Optimization",
+      "venue": "ICLR",
+      "venue_grade": "经典/奠基",
+      "doi": "",
+      "arxiv": "1412.6980",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/10-Adam.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-09/1412.6980.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/11-Transformer",
+      "date": "2026-06-09",
+      "title": "Attention Is All You Need (Transformer)",
+      "zhTitle": "Attention Is All You Need (Transformer)",
+      "venue": "NeurIPS",
+      "venue_grade": "经典",
+      "doi": "",
+      "arxiv": "1706.03762",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/11-Transformer.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-09/1706.03762.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/12-DNN解PDE",
+      "date": "2026-06-09",
+      "title": "A Deep Learning Approach to Solving Partial Differential Equations",
+      "zhTitle": "A Deep Learning Approach to Solving Partial Differential ...",
+      "venue": "JCP",
+      "venue_grade": "SCI一区",
+      "doi": "10.1016/j.jcp.2018.08.029",
+      "arxiv": "1708.07469",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/12-DNN解PDE.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-09/1708.07469.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/13-DGM",
+      "date": "2026-06-09",
+      "title": "DGM: Deep Galerkin Method",
+      "zhTitle": "DGM: Deep Galerkin Method",
+      "venue": "PNAS",
+      "venue_grade": "经典/奠基",
+      "doi": "10.1073/pnas.1718945115",
+      "arxiv": "1707.02568",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/13-DGM.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-09/1707.02568.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/14-PIDL前传",
+      "date": "2026-06-09",
+      "title": "Physics Informed Deep Learning (Part I & II)",
+      "zhTitle": "Physics Informed Deep Learning (Part I & II)",
+      "venue": "arXiv",
+      "venue_grade": "经典/奠基",
+      "doi": "",
+      "arxiv": "1711.10561",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/14-PIDL前传.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-09/1711.10561.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/15-PINN奠基",
+      "date": "2026-06-09",
+      "title": "Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations",
+      "zhTitle": "Physics-informed neural networks: A deep learning framewo...",
+      "venue": "JCP",
+      "venue_grade": "SCI一区",
+      "doi": "10.1016/j.jcp.2018.10.045",
+      "arxiv": "",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/15-PINN奠基.html",
+      "readLink": {
+        "type": "doi",
+        "url": "https://doi.org/10.1016/j.jcp.2018.10.045",
+        "label": "DOI ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/16-XPINN",
+      "date": "2026-06-09",
+      "title": "Extended Physics-Informed Neural Networks (XPINN)",
+      "zhTitle": "Extended Physics-Informed Neural Networks (XPINN)",
+      "venue": "CMAME",
+      "venue_grade": "经典/奠基",
+      "doi": "10.1016/j.cma.2020.113028",
+      "arxiv": "1911.00534",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/16-XPINN.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-09/1911.00534.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/17-cPINN",
+      "date": "2026-06-09",
+      "title": "Conservative Physics-Informed Neural Networks (cPINN)",
+      "zhTitle": "Conservative Physics-Informed Neural Networks (cPINN)",
+      "venue": "CMAME",
+      "venue_grade": "经典/奠基",
+      "doi": "10.1016/j.cma.2020.113429",
+      "arxiv": "2001.03794",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/17-cPINN.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-09/2001.03794.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/18-B-PINN",
+      "date": "2026-06-09",
+      "title": "B-PINNs: Bayesian Physics-Informed Neural Networks for Forward and Inverse PDE Problems with Noisy Data",
+      "zhTitle": "B-PINNs: Bayesian Physics-Informed Neural Networks for Fo...",
+      "venue": "JCP",
+      "venue_grade": "SCI一区",
+      "doi": "10.1016/j.jcp.2020.109913",
+      "arxiv": "2003.06097",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/18-B-PINN.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-09/2003.06097.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/19-NTK失败机理",
+      "date": "2026-06-09",
+      "title": "When and why PINNs fail to train: A neural tangent kernel perspective",
+      "zhTitle": "When and why PINNs fail to train: A neural tangent kernel...",
+      "venue": "JCP",
+      "venue_grade": "SCI一区",
+      "doi": "10.1016/j.jcp.2022.01.023",
+      "arxiv": "2007.14527",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/19-NTK失败机理.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-09/2007.14527.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/20-梯度病态",
+      "date": "2026-06-09",
+      "title": "Understanding and mitigating gradient pathologies in PINNs",
+      "zhTitle": "Understanding and mitigating gradient pathologies in PINNs",
+      "venue": "SIAM JSC",
+      "venue_grade": "SCI",
+      "doi": "10.1137/20M1318043",
+      "arxiv": "2001.04536",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/20-梯度病态.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-09/2001.04536.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/21-失败模式",
+      "date": "2026-06-09",
+      "title": "Characterizing possible failure modes in physics-informed neural networks",
+      "zhTitle": "Characterizing possible failure modes in physics-informed...",
+      "venue": "NeurIPS",
+      "venue_grade": "经典",
+      "doi": "",
+      "arxiv": "2109.01050",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/21-失败模式.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-09/2109.01050.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/22-PI-DeepONet",
+      "date": "2026-06-09",
+      "title": "Learning the solution operator of parametric partial differential equations with physics-informed DeepONets",
+      "zhTitle": "Learning the solution operator of parametric partial diff...",
+      "venue": "Science Advances",
+      "venue_grade": "SCI",
+      "doi": "10.1126/sciadv.abi8605",
+      "arxiv": "2103.10974",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/22-PI-DeepONet.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-09/2103.10974.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/23-PINO",
+      "date": "2026-06-09",
+      "title": "Physics-Informed Neural Operator for Learning Partial Differential Equations (PINO)",
+      "zhTitle": "Physics-Informed Neural Operator for Learning Partial Dif...",
+      "venue": "ACM/IMS JDS",
+      "venue_grade": "经典/奠基",
+      "doi": "10.1145/3648506",
+      "arxiv": "2111.03794",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/23-PINO.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-09/2111.03794.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/24-因果训练",
+      "date": "2026-06-09",
+      "title": "Respecting causality for training physics-informed neural networks",
+      "zhTitle": "Respecting causality for training physics-informed neural...",
+      "venue": "JCP",
+      "venue_grade": "SCI一区",
+      "doi": "10.1016/j.jcp.2022.02.078",
+      "arxiv": "2203.07404",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/24-因果训练.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-09/2203.07404.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/25-采样策略",
+      "date": "2026-06-09",
+      "title": "A comprehensive study of non-adaptive and residual-based adaptive sampling for PINNs",
+      "zhTitle": "A comprehensive study of non-adaptive and residual-based ...",
+      "venue": "CMAME",
+      "venue_grade": "经典/奠基",
+      "doi": "10.1016/j.cma.2022.06.026",
+      "arxiv": "2207.10289",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/25-采样策略.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-09/2207.10289.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-09/26-PINN综述",
+      "date": "2026-06-09",
+      "title": "Physics-informed machine learning",
+      "zhTitle": "Physics-informed machine learning",
+      "venue": "Nature Reviews Physics",
+      "venue_grade": "综述",
+      "doi": "10.1038/s42254-021-00314-5",
+      "arxiv": "",
+      "tags": [
+        "阅读路径"
+      ],
+      "htmlPath": "papers/2026-06-09/26-PINN综述.html",
+      "readLink": {
+        "type": "doi",
+        "url": "https://doi.org/10.1038/s42254-021-00314-5",
+        "label": "DOI ↗"
+      }
+    },
     {
       "id": "2026-06-08/01-ParetoFront-系统参数与损失权重",
       "date": "2026-06-08",
