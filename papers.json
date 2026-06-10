@@ -1,7 +1,64 @@
 {
-  "generated": "2026-06-09",
-  "total": 60,
+  "generated": "2026-06-10",
+  "total": 63,
   "papers": [
+    {
+      "id": "2026-06-10/01-FAMAW-PINN-萤火虫联合自适应",
+      "date": "2026-06-10",
+      "title": "FAMAW-PINN: A physics-informed neural network integrating adaptive loss weighting with firefly-inspired adaptive point movement",
+      "zhTitle": "FAMAW-PINN：萤火虫配点移动 + 自适应损失加权",
+      "venue": "Journal of Computational Physics",
+      "venue_grade": "SCI 一区",
+      "doi": "10.1016/j.jcp.2025.114363",
+      "arxiv": "",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-10/01-FAMAW-PINN-萤火虫联合自适应.html",
+      "readLink": {
+        "type": "doi",
+        "url": "https://doi.org/10.1016/j.jcp.2025.114363",
+        "label": "DOI ↗"
+      }
+    },
+    {
+      "id": "2026-06-10/02-DCGD-双锥梯度下降",
+      "date": "2026-06-10",
+      "title": "Dual Cone Gradient Descent for Training Physics-Informed Neural Networks",
+      "zhTitle": "DCGD：双锥梯度下降（NeurIPS 2024）",
+      "venue": "NeurIPS 2024",
+      "venue_grade": "CCF-A",
+      "doi": "",
+      "arxiv": "2409.18426",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-10/02-DCGD-双锥梯度下降.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-10/2409.18426.pdf",
+        "label": "PDF ↗"
+      }
+    },
+    {
+      "id": "2026-06-10/03-PIPNN-NTK-并行子域NTK加权",
+      "date": "2026-06-10",
+      "title": "Physics-Informed Parallel Neural Networks with self-adaptive loss weighting for the identification of continuous structural systems",
+      "zhTitle": "PIPNN-NTK：并行子域 + NTK 自适应损失加权",
+      "venue": "Computer Methods in Applied Mechanics and Engineering",
+      "venue_grade": "SCI 一区",
+      "doi": "10.1016/j.cma.2024.117042",
+      "arxiv": "",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-10/03-PIPNN-NTK-并行子域NTK加权.html",
+      "readLink": {
+        "type": "doi",
+        "url": "https://doi.org/10.1016/j.cma.2024.117042",
+        "label": "DOI ↗"
+      }
+    },
     {
       "id": "2026-06-09/01-反向传播",
       "date": "2026-06-09",
