@@ -1,7 +1,22 @@
 {
-  "generated": "2026-06-10",
-  "total": 63,
+  "generated": "2026-06-11",
+  "total": 64,
   "papers": [
+    {
+      "id": "2026-06-11/01-C方案对比基线五篇精选",
+      "date": "2026-06-11",
+      "title": "PINN Adaptive Loss Weighting Baselines for Scheme-C Comparison (2024–2026)",
+      "zhTitle": "C 方案对比基线：五篇 PINN 损失自适应精选（2024–2026）",
+      "venue": "Curated selection",
+      "venue_grade": "综述精选",
+      "doi": "",
+      "arxiv": "",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-11/01-C方案对比基线五篇精选.html",
+      "readLink": null
+    },
     {
       "id": "2026-06-10/01-FAMAW-PINN-萤火虫联合自适应",
       "date": "2026-06-10",
