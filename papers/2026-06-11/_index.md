@@ -39,8 +39,19 @@ C 方案, 对比基线, DB-PINN, ReLoBRaLo, MOO-VARI, I-PINN, ConFIG, 相对进�
 - **思路**：λ 仍用 C 的相对进度，参数更新在 ⟨∇L_PDE, ∇L_BC⟩<0 时切换 ConFIG 伪逆方向。
 - **首个实验**：叠加 vs 纯 C；看是否进一步压低 PDE 残差。
 
+## 第 2 次检索（用户指定）
+
+| # | 汇报 | 发表于 |
+|---|------|--------|
+| 2 | [[02-Kendall-不确定性多任务加权]] | CVPR 2018（CCF-A） |
+
+#### Idea 4：Kendall 原版 vs C 相对进度（参考 [[02-Kendall-不确定性多任务加权]]）
+- **思路**：对 \(L_{PDE}, L_S, L_{PC}\) 各学 \(s_k\)，用 \(e^{-s_k}L_k+s_k\) 联合优化；与 C 方案同网络、同步数对比。
+- **首个实验**：2D 声波 full 配置；指标 final \(\sigma_k\)、RMSE@t=0.12s、训练稳定性。
+- **风险 / 难度**：Kendall 可能压低 PDE 权重（见 I-PINN 讨论）；需监控 \(\lambda_{PDE}\) 轨迹。
+
 ## 备注
 
-- 检索来源：结合历史 corpus + WebSearch（2024–2026）
-- 本次新增：`01-C方案对比基线五篇精选.md`
-- GitHub Pages：sync 2026-06-11 后待 push
+- 检索来源：结合历史 corpus + WebSearch（2024–2026）；第 2 次：用户指定 Kendall CVPR 2018
+- 本次新增单篇：`02-Kendall-不确定性多任务加权.md`；本地 PDF 已下载 `1705.07115.pdf`
+- GitHub Pages：待 sync + push

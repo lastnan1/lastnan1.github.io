@@ -1,6 +1,6 @@
 {
   "generated": "2026-06-11",
-  "total": 64,
+  "total": 65,
   "papers": [
     {
       "id": "2026-06-11/01-C方案对比基线五篇精选",
@@ -16,6 +16,25 @@
       ],
       "htmlPath": "papers/2026-06-11/01-C方案对比基线五篇精选.html",
       "readLink": null
+    },
+    {
+      "id": "2026-06-11/02-Kendall-不确定性多任务加权",
+      "date": "2026-06-11",
+      "title": "Multi-Task Learning Using Uncertainty to Weigh Losses for Scene Geometry and Semantics",
+      "zhTitle": "Kendall 不确定性加权：多任务损失同方差不确定性（CVPR 2018）",
+      "venue": "CVPR 2018",
+      "venue_grade": "CCF-A",
+      "doi": "10.1109/CVPR.2018.00781",
+      "arxiv": "1705.07115",
+      "tags": [
+        "自适应权重"
+      ],
+      "htmlPath": "papers/2026-06-11/02-Kendall-不确定性多任务加权.html",
+      "readLink": {
+        "type": "pdf",
+        "url": "papers/2026-06-11/1705.07115.pdf",
+        "label": "PDF ↗"
+      }
     },
     {
       "id": "2026-06-10/01-FAMAW-PINN-萤火虫联合自适应",
